@@ -1,0 +1,64 @@
+{# templates/login/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{# ... #}
+
+{% block content %}
+    {% if error %}
+        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    <form action="{{ path('app_login') }}" method="post" class='contact-form'>
+        <label for="username">Email:</label>
+        <input type="text" id="username" name="_username" value="{{ last_username }}">
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="_password">
+
+        {# If you want to control the URL the user is redirected to on success#}
+        <input type="hidden" name="_target_path" value="/home"> 
+
+        <button type="submit">login</button>
+    </form>
+
+
+    <form id="contact-form" action="" method="post">
+                  <div class="row">
+                    <div class="col-lg-12">
+                      <div class="section-heading">
+                        <h2><em>Contact Us</em> &amp; Get In <span>Touch</span></h2>
+                      </div>
+                    </div>
+                    <div class="col-lg-6">
+                      <fieldset>
+                        <input type="name" name="name" id="name" placeholder="Your Name..." autocomplete="on" required="">
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-6">
+                      <fieldset>
+                        <input type="surname" name="surname" id="surname" placeholder="Your Surname..." autocomplete="on" required="">
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-6">
+                      <fieldset>
+                        <input type="text" name="email" id="email" pattern="[^ @]*@[^ @]*" placeholder="Your E-mail..." required="">
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-6">
+                      <fieldset>
+                        <input type="subject" name="subject" id="subject" placeholder="Subject..." autocomplete="on">
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-12">
+                      <fieldset>
+                        <textarea name="message" id="message" placeholder="Your Message"></textarea>
+                      </fieldset>
+                    </div>
+                    <div class="col-lg-12">
+                      <fieldset>
+                        <button type="submit" id="form-submit" class="orange-button">Send Message Now</button>
+                      </fieldset>
+                    </div>
+                  </div>
+                </form>
+{% endblock %}

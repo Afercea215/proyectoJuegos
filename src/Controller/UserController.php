@@ -24,7 +24,7 @@ class UserController extends AbstractController
             'path' => 'src/Controller/UserController.php',
         ]);
     }
-    #[Route('/login', name: 'login')]
+    #[Route('/a', name: 'a')]
     public function login(Request $request):Response
     {
         $login = new login();

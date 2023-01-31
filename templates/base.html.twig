@@ -2,11 +2,22 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <title>{% block title %}Xokas y Cia{% endblock %}</title>
+        <link rel="icon" href={{img_path}}logo.png>
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700;800&display=swap"rel="stylesheet">
+        
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
+            <!-- Bootstrap core CSS -->
+            <link href="bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+            <!-- Additional CSS Files -->
+            <link rel="stylesheet" href="bootstrap/assets/css/fontawesome.css">
+            <link rel="stylesheet" href="bootstrap/assets/css/templatemo-tale-seo-agency.css">
+            <link rel="stylesheet" href="bootstrap/assets/css/owl.css">
+            <link rel="stylesheet" href="bootstrap/assets/css/animate.css">
+            <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
+            
         {% endblock %}
 
         {% block javascripts %}
@@ -14,6 +25,62 @@
         {% endblock %}
     </head>
     <body>
-        {% block body %}{% endblock %}
+        {% block body %}
+            {% block header %}
+                <header class="header-area background-header">
+                    <div class="container ">
+                    <div class="row text-center">
+                        <div class="col-9">
+                            <nav class="main-nav">
+                                <!-- ***** Logo Start ***** -->
+                                <a href="index.html" class="logo">
+                                <img src={{img_path}}logo.png alt="" style="max-width: 50px;">
+                                </a>
+                                <!-- ***** Logo End ***** -->
+                                <!-- ***** Menu Start ***** -->
+                                <ul class="nav">
+                                    <li class="scroll-to-section"><a href="#" class="">Reservar</a></li>
+                                    <li class="scroll-to-section"><a href="#" class="">Juegos</a></li>
+                                    <li class="scroll-to-section"><a href="#">Eventos</a></li>
+                                </ul>
+                                <a class="menu-trigger">
+                                <span>Menu</span>
+                                </a>
+                                <!-- ***** Menu End ***** -->
+                            </nav>
+                        </div>
+
+                        <div class="col-3 align-middle">
+                            <div class="second-button d-inline-block mt-3">
+                                <a href='../login' class='align-middle'>Login</a>
+                            </div>
+                            <div class="main-button scroll-to-section d-inline-block">
+                                <a href='../register' class='align-middle'>Registrarse</a>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+                </header>
+                
+            {% endblock %}
+
+            <div id='content'>
+                {% block content %}
+                {% endblock %}
+            </div>
+
+            {% block footer %}
+                <!-- Scripts -->
+                <!-- Bootstrap core JavaScript -->
+                <script src="bootstrap/vendor/jquery/jquery.min.js"></script>
+                <script src="bootstrap/vendor/bootstrap/js/bootstrap.min.js"></script>
+
+                <script src="bootstrap/assets/js/isotope.min.js"></script>
+                <script src="bootstrap/assets/js/owl-carousel.js"></script>
+                <script src="bootstrap/assets/js/tabs.js"></script>
+                <script src="bootstrap/assets/js/popup.js"></script>
+                <script src="bootstrap/assets/js/custom.js"></script>
+            {% endblock %}
+        {% endblock %}
     </body>
 </html>

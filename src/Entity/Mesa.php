@@ -2,14 +2,20 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\ExistsFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\MesaRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
-#[ApiResource()]
+#[ApiResource(normalizationContext: ['skip_null_values' => false])]
+#[ApiFilter(ExistsFilter::class, properties: [
+    'x'
+])]
 #[ORM\Entity(repositoryClass: MesaRepository::class)]
 class Mesa
 {
@@ -30,13 +36,14 @@ class Mesa
      */
     private ?int $longitud = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     /**
      * Posicion x en cm
      */
     private ?int $x = null;
 
-    #[ORM\Column]
+    
+    #[ORM\Column(nullable: true)]
     /**
      * Posicion y en cm
      */
@@ -100,7 +107,7 @@ class Mesa
         return $this->x;
     }
 
-    public function setX(int $x): self
+    public function setX(?int $x): self
     {
         $this->x = $x;
 
@@ -112,7 +119,7 @@ class Mesa
         return $this->y;
     }
 
-    public function setY(int $y): self
+    public function setY(?int $y): self
     {
         $this->y = $y;
 

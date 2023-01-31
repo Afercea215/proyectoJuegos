@@ -2,12 +2,30 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Odm\Filter\SearchFilter;
+use ApiPlatform\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Doctrine\Orm\Filter\SearchFilter as FilterSearchFilter;
+use ApiPlatform\Metadata\ApiFilter;
 use ApiPlatform\Metadata\ApiResource;
 use App\Repository\JuegoRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+#[
+    ApiResource()
+    ,ApiFilter(
+        FilterSearchFilter::class,
+        properties: [
+            'nombre' => SearchFilter::STRATEGY_PARTIAL,
+        ]
+    )
+    ,ApiFilter(
+        OrderFilter::class,
+        properties: [
+            'nombre'
+        ])
+]
 #[ORM\Entity(repositoryClass: JuegoRepository::class)]
 class Juego
 {
@@ -38,10 +56,10 @@ class Juego
     private ?string $editorial = null;
 
     #[ORM\OneToMany(mappedBy: 'juego', targetEntity: Reserva::class)]
-    private Collection $reservas;
+    private ?Collection $reservas;
 
-    #[ORM\ManyToMany(targetEntity: evento::class, inversedBy: 'juegos')]
-    private Collection $eventos;
+    #[ORM\ManyToMany(targetEntity: Evento::class, inversedBy: 'juegos')]
+    private ?Collection $eventos;
 
     public function __construct()
     {
