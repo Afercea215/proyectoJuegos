@@ -52,9 +52,13 @@ class Mesa
     #[ORM\OneToMany(mappedBy: 'mesa', targetEntity: Reserva::class)]
     private Collection $reservas;
 
+    #[ORM\OneToMany(mappedBy: 'mesa', targetEntity: Disposicion::class)]
+    private Collection $disposicions;
+
     public function __construct()
     {
         $this->reservas = new ArrayCollection();
+        $this->disposicions = new ArrayCollection();
     }
 
     public function __toString()
@@ -150,6 +154,36 @@ class Mesa
             // set the owning side to null (unless already changed)
             if ($reserva->getMesa() === $this) {
                 $reserva->setMesa(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Disposicion>
+     */
+    public function getDisposicions(): Collection
+    {
+        return $this->disposicions;
+    }
+
+    public function addDisposicion(Disposicion $disposicion): self
+    {
+        if (!$this->disposicions->contains($disposicion)) {
+            $this->disposicions->add($disposicion);
+            $disposicion->setMesa($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDisposicion(Disposicion $disposicion): self
+    {
+        if ($this->disposicions->removeElement($disposicion)) {
+            // set the owning side to null (unless already changed)
+            if ($disposicion->getMesa() === $this) {
+                $disposicion->setMesa(null);
             }
         }
 

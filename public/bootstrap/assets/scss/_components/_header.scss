@@ -1,0 +1,61 @@
+.c-header{
+    @include flexRow;
+    background-color: $color-princip;
+    justify-content: space-around;
+    width: 100%;
+    position: relative;
+    top: 0px;
+    padding: 1% 0%;
+
+    &__menu{
+        text-align: center;
+        display: flex;
+        justify-content: space-around;
+        color: $color-sec;
+        width: 70%;
+
+        & a{
+            margin: 0% 1%;
+        }
+    }
+
+    &__logo{
+        max-width: 95px;
+        margin-left: 2%;
+    }
+
+    &__indentificacion{
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+
+        &__logo-usuario{
+            display: flex;
+            align-items: center;
+            background-color: $color-sec;
+            border-radius: $border-1+px;
+            padding: 3px 5px;
+
+            & img{
+                border-radius: 50%;
+                border: 2px solid $color-terc;
+                max-width: 35px;
+            }
+            & span{
+                font-size: 20px;
+                color: $color-terc;
+            }
+        }
+    }
+
+    &--admin{
+        background: $color-terc;
+        
+    }
+}
+
+#login{
+    padding: 2%;
+    margin: 0 5%;
+    color: $color-sec;
+}

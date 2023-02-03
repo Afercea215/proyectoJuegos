@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Login;
 use App\Entity\Mesa;
+use App\Service\TestService2;
+use App\Service\UserService;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -16,12 +18,18 @@ use Symfony\Component\HttpFoundation\Request;
 
 class UserController extends AbstractController
 {
-    #[Route('/user', name: 'user')]
-    public function index(): JsonResponse
+    #[Route('/test', name: 'test')]
+    public function index(UserService $u): JsonResponse
     {
         return $this->json([
-            'message' => 'Welcome to your new controller!',
-            'path' => 'src/Controller/UserController.php',
+            'nombres' => $u->getUsersName()
+        ]);
+    }
+    #[Route('/user/{id}', name: 'profile')]
+    public function profile(?int $id): JsonResponse
+    {
+        return $this->json([
+            'nombres' => $id
         ]);
     }
     #[Route('/a', name: 'a')]

@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+<div id="fondoPantalla">
+    {% for img in imgsJuegos %}
+        <img class="imgFondo" src='{{img_juegos_path}}{{img}}'>
+    {% endfor %}
+</div>
+{% endblock %}

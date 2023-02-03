@@ -9,6 +9,7 @@
         
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
+            <link rel="stylesheet" href="css/main.css" />
             <!-- Bootstrap core CSS -->
             <link href="bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
             <!-- Additional CSS Files -->
@@ -17,20 +18,30 @@
             <link rel="stylesheet" href="bootstrap/assets/css/owl.css">
             <link rel="stylesheet" href="bootstrap/assets/css/animate.css">
             <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
-            
+
+            {# jquery #}
+            <link rel="stylesheet" href="js/ui/css/jquery-ui.css">
+            <link rel="stylesheet" href="js/ui/css/jquery-ui.structure.css">
+            <link rel="stylesheet" href="js/ui/css/jquery-ui.theme.css">
+    
+            {# personal #}
         {% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
+        
     </head>
     <body>
         {% block body %}
             {% block header %}
-                <header class="header-area background-header">
+                {% set classHeader = '' %}
+
+                {% if app.user and app.user.roles[0] and app.user.roles[0] == 'ROLE_ADMIN' %}
+                    {% set classHeader = 'header-area--admin' %}
+                {% endif %}
+
+                <header class='header-area background-header {{classHeader}}'>
                     <div class="container ">
                     <div class="row text-center">
-                        <div class="col-9">
+                        <div class="col-8 col-md-7 ">
                             <nav class="main-nav">
                                 <!-- ***** Logo Start ***** -->
                                 <a href="index.html" class="logo">
@@ -39,24 +50,43 @@
                                 <!-- ***** Logo End ***** -->
                                 <!-- ***** Menu Start ***** -->
                                 <ul class="nav">
-                                    <li class="scroll-to-section"><a href="#" class="">Reservar</a></li>
-                                    <li class="scroll-to-section"><a href="#" class="">Juegos</a></li>
+                                    <li class="scroll-to-section"><a href='{{ absolute_url(path('app_reserva')) }}' class="">Reservar</a></li>
+                                    <li class="scroll-to-section"><a href='{{ absolute_url(path('app_reserva')) }}' class="">Juegos</a></li>
                                     <li class="scroll-to-section"><a href="#">Eventos</a></li>
                                 </ul>
                                 <a class="menu-trigger">
-                                <span>Menu</span>
+                                    <span>Menu</span>
                                 </a>
                                 <!-- ***** Menu End ***** -->
                             </nav>
                         </div>
 
-                        <div class="col-3 align-middle">
-                            <div class="second-button d-inline-block mt-3">
-                                <a href='../login' class='align-middle'>Login</a>
-                            </div>
-                            <div class="main-button scroll-to-section d-inline-block">
-                                <a href='../register' class='align-middle'>Registrarse</a>
-                            </div>
+                        <div class="col-4 col-md-5 pt-3">
+                            {% if app.user %}
+                                <div class="indentificacion">
+                                    <div class="indentificacion__logo">
+                                        <div class="menu-desplegable">
+                                            <img src="images/users/logo.png" class="logo" alt="">
+                                            <span id="desplegable" class="btnDesplegable">▼</span>
+
+                                            <div class="desplegable__contenido" id="contenido-menu">
+                                                <span>{{app.user.nombre}}</span>
+                                                <a href='{{ absolute_url(path('profile', { 'id': app.user.id })) }}'>Datos Personales</a>
+                                                <a href='{{ absolute_url(path('app_logout')) }}'>Cerrar Sesion</a>
+
+                                            </div>
+                                        </div>
+                                    </div>    
+                                </div>
+                            {% else %}
+                                <div class="boton boton--secundario d-inline-block align-middle">
+                                    <a href='../login' class=''>Login</a>
+                                </div>
+                                <div class="boton scroll-to-section d-inline-block align-middle">
+                                    <a href='../register' class=''>Registrarse</a>
+                                </div>
+                            {% endif %}
+                            
                         </div>
                     </div>
                     </div>
@@ -70,6 +100,15 @@
             </div>
 
             {% block footer %}
+
+            {% endblock %}
+
+            {% block javascripts %}
+                {{ encore_entry_script_tags('app') }}
+                {# JQUERY #}
+                <script src="js/js/jquery.js"></script>
+                <script src="js/js/jquery-ui.js"></script>
+    
                 <!-- Scripts -->
                 <!-- Bootstrap core JavaScript -->
                 <script src="bootstrap/vendor/jquery/jquery.min.js"></script>
@@ -80,7 +119,15 @@
                 <script src="bootstrap/assets/js/tabs.js"></script>
                 <script src="bootstrap/assets/js/popup.js"></script>
                 <script src="bootstrap/assets/js/custom.js"></script>
+            
+                {# PERSONAL #}
+                <script src="js/objetos/mesa.js"></script>   
+                <script src="js/objetos/alamacen.js"></script>
+                <script src="js/objetos/sala.js"></script>
+                <script src="js/funcionamiento/gestionMesas.js"></script>
+                <script src="js/funcionamiento/menu-header.js"></script>
             {% endblock %}
+
         {% endblock %}
     </body>
 </html>

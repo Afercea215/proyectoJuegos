@@ -1,0 +1,45 @@
+{# templates/login/index.html.twig #}
+{% extends 'base.html.twig' %}
+
+{# ... #}
+
+{% block content %}
+    <h2>Login</h2>
+    {% set emailClass = '' %}
+    {% set passClass = '' %}
+
+    {% if error %}
+      {% if error.message == 'Bad credentials.' %}
+        {% set emailClass = 'error-input' %}
+        <div class='mensaje-error'>Correo electronico incorrecto.</div>
+      {% endif %}
+
+      {% if error.message == 'The presented password is invalid.' %}
+        {% set passClass = 'error-input' %}
+        <div class='mensaje-error'>Contraseña incorrecta.</div>
+      {% endif %}
+      {#   <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div> #}
+        {# <div class='mensaje-error'>Contraseña o email incorrecto</div> #}
+    {% endif %}
+    
+    <form action="{{ path('app_login') }}" method="post" class='form col-lg-4 col-md-6 col-sm-9 col-xs-12 text-center mt-3'>
+        <div class='w-100 text-center'>
+          <label for="username">Email:</label>
+        </div>
+        <input type="text" id="username" name="_username" value="{{ last_username }}" class='text-center {{emailClass}}' placeholder='Escribe tu correo'>
+
+        <div class='w-100 text-center'>
+          <label for="password">Password:</label>
+        </div>
+        <input type="password" id="password" name="_password" class='text-center {{passClass}}'>
+        <br>
+        {# <div>
+          <input type='checkbox' id='recuerdame'>
+        </div> #}
+
+        {# If you want to control the URL the user is redirected to on success#}
+        <input type="hidden" name="_target_path" value="/home"> 
+
+        <button type="submit" class='w-50 boton' >Iniciar sesion</button>
+    </form>
+{% endblock %}

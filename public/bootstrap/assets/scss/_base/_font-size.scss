@@ -1,0 +1,9 @@
+@for $i from 0 to 10{
+    .g-font-size--#{$i}{
+        font-size: $i*5px;
+    }
+}
+@function getFontSize($num){
+    @return $num*5px;
+}
+
