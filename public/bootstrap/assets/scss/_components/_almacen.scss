@@ -3,4 +3,13 @@
     width: 250px;
     height: 500px; 
     //display: flex;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 1%;
+    overflow: scroll;
+
+    & .mesa{
+        margin-bottom: 2%;
+    }
 }

@@ -1,19 +1,10 @@
 $("document").ready(function () {
   
-  var almacen2;
-  let sala;
+  var almacen2 = new Almacen();
+  almacen2.setDrop();
+  let sala2 = new Sala();
+  sala2.setDrop();
   
-  if ($('#almacen')!=undefined && $('#sala')!=undefined) {
-    almacen2 = new Almacen();
-    almacen2.setDrop();
-    almacen2.pinta();
-    
-    sala = new Sala();
-    sala.setDrop();
-    sala.pinta();
-  
-    setDrag();
-  }
 
   $.datepicker.regional['es'] = {
     closeText: 'Cerrar',
@@ -34,26 +25,39 @@ $("document").ready(function () {
   };
   $.datepicker.setDefaults($.datepicker.regional['es']);
 
-  $('#fecha-disposicion').get(0).andres=almacen2;
+  $('#fecha-disposicion').get(0).almacen=almacen2;
+  $('#fecha-disposicion').get(0).sala=sala2;
   
   $('#fecha-disposicion').datepicker({
     almacen1:1,
     firstDay: 1,
     beforeShowDay: $.datepicker.noWeekends,
-    onSelect:function (text, obj,) {
-      console.log(this);
-      debugger
+    onSelect:function (text, obj) {
+      this.sala.actualizaDisposicion(obj);
+      this.almacen.actualizaDisposicion(obj);
+
+      setDrag();
+
       //actualizar sala y almacen de mesas con la fun ya hechas.
+    }
+  });
+  
+  if ($('#almacen')!=undefined && $('#sala')!=undefined) {
+    let currentDate = new Date();
+    sala2.actualizaDisposicion({currentYear: currentDate.getFullYear(), currentMonth: currentDate.getMonth()+1, currentDay: currentDate.getDate()});
+    almacen2.actualizaDisposicion({currentYear: currentDate.getFullYear(), currentMonth: currentDate.getMonth()+1, currentDay: currentDate.getDate()});
+    setDrag();
+    
+  }
+
+  $('#default-dispo').click(function () {
+    if($('#fecha-disposicion').data('disposiciones').length>0){
+      sala2.actualizaDisposicion({currentYear: 1, currentMonth: 1, currentDay: 1});
+      almacen2.actualizaDisposicion({currentYear: 1, currentMonth: 1, currentDay: 1});
     }
   });
 
 
-
-
-  /* let mesas = getAllMesas();  
-  colocaMesas(mesas);
-  setDrop(mesas);
-  setDrag(); */
 });
 
 function setDrag() {
@@ -67,6 +71,10 @@ function setDrag() {
     snapTolerance:25,
     cursor:'move',
     snap:'#sala',
+
+    stop: function () {
+      $(this).data('x',this.on)
+    }
   });
 
 }
@@ -82,6 +90,7 @@ function buscaMesaArray(id, array) {
 }
 
 function mesaChoca(pos1, pos2) {
+
   if ( (pos1[0] > pos2[0] && pos1[0] < pos2[1] ||
     pos1[1] > pos2[0] && pos1[1] < pos2[1] ||
     pos1[0] <= pos2[0] && pos1[1] >= pos2[1])
@@ -94,4 +103,4 @@ function mesaChoca(pos1, pos2) {
     }else {
       return false
     }
-}
+  }
