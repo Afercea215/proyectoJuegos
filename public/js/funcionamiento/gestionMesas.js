@@ -1,5 +1,7 @@
+$( "#divNewMesa" ).hide();
+
 $("document").ready(function () {
-  
+
   var almacen2 = new Almacen();
   almacen2.setDrop();
   let sala2 = new Sala();
@@ -55,6 +57,11 @@ $("document").ready(function () {
       sala2.actualizaDisposicion({currentYear: 1, currentMonth: 1, currentDay: 1});
       almacen2.actualizaDisposicion({currentYear: 1, currentMonth: 1, currentDay: 1});
     }
+  });
+
+
+  $( "#btnNewMesa" ).click(function () {
+    $( "#divNewMesa" ).show( 'scale', {}, 500, function(){});
   });
 
 

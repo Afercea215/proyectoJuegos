@@ -2,6 +2,7 @@
 
 namespace App\Form;
 
+use App\Entity\Mesa;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -15,7 +16,7 @@ class MesaType extends AbstractType
             ->add('ancho', IntegerType::class,
                 ['required' => true
                 ,'label' => 'Ancho mesa',])
-            ->add('nombre', IntegerType::class,
+            ->add('longitud', IntegerType::class,
                 ['required' => true,
                 'label' => 'Longitud mesa',])
         ;
@@ -24,7 +25,7 @@ class MesaType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            // Configure your form options here
+            'data_class' => Mesa::class
         ]);
     }
 }
