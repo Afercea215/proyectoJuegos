@@ -69,7 +69,6 @@ Sala.prototype.setDrop=function (mesas = this.mesas, mesasAlamacen) {
         drop: function (ev, ui) {
             var mesa = ui.draggable;
             //compruebo si choca con las demas mesas
-            debugger
             let top = mesa.data('ui-draggable').positionAbs.top;
             let left = mesa.data('ui-draggable').positionAbs.left;
             
@@ -91,8 +90,6 @@ Sala.prototype.colocaMesas=function () {
         mesa.pinta();
     })
 }
-
-
 
 function getMesasSala(fecha,obj) {
     let fechaActu = new Date();

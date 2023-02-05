@@ -7,6 +7,8 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
 
 #[ORM\Entity(repositoryClass: EventoRepository::class)]
 class Evento
@@ -17,6 +19,7 @@ class Evento
     private ?int $id = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\NotBlank([],'El campo no debe estar vacio')]
     private ?string $nombre = null;
 
     #[ORM\Column(length: 255)]
@@ -26,14 +29,17 @@ class Evento
     private ?string $img = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Assert\NotBlank([],'El campo no debe estar vacio')]
     private ?\DateTimeInterface $fecha = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank([],'El campo no debe estar vacio')]
     private ?Tramo $tramoIni = null;
 
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
+    #[Assert\NotBlank([],'El campo no debe estar vacio')]
     private ?tramo $tramoFin = null;
 
     #[ORM\OneToMany(mappedBy: 'evento', targetEntity: Participa::class)]

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\ParticipaRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ParticipaRepository::class)]
 class Participa
@@ -20,9 +21,11 @@ class Participa
     private ?bool $presentado = null;
 
     #[ORM\ManyToOne(inversedBy: 'participas')]
+    #[Assert\NotBlank([],'El campo debe estar relleno')]
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'participas')]
+    #[Assert\NotBlank([],'El campo debe estar relleno')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Evento $evento = null;
 

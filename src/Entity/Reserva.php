@@ -5,6 +5,7 @@ namespace App\Entity;
 use App\Repository\ReservaRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ReservaRepository::class)]
 class Reserva
@@ -15,31 +16,38 @@ class Reserva
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Assert\NotBlank([],'El campo debe estar relleno')]
     private ?\DateTimeInterface $fini = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
+    #[Assert\NotBlank([],'El campo debe estar relleno')]
     private ?\DateTimeInterface $fechaAnul = null;
 
     #[ORM\Column]
     private ?bool $presentado = null;
 
     #[ORM\ManyToOne]
+    #[Assert\NotBlank([],'El campo debe estar relleno')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Tramo $tramoIni = null;
 
     #[ORM\ManyToOne]
+    #[Assert\NotBlank([],'El campo debe estar relleno')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Tramo $tramoFin = null;
 
     #[ORM\ManyToOne(inversedBy: 'reservas')]
+    #[Assert\NotBlank([],'El campo debe estar relleno')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
     #[ORM\ManyToOne(inversedBy: 'reservas')]
+    #[Assert\NotBlank([],'El campo debe estar relleno')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Juego $juego = null;
 
     #[ORM\ManyToOne(inversedBy: 'reservas')]
+    #[Assert\NotBlank([],'El campo debe estar relleno')]
     #[ORM\JoinColumn(nullable: false)]
     private ?Mesa $mesa = null;
 

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\LoginRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: LoginRepository::class)]
 class Login
@@ -14,14 +15,13 @@ class Login
     private ?int $id = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank([],'El campo no debe estar vacio')]
     private ?string $userName = null;
 
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank([],'El campo no debe estar vacio')]
     private ?string $contrasena = null;
 
-    #[ORM\ManyToOne]
-    private ?Mesa $mesa = null;
-    
     public function getId(): ?int
     {
         return $this->id;
@@ -51,15 +51,4 @@ class Login
         return $this;
     }
 
-    public function getMesa(): ?Mesa
-    {
-        return $this->mesa;
-    }
-
-    public function setMesa(?Mesa $mesa): self
-    {
-        $this->mesa = $mesa;
-
-        return $this;
-    }
 }

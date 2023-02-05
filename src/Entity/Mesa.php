@@ -24,39 +24,55 @@ class Mesa
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column]
-    /**
-     * Ancho de la mesa en cm
-     */
+    #[Assert\Range([
+        'min' => 50,
+        'max' => 300,
+        'notInRangeMessage' => 'El ancho de la mesa debe ser como minimo {{ min }}cm y como maximo {{ max }}cm.',
+        ])]
+        #[Assert\NotBlank([],'El campo no debe estar vacio')]
+        #[ORM\Column]
+        /**
+         * Ancho de la mesa en cm
+         */
     private ?int $ancho = null;
-
-    #[ORM\Column]
-    /**
-     * Longitud de la mesa en cm
-     */
-    private ?int $longitud = null;
-
-    #[ORM\Column(nullable: true)]
-    /**
-     * Posicion x en cm
-     */
-    private ?int $x = null;
-
     
-    #[ORM\Column(nullable: true)]
-    /**
-     * Posicion y en cm
-     */
-    private ?int $y = null;
-
-    #[ORM\OneToMany(mappedBy: 'mesa', targetEntity: Reserva::class)]
-    private Collection $reservas;
-
-    #[ORM\OneToMany(mappedBy: 'mesa', targetEntity: Disposicion::class)]
-    private Collection $disposicions;
-
-    public function __construct()
-    {
+    #[Assert\Range([
+        'min' => 50,
+        'max' => 300,
+        'notInRangeMessage' => 'La longitud de la mesa debe ser como minimo {{ min }}cm y como maximo {{ max }}cm.',
+        ])]
+        #[Assert\NotBlank([],'El campo no debe estar vacio')]
+        #[ORM\Column]
+        /**
+         * Longitud de la mesa en cm
+         */
+        private ?int $longitud = null;
+        
+        #[Assert\PositiveOrZero([],'El valor debe ser positivo')]
+        #[Assert\NotBlank([],'El campo no debe estar vacio')]
+        #[ORM\Column(nullable: true)]
+        /**
+         * Posicion x en cm
+         */
+        private ?int $x = null;
+        
+        
+        #[Assert\NotBlank([],'El campo no debe estar vacio')]
+        #[Assert\PositiveOrZero([],'El valor debe ser positivo')]
+        #[ORM\Column(nullable: true)]
+        /**
+         * Posicion y en cm
+         */
+        private ?int $y = null;
+        
+        #[ORM\OneToMany(mappedBy: 'mesa', targetEntity: Reserva::class)]
+        private Collection $reservas;
+        
+        #[ORM\OneToMany(mappedBy: 'mesa', targetEntity: Disposicion::class)]
+        private Collection $disposicions;
+        
+        public function __construct()
+        {
         $this->reservas = new ArrayCollection();
         $this->disposicions = new ArrayCollection();
     }
@@ -70,10 +86,10 @@ class Mesa
     {
         return [
             'id' => $this->getId(),
-            'ancho' => $this->getId(),
-            'longitud' => $this->getId(),
-            'x' => $this->getId(),
-            'y' => $this->getId(),
+            'ancho' => $this->getAncho(),
+            'longitud' => $this->getLongitud(),
+            'x' => $this->getX(),
+            'y' => $this->getY(),
         ];
     }
 

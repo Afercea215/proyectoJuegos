@@ -5,27 +5,6 @@ function Almacen(fecha=null){
     this.imagen='fondoAlmacen.jpg';
 }
 
-Almacen.prototype.setDrop=function (mesasSala) {
-    $('#almacen').sortable({
-        placeholder: "ui-state-highlight"
-      }).droppable({
-        drop:function (ev, ui) {
-          //simplemente actualizo la posicion de la mesa y sus estilos
-            let mesa = ui.draggable;
-            $(this).append(mesa);
-            $(mesa).css({position:'', top:'', left:''});
-            
-            //$('#sala').append(mesa);
-            let mesaObj = buscaMesaArray(mesa.attr('id'), mesasSala);
-            this.mesas.push(mesaObj);
-            let index = mesasAlamacen.indexOf(mesaObj);
-            mesasSala.splice(index, index);
-
-            mesaObj.actualizarPosicion(null,null);
-        }
-      });
-}
-
 Almacen.prototype.setDrop=function () {
     $('#almacen').droppable({
         drop:function (ev, ui) {
@@ -94,7 +73,7 @@ Almacen.prototype.actualizaDisposicion=function (fecha) {
     }
 }
 
-
+//pinto las mesa del array
 Almacen.prototype.pinta=function () {
     $.each(this.mesas,function (key,mesa) {
         mesa.pinta();

@@ -10,6 +10,7 @@ function Mesa(id, ancho, longitud, x, y, reservas, disposiciones) {
 
 Mesa.prototype.imagen="./mesa.png";
 
+//pinta la mesa en funcion de su posicion
 Mesa.prototype.pinta=function () {
     let mesaDiv = this.creaDiv().eq(0);
     if (this.x == null && this.y == null) {
@@ -113,7 +114,7 @@ Mesa.prototype.actualizarPosicion=function (x, y) {
     }
 };
 
-
+//creo el elemento div a partir de un objeto
 Mesa.prototype.creaDiv=function () {
     return $('<div>').attr('id','mesa_'+this.id)
                     .attr('class','mesa')
@@ -125,6 +126,8 @@ Mesa.prototype.creaDiv=function () {
 
 };
 
+//compruebo si una mesa choca con todas las demas de la sala
+//x y son las posiciones donde se dropea la mesa para comprobar
 Mesa.prototype.choca=function (x,y) {
     var left = x;
     var top = y;
@@ -136,7 +139,9 @@ Mesa.prototype.choca=function (x,y) {
     let valido = true;
     //comprueba si choca la poasicion con alguna mesa de la sala
     $.each(mesasSala, function (key,val) {
+        //si no es ella misma o una mesa sin id se comprar con las demas
         if (mesasSala.length>0 && val.id!='' && $(val).data('obj')!=this) {
+
             let posX = parseInt(val.offsetLeft);
             let posY = parseInt(val.offsetTop);
             let anchura = parseInt(val.style.width);
@@ -150,19 +155,26 @@ Mesa.prototype.choca=function (x,y) {
     return valido;
 }
 
-function getMesaById(id) {
-    let mesa;
-    $.ajax({
-        url: 'http://localhost:8000/api/mesas/'+id,
-        type: 'GET',
-        async: false
-    }).done(function (data) {
-        mesa = (new Mesa(data.id, data.ancho, data.longitud, data.x, data.y, data.reservas, data.disposiciones));
+//añado la propiedad drag a las mesas
+function setDrag() {
+    $(".mesa").draggable({
+        revert:true,
+        revertDuration:0,
+        helper:'clone',
+        accept: '#almacen, #sala',
+        opacity: 0.75,
+        grid: [ 20, 20 ],
+        snapTolerance:25,
+        cursor:'move',
+        snap:'#sala',
+
+        stop: function () {
+            $(this).data('x',this.on)
+        }
     });
-    return mesa;
 }
 
-
+//devuelvo todas las mesas de la bd
 function getMesas(){
     let mesas=[];
     $.ajax({
@@ -177,13 +189,16 @@ function getMesas(){
     return mesas;
 };
 
+//devuelvo las disposiciones de una fecha
 function getDisposiciones(fecha) {
+    //consigo el dia anterior y posterior a la fecha para filtrar
     let f1=new Date(fecha.currentYear,fecha.currentMonth+1, (fecha.currentDay-1));
     let f2=new Date(fecha.currentYear,fecha.currentMonth+1, (parseInt(fecha.currentDay)+1));
     let fechaAnt =f1.getFullYear()+'-'+ (f1.getMonth()<10?'0'+f1.getMonth():f1.getMonth()) +'-'+ (f1.getDate()<10?'0'+f1.getDate():f1.getDate()) + ' 00:00:00';
     let fechaDesp =f2.getFullYear()+'-'+ (f2.getMonth()<10?'0'+f2.getMonth():f2.getMonth()) + '-' + (f2.getDate()<10?'0'+f2.getDate():f2.getDate()) + ' 00:00:00';
     let dispo=[];
     let url = 'http://localhost:8000/api/disposicions?fecha[before]='+fechaDesp+'&fecha[after]='+fechaAnt;
+    //hago la peticion, y lo meto en el array dispo
     $.ajax({
         url: url,
         type: 'GET',
@@ -195,4 +210,31 @@ function getDisposiciones(fecha) {
     })
     $('#fecha-disposicion').data('disposiciones', dispo);
     return dispo;
+}
+/* 
+function buscaMesaArray(id, array) {
+    let mesa;
+    $.each(array,function (key,val) {
+        if (parseInt(id.split('_')[1]) == val.id) {
+        mesa = val;
+        }
+    })
+return mesa;
+} */
+
+//comprueba si dos mesas chochan, con dos arrays de posiciones
+function mesaChoca(pos1, pos2) {
+
+    if ( (pos1[0] > pos2[0] && pos1[0] < pos2[1] ||
+        pos1[1] > pos2[0] && pos1[1] < pos2[1] ||
+        pos1[0] <= pos2[0] && pos1[1] >= pos2[1])
+        &&
+        (pos1[2] > pos2[2] && pos1[2] < pos2[3] ||
+        pos1[3] > pos2[2] && pos1[3] < pos2[3] ||
+        pos1[2] <= pos2[2] && pos1[3] >= pos2[3]))
+        {
+        return true
+    }else {
+        return false
+    }
 }

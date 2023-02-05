@@ -11,7 +11,8 @@
     </div>
 
     <div id='divNewMesa' class='' style='width:100%'>
-        {{ form_start(form, { 'attr' : { 'class': 'form col-lg-4 col-md-6 col-sm-9 col-xs-12 text-center mt-3 '} }) }}
+        {{ form_start(form,{'attr': {'id': 'newMesaForm', 'class': 'form col-lg-4 col-md-6 col-sm-9 col-xs-12 text-center mt-3 '}}) }}
+            {{ form_errors(form) }}
             {{ form_row(form.ancho) }}
             {{ form_row(form.longitud) }}
             
@@ -19,5 +20,11 @@
 
         {{ form_end(form) }}
     </div>
+    
+    {% if not form.vars.valid %}
+        <div class="alert alert-error">
+            {{ form_errors(form) }}
+        </div>
+    {% endif %}
 
  {% endblock %}

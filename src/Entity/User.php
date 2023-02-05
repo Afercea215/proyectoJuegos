@@ -7,9 +7,10 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
+#[UniqueEntity(fields: ['email'], message: 'Ya existe una cuenta con este email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -18,26 +19,32 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
+    #[Assert\Email([],'Debe ser un email')]
+    #[Assert\NotBlank([],'El campo debe estar relleno')]
     private ?string $email = null;
-
+    
     #[ORM\Column]
     private array $roles = [];
-
+    
     /**
      * @var string The hashed password
      */
+    #[Assert\NotBlank([],'El campo debe estar relleno')]
     #[ORM\Column]
     private ?string $password = null;
-
+    
+    
     #[ORM\Column(length: 50)]
+    #[Assert\NotBlank([],'El campo debe estar relleno')]
     private ?string $nombre = null;
-
+    
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank([],'El campo debe estar relleno')]
     private ?string $apellidos = null;
-
+    
     #[ORM\Column(length: 50)]
     private ?string $telegramUser = null;
-
+    
     public function getId(): ?int
     {
         return $this->id;

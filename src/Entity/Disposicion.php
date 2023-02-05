@@ -9,6 +9,7 @@ use ApiPlatform\Metadata\ApiResource;
 use App\Repository\DisposicionRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: DisposicionRepository::class)]
 #[ApiResource(),
@@ -24,9 +25,11 @@ class Disposicion
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
+    #[Assert\NotBlank([],'El campo no debe estar vacio')]
     private ?\DateTimeInterface $fecha = null;
 
     #[ORM\ManyToOne(inversedBy: 'disposicions')]
+    #[Assert\NotBlank([],'El campo no debe estar vacio')]
     private ?Mesa $mesa = null;
 
     #[ORM\Column]

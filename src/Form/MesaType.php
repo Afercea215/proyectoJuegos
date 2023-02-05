@@ -25,7 +25,8 @@ class MesaType extends AbstractType
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Mesa::class
+            'data_class' => Mesa::class,
+            'id' => 'newMesaForm'
         ]);
     }
 }

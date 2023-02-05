@@ -11,6 +11,7 @@ use App\Repository\JuegoRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[
     ApiResource()
@@ -35,24 +36,30 @@ class Juego
     private ?int $id = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank([],'El campo no debe estar vacio')]
     private ?int $ancho = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank([],'El campo no debe estar vacio')]
     private ?int $longitud = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank([],'El campo no debe estar vacio')]
     private ?int $minJuga = null;
 
     #[ORM\Column]
+    #[Assert\NotBlank([],'El campo no debe estar vacio')]
     private ?int $maxJuga = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\NotBlank([],'El campo no debe estar vacio')]
     private ?string $nombre = null;
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $img = null;
 
     #[ORM\Column(length: 255, nullable: true)]
+    #[Assert\NotBlank([],'El campo no debe estar vacio')]
     private ?string $editorial = null;
 
     #[ORM\OneToMany(mappedBy: 'juego', targetEntity: Reserva::class)]
