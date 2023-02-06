@@ -91,6 +91,22 @@
                     </div>
                     </div>
                 </header>
+
+                {% for flash_message in app.session.flashbag.get('success') %}
+                    <div class="alert alert-success fade show text-center">
+                        <div class='w-100 d-flex flex-row justify-content-between'>
+                            <svg class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+                            {{ flash_message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+                {% endfor %}
+
+                {% for flash_message in app.session.flashbag.get('error') %}
+                    <div class="alerta alerta--error ">
+                        {{ flash_message }}
+                    </div>
+                {% endfor %}
                 
             {% endblock %}
 
@@ -126,12 +142,15 @@
                 {# PERSONAL #}
                 <script src="js/funcionamiento/load.js"></script>   
                 <script src="js/objetos/mesa.js"></script>   
+                <script src="js/objetos/juego.js"></script>   
                 <script src="js/objetos/alamacen.js"></script>
                 <script src="js/objetos/sala.js"></script>
                 <script src="js/funcionamiento/gestionMesas.js"></script>
+                <script src="js/funcionamiento/reservar.js"></script>
                 <script src="js/funcionamiento/menu-header.js"></script>
                 <script src="js/objetos/datepickerDisposiciones.js"></script>
                 <script src="js/validacion/validaForm.js"></script>
+                <script src="js/uix/alert.js"></script>
             {% endblock %}
 
         {% endblock %}

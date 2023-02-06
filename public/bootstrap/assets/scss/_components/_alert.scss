@@ -1,0 +1,14 @@
+.alert{
+    width: 100%;
+    text-align: 100%;
+    color: rgb(46, 46, 46);
+    padding: 5%;
+    &--error{
+        background: #ff8787;
+    }
+    
+}
+.alert--success{
+    background: #8987ff;
+    text-align: center;
+}

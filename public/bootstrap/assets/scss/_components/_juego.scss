@@ -1,0 +1,6 @@
+.juego{
+    border: 2px solid $color-princip;
+    & img{
+        max-width: 100px;
+    }
+}

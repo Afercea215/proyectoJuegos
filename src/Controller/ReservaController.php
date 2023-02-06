@@ -27,13 +27,25 @@ class ReservaController extends AbstractController
             //$errors = $validator->validate($mesa);
             
             //if(count($errors)==0){
-            $entityManager->persist($mesa);
-            $entityManager->flush();
+                try {
+                    $entityManager->persist($mesa);
+                    $entityManager->flush();
+                    $this->addFlash(
+                        'success',
+                        '¡Mesa creada!'
+                    );
+                } catch (\Throwable $th) {
+                    $this->addFlash(
+                        'error',
+                        '¡No se ha podido crear la mesa!'
+                    );
+                    //throw $th;
+                }
             //}else{
             //}
         }
 
-        return $this->render('Reserva/index.html.twig', [
+        return $this->render('Reserva/reservar.html.twig', [
             'form' => $form,
         ]);
     }

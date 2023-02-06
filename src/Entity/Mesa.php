@@ -29,7 +29,6 @@ class Mesa
         'max' => 300,
         'notInRangeMessage' => 'El ancho de la mesa debe ser como minimo {{ min }}cm y como maximo {{ max }}cm.',
         ])]
-        #[Assert\NotBlank([],'El campo no debe estar vacio')]
         #[ORM\Column]
         /**
          * Ancho de la mesa en cm
@@ -41,7 +40,6 @@ class Mesa
         'max' => 300,
         'notInRangeMessage' => 'La longitud de la mesa debe ser como minimo {{ min }}cm y como maximo {{ max }}cm.',
         ])]
-        #[Assert\NotBlank([],'El campo no debe estar vacio')]
         #[ORM\Column]
         /**
          * Longitud de la mesa en cm
@@ -49,7 +47,6 @@ class Mesa
         private ?int $longitud = null;
         
         #[Assert\PositiveOrZero([],'El valor debe ser positivo')]
-        #[Assert\NotBlank([],'El campo no debe estar vacio')]
         #[ORM\Column(nullable: true)]
         /**
          * Posicion x en cm
@@ -57,7 +54,6 @@ class Mesa
         private ?int $x = null;
         
         
-        #[Assert\NotBlank([],'El campo no debe estar vacio')]
         #[Assert\PositiveOrZero([],'El valor debe ser positivo')]
         #[ORM\Column(nullable: true)]
         /**

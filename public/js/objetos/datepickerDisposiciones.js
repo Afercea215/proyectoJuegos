@@ -19,18 +19,23 @@ function setDefaultsDtepicker() {
       $.datepicker.setDefaults($.datepicker.regional['es']);
 }
 
-function setDatePickerDisposiciones(sala, almacen){
+function setDatePickerDisposiciones(sala, almacen=null){
     
     setDefaultsDtepicker();
-    $('#fecha-disposicion').get(0).almacen=almacen;
+    
+    if (almacen!=null) {
+      $('#fecha-disposicion').get(0).almacen=almacen;
+    }
+
     $('#fecha-disposicion').get(0).sala=sala;
 
     $('#fecha-disposicion').data('festivos',getFestivos());
 
     $('#fecha-disposicion').datepicker({
-        firstDay: 0,
+        firstDay: 1,
         beforeShowDay: funDisable,
         showAnim: "fold",
+        minDate: +0,
         onSelect:function (text, obj) {
           //cada vez que se cambia el dia se actualiza la sala y almacen
           showLoad();

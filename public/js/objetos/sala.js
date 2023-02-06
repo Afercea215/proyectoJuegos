@@ -61,7 +61,6 @@ Sala.prototype.actualizaDisposicion=function (fecha) {
             val.pinta();
         })
     }
-
 }
 
 Sala.prototype.setDrop=function (mesas = this.mesas, mesasAlamacen) {
