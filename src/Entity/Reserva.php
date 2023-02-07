@@ -2,11 +2,27 @@
 
 namespace App\Entity;
 
+use ApiPlatform\Doctrine\Orm\Filter\DateFilter;
+use ApiPlatform\Metadata\ApiFilter;
+use ApiPlatform\Metadata\ApiResource;
+use ApiPlatform\Metadata\Post;
+use App\Controller\NewReservaController;
 use App\Repository\ReservaRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
+#[ApiResource(/* operations: [
+    new Post(
+        name: 'newReserva',
+        uriTemplate: '/reservas',
+        controller: NewReservaController::class,
+    )
+] */),
+ApiFilter(
+    DateFilter::class,
+    properties: ['fecha' => DateFilter::EXCLUDE_NULL]
+)]
 #[ORM\Entity(repositoryClass: ReservaRepository::class)]
 class Reserva
 {
@@ -17,24 +33,20 @@ class Reserva
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE)]
     #[Assert\NotBlank([],'El campo debe estar relleno')]
-    private ?\DateTimeInterface $fini = null;
+    private ?\DateTimeInterface $fecha = null;
 
     #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
-    #[Assert\NotBlank([],'El campo debe estar relleno')]
+    #[ORM\JoinColumn(nullable: true)]
     private ?\DateTimeInterface $fechaAnul = null;
 
     #[ORM\Column]
+    #[ORM\JoinColumn(nullable: true)]
     private ?bool $presentado = null;
 
     #[ORM\ManyToOne]
     #[Assert\NotBlank([],'El campo debe estar relleno')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?Tramo $tramoIni = null;
-
-    #[ORM\ManyToOne]
-    #[Assert\NotBlank([],'El campo debe estar relleno')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?Tramo $tramoFin = null;
+    private ?Tramo $tramo = null;
 
     #[ORM\ManyToOne(inversedBy: 'reservas')]
     #[Assert\NotBlank([],'El campo debe estar relleno')]
@@ -56,14 +68,14 @@ class Reserva
         return $this->id;
     }
 
-    public function getFini(): ?\DateTimeInterface
+    public function getFecha(): ?\DateTimeInterface
     {
-        return $this->fini;
+        return $this->fecha;
     }
 
-    public function setFini(\DateTimeInterface $fini): self
+    public function setFecha(\DateTimeInterface $fecha): self
     {
-        $this->fini = $fini;
+        $this->fecha = $fecha;
 
         return $this;
     }
@@ -92,26 +104,14 @@ class Reserva
         return $this;
     }
 
-    public function getTramoIni(): ?Tramo
+    public function getTramo(): ?Tramo
     {
-        return $this->tramoIni;
+        return $this->tramo;
     }
 
-    public function setTramoIni(?Tramo $tramoIni): self
+    public function setTramo(?Tramo $tramo): self
     {
-        $this->tramoIni = $tramoIni;
-
-        return $this;
-    }
-
-    public function getTramoFin(): ?Tramo
-    {
-        return $this->tramoFin;
-    }
-
-    public function setTramoFin(?Tramo $tramoFin): self
-    {
-        $this->tramoFin = $tramoFin;
+        $this->tramo = $tramo;
 
         return $this;
     }

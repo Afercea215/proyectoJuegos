@@ -31,6 +31,15 @@ Mesa.prototype.pinta=function () {
 
 };
 
+function setReservada (elemento) {
+    $(elemento).addClass('reservada');
+    $(elemento).droppable({ disabled: true });
+}
+function setNoReservada (elemento) {
+    $(elemento).addClass('noReservada');
+    $(elemento).droppable({ disabled: false });
+}
+
 Mesa.prototype.actualizarPosicion=function (x, y) {
     
     //comprobar si el dia seleccionado tiene distribuciones para updatear la mesa o la disposicion

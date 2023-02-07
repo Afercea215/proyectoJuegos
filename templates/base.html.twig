@@ -33,7 +33,7 @@
         {% block body %}
             {% block header %}
                 {% set classHeader = '' %}
-
+                
                 {% if app.user and app.user.roles[0] and app.user.roles[0] == 'ROLE_ADMIN' %}
                     {% set classHeader = 'header-area--admin' %}
                 {% endif %}
@@ -44,8 +44,8 @@
                         <div class="col-8 col-md-7 ">
                             <nav class="main-nav">
                                 <!-- ***** Logo Start ***** -->
-                                <a href="index.html" class="logo">
-                                <img src={{img_path}}logo.png alt="" style="max-width: 50px;">
+                                <a href="{{ absolute_url(path('home')) }}" class="logo">
+                                <img src={{img_path}}logo.png alt="" style="width: 50px;">
                                 </a>
                                 <!-- ***** Logo End ***** -->
                                 <!-- ***** Menu Start ***** -->
@@ -66,7 +66,7 @@
                                 <div class="indentificacion">
                                     <div class="indentificacion__logo">
                                         <div class="menu-desplegable">
-                                            <img src="images/users/logo.png" class="logo" alt="">
+                                            <img src="images/users/logo.png" class='imgUser' alt="">
                                             <span id="desplegable" class="btnDesplegable">▼</span>
 
                                             <div class="desplegable__contenido" id="contenido-menu">
@@ -140,7 +140,9 @@
                 <script src="bootstrap/assets/js/custom.js"></script>
             
                 {# PERSONAL #}
+                <script src="js/api/reservas.js"></script>   
                 <script src="js/funcionamiento/load.js"></script>   
+                <script src="js/objetos/reserva.js"></script>   
                 <script src="js/objetos/mesa.js"></script>   
                 <script src="js/objetos/juego.js"></script>   
                 <script src="js/objetos/alamacen.js"></script>

@@ -1,8 +1,16 @@
  .mesa{
     background-image: url('../images/brand/mesa.png');
     position: absolute;
+    border-radius: getBorder(1);
  }
 
  #contenedor-mesa{
    display: flex;
+}
+
+.reservada{
+   border: 2px solid rgb(240, 88, 88);
+}
+.noReservada{
+   border: 2px solid rgb(126, 240, 88);
 }

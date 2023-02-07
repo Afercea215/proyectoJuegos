@@ -3,6 +3,11 @@
  {% block content %}
 
     <span id='fecha-disposicion'></span>
+    <select id='tramo'>
+      {% for tramo in tramos %}
+         <option value={{tramo.id}}>{{tramo.inicio|date('H:i')}} - {{tramo.fin|date('H:i')}} </option>
+      {% endfor %}
+    </select>
     {# <input type="button" id='default-dispo' value='Disposicion por defecto'>
     <input type="button" id='btnNewMesa' value='Nueva mesa'> #}
 
