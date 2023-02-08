@@ -31,7 +31,7 @@ class LoginController extends AbstractController
     {
         $security->logout();
         //return $this->redirect($this->generateUrl('homepage'));
-        return $this->redirectToRoute('app_evento');
+        return $this->redirectToRoute('home');
         // controller can be blank: it will never be called!
         //throw new \Exception('Don\'t forget to activate logout in security.yaml');
     }

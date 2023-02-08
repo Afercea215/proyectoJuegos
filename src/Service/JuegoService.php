@@ -28,7 +28,7 @@ class JuegoService
     public function getFondoPantalla(){
         $imgs=$this->getImages();
         $imgsFondo=[];
-        for ($i=0; $i <40 ; $i++) {
+        for ($i=0; $i <80 ; $i++) {
             $n = rand(0,sizeof($imgs)-1); 
 
             $imgsFondo[]=$imgs[$n];

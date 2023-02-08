@@ -4,9 +4,6 @@
 
 {% block content %}
     <h1>Registro</h1>
-    <pre>
-        {{ dump(app.user) }}
-    </pre>
     {{ form_start(registrationForm, { 'attr' : { 'class': 'form col-lg-4 col-md-6 col-sm-9 col-xs-12 text-center mt-3' } }) }}
         {{ form_row(registrationForm.email) }}
         {{ form_row(registrationForm.plainPassword, {
@@ -16,7 +13,7 @@
         {{ form_row(registrationForm.apellidos) }}
         {{ form_row(registrationForm.telegramUser) }}
         {{ form_row(registrationForm.agreeTerms) }}
-
+        <a href="{{ absolute_url(path('app_login')) }}">¿Ya tienes cuenta?</a>
         <button type="submit" class="w-50 boton">Registrarse</button>
     {{ form_end(registrationForm) }}
 {% endblock %}

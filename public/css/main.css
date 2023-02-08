@@ -1251,6 +1251,7 @@ a {
   text-align: center;
   overflow: hidden;
   position: fixed;
+  opacity: 0.5;
 }
 #fondoPantalla .imgFondo {
   opacity: 1;
@@ -1259,403 +1260,403 @@ a {
 }
 #fondoPantalla .imgFondo:nth-child(1) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 1.6297470468s;
+  animation-delay: 1.7504000186s;
 }
 #fondoPantalla .imgFondo:nth-child(2) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 6.2172835498s;
+  animation-delay: 1.1752630902s;
 }
 #fondoPantalla .imgFondo:nth-child(3) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 1.4640207965s;
+  animation-delay: 20.6720077643s;
 }
 #fondoPantalla .imgFondo:nth-child(4) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 4.0014586162s;
+  animation-delay: 3.2534538743s;
 }
 #fondoPantalla .imgFondo:nth-child(5) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 1.5158956753s;
+  animation-delay: 1.5492502587s;
 }
 #fondoPantalla .imgFondo:nth-child(6) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.8124818664s;
+  animation-delay: 1.488056055s;
 }
 #fondoPantalla .imgFondo:nth-child(7) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.5246047252s;
+  animation-delay: 0.1818623058s;
 }
 #fondoPantalla .imgFondo:nth-child(8) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.0516278198s;
+  animation-delay: 1.3752311259s;
 }
 #fondoPantalla .imgFondo:nth-child(9) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.0562472537s;
+  animation-delay: 1.2258227278s;
 }
 #fondoPantalla .imgFondo:nth-child(10) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 2.3156815673s;
+  animation-delay: 0.5458689924s;
 }
 #fondoPantalla .imgFondo:nth-child(11) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.8162514429s;
+  animation-delay: 3.2545035224s;
 }
 #fondoPantalla .imgFondo:nth-child(12) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 1.5144348484s;
+  animation-delay: 3.1599614034s;
 }
 #fondoPantalla .imgFondo:nth-child(13) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 1.0492525211s;
+  animation-delay: 0.5318160472s;
 }
 #fondoPantalla .imgFondo:nth-child(14) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 1.1838235186s;
+  animation-delay: 1.3558552096s;
 }
 #fondoPantalla .imgFondo:nth-child(15) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 1.1567460179s;
+  animation-delay: 2.3209273883s;
 }
 #fondoPantalla .imgFondo:nth-child(16) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 1.2709977224s;
+  animation-delay: 0.011112642s;
 }
 #fondoPantalla .imgFondo:nth-child(17) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 2.7132162175s;
+  animation-delay: 0.670363197s;
 }
 #fondoPantalla .imgFondo:nth-child(18) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 7.5232391895s;
+  animation-delay: 1.1619364954s;
 }
 #fondoPantalla .imgFondo:nth-child(19) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 2.42484362s;
+  animation-delay: 0.5791738646s;
 }
 #fondoPantalla .imgFondo:nth-child(20) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 1.6611851685s;
+  animation-delay: 1.2709637433s;
 }
 #fondoPantalla .imgFondo:nth-child(21) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 3.5346719302s;
+  animation-delay: 1.4390130703s;
 }
 #fondoPantalla .imgFondo:nth-child(22) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.4824373425s;
+  animation-delay: 0.0411673894s;
 }
 #fondoPantalla .imgFondo:nth-child(23) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 1.1771231799s;
+  animation-delay: 0.2036260314s;
 }
 #fondoPantalla .imgFondo:nth-child(24) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 1.7793181674s;
+  animation-delay: 7.1647889003s;
 }
 #fondoPantalla .imgFondo:nth-child(25) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.0637585339s;
+  animation-delay: 0.5103535164s;
 }
 #fondoPantalla .imgFondo:nth-child(26) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 2.2149084399s;
+  animation-delay: 4.9735910061s;
 }
 #fondoPantalla .imgFondo:nth-child(27) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 4.8273667408s;
+  animation-delay: 1.5707487763s;
 }
 #fondoPantalla .imgFondo:nth-child(28) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.1794356816s;
+  animation-delay: 1.1775009358s;
 }
 #fondoPantalla .imgFondo:nth-child(29) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.2485949519s;
+  animation-delay: 27.3634378575s;
 }
 #fondoPantalla .imgFondo:nth-child(30) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.6589477276s;
+  animation-delay: 1.1853490855s;
 }
 #fondoPantalla .imgFondo:nth-child(31) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.6944376476s;
+  animation-delay: 5.3381386469s;
 }
 #fondoPantalla .imgFondo:nth-child(32) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 1.2816443626s;
+  animation-delay: 0.1462723124s;
 }
 #fondoPantalla .imgFondo:nth-child(33) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.118626478s;
+  animation-delay: 0.4013364312s;
 }
 #fondoPantalla .imgFondo:nth-child(34) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.8482453459s;
+  animation-delay: 0.7858378667s;
 }
 #fondoPantalla .imgFondo:nth-child(35) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.7272779422s;
+  animation-delay: 0.618793235s;
 }
 #fondoPantalla .imgFondo:nth-child(36) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.3902185342s;
+  animation-delay: 1.1662702082s;
 }
 #fondoPantalla .imgFondo:nth-child(37) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 2.3250443548s;
+  animation-delay: 1.1813209575s;
 }
 #fondoPantalla .imgFondo:nth-child(38) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 4.4202729554s;
+  animation-delay: 0.7012910849s;
 }
 #fondoPantalla .imgFondo:nth-child(39) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.250288647s;
+  animation-delay: 0.9047351535s;
 }
 #fondoPantalla .imgFondo:nth-child(40) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 8.0752614186s;
+  animation-delay: 0.0244567638s;
 }
 #fondoPantalla .imgFondo:nth-child(41) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.0513068101s;
+  animation-delay: 1.0884828294s;
 }
 #fondoPantalla .imgFondo:nth-child(42) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 4.5868893502s;
+  animation-delay: 0.4962753381s;
 }
 #fondoPantalla .imgFondo:nth-child(43) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 1.5325254199s;
+  animation-delay: 3.1168215694s;
 }
 #fondoPantalla .imgFondo:nth-child(44) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.9119254225s;
+  animation-delay: 1.4071420058s;
 }
 #fondoPantalla .imgFondo:nth-child(45) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 15.9078851563s;
+  animation-delay: 0.4719488128s;
 }
 #fondoPantalla .imgFondo:nth-child(46) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.7485213446s;
+  animation-delay: 1.055555937s;
 }
 #fondoPantalla .imgFondo:nth-child(47) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.3023494142s;
+  animation-delay: 1.613861591s;
 }
 #fondoPantalla .imgFondo:nth-child(48) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.9920491967s;
+  animation-delay: 3.9027302826s;
 }
 #fondoPantalla .imgFondo:nth-child(49) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.3015926352s;
+  animation-delay: 0.3288820523s;
 }
 #fondoPantalla .imgFondo:nth-child(50) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 1.5822270028s;
+  animation-delay: 0.8715470699s;
 }
 #fondoPantalla .imgFondo:nth-child(51) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.4058414518s;
+  animation-delay: 1.0511088985s;
 }
 #fondoPantalla .imgFondo:nth-child(52) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 48.9058840918s;
+  animation-delay: 20.1136191021s;
 }
 #fondoPantalla .imgFondo:nth-child(53) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 4.5031112647s;
+  animation-delay: 3.251924666s;
 }
 #fondoPantalla .imgFondo:nth-child(54) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 5.1084052823s;
+  animation-delay: 1.4423277671s;
 }
 #fondoPantalla .imgFondo:nth-child(55) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.5536865554s;
+  animation-delay: 0.1097647484s;
 }
 #fondoPantalla .imgFondo:nth-child(56) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 4.1934087727s;
+  animation-delay: 2.9459790671s;
 }
 #fondoPantalla .imgFondo:nth-child(57) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 7.8921368205s;
+  animation-delay: 0.3620482621s;
 }
 #fondoPantalla .imgFondo:nth-child(58) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 1.3482988621s;
+  animation-delay: 5.0479563062s;
 }
 #fondoPantalla .imgFondo:nth-child(59) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.1212978641s;
+  animation-delay: 1.0695275444s;
 }
 #fondoPantalla .imgFondo:nth-child(60) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.2650176995s;
+  animation-delay: 1.3926729573s;
 }
 #fondoPantalla .imgFondo:nth-child(61) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 1.1131973341s;
+  animation-delay: 0.8882324453s;
 }
 #fondoPantalla .imgFondo:nth-child(62) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 1.1887759317s;
+  animation-delay: 1.0048769721s;
 }
 #fondoPantalla .imgFondo:nth-child(63) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.2821997236s;
+  animation-delay: 1.011776377s;
 }
 #fondoPantalla .imgFondo:nth-child(64) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.5922840369s;
+  animation-delay: 1.1152169906s;
 }
 #fondoPantalla .imgFondo:nth-child(65) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 1.8573863758s;
+  animation-delay: 0.2334912567s;
 }
 #fondoPantalla .imgFondo:nth-child(66) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 3.7320227192s;
+  animation-delay: 0.2346533431s;
 }
 #fondoPantalla .imgFondo:nth-child(67) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.2682625513s;
+  animation-delay: 1.6608418697s;
 }
 #fondoPantalla .imgFondo:nth-child(68) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.4015998012s;
+  animation-delay: 10.1737707126s;
 }
 #fondoPantalla .imgFondo:nth-child(69) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.2477188569s;
+  animation-delay: 0.764484637s;
 }
 #fondoPantalla .imgFondo:nth-child(70) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 1.3776080989s;
+  animation-delay: 0.706037289s;
 }
 #fondoPantalla .imgFondo:nth-child(71) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 1.2189150595s;
+  animation-delay: 0.9001195958s;
 }
 #fondoPantalla .imgFondo:nth-child(72) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.7403807366s;
+  animation-delay: 0.7699778657s;
 }
 #fondoPantalla .imgFondo:nth-child(73) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 1.3278013872s;
+  animation-delay: 3.3755888156s;
 }
 #fondoPantalla .imgFondo:nth-child(74) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.6551089228s;
+  animation-delay: 1.0103908789s;
 }
 #fondoPantalla .imgFondo:nth-child(75) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 19.2558006142s;
+  animation-delay: 0.4070800089s;
 }
 #fondoPantalla .imgFondo:nth-child(76) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 4.6968921757s;
+  animation-delay: 0.1537007763s;
 }
 #fondoPantalla .imgFondo:nth-child(77) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.3765714804s;
+  animation-delay: 1.7463089419s;
 }
 #fondoPantalla .imgFondo:nth-child(78) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 1.105990945s;
+  animation-delay: 0.2169356534s;
 }
 #fondoPantalla .imgFondo:nth-child(79) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 7.8971773756s;
+  animation-delay: 1.578927648s;
 }
 #fondoPantalla .imgFondo:nth-child(80) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 2.9858109969s;
+  animation-delay: 0.2570809297s;
 }
 #fondoPantalla .imgFondo:nth-child(81) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 1.4549938457s;
+  animation-delay: 2.1760130837s;
 }
 #fondoPantalla .imgFondo:nth-child(82) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.8303042234s;
+  animation-delay: 0.9233372135s;
 }
 #fondoPantalla .imgFondo:nth-child(83) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 8.4233884696s;
+  animation-delay: 105.3110325284s;
 }
 #fondoPantalla .imgFondo:nth-child(84) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.9744788978s;
+  animation-delay: 6.2940465654s;
 }
 #fondoPantalla .imgFondo:nth-child(85) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 1.1814340221s;
+  animation-delay: 5.2503633275s;
 }
 #fondoPantalla .imgFondo:nth-child(86) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.2538153992s;
+  animation-delay: 1.8080065931s;
 }
 #fondoPantalla .imgFondo:nth-child(87) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.6010468533s;
+  animation-delay: 2.0938507831s;
 }
 #fondoPantalla .imgFondo:nth-child(88) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 7.903403097s;
+  animation-delay: 2.5978469371s;
 }
 #fondoPantalla .imgFondo:nth-child(89) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 3.5298808891s;
+  animation-delay: 1.3558412382s;
 }
 #fondoPantalla .imgFondo:nth-child(90) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 1.8405998595s;
+  animation-delay: 1.7933855514s;
 }
 #fondoPantalla .imgFondo:nth-child(91) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 5.9744825412s;
+  animation-delay: 23.2355733564s;
 }
 #fondoPantalla .imgFondo:nth-child(92) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.2936262109s;
+  animation-delay: 0.5509802764s;
 }
 #fondoPantalla .imgFondo:nth-child(93) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.8689305153s;
+  animation-delay: 0.3819151508s;
 }
 #fondoPantalla .imgFondo:nth-child(94) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 2.1343317311s;
+  animation-delay: 0.6948888292s;
 }
 #fondoPantalla .imgFondo:nth-child(95) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 3.7694261244s;
+  animation-delay: 1.8925719845s;
 }
 #fondoPantalla .imgFondo:nth-child(96) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 4.5949339711s;
+  animation-delay: 1.5937312238s;
 }
 #fondoPantalla .imgFondo:nth-child(97) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 1.2780200343s;
+  animation-delay: 0.1169528826s;
 }
 #fondoPantalla .imgFondo:nth-child(98) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.8561523843s;
+  animation-delay: 1.1978656014s;
 }
 #fondoPantalla .imgFondo:nth-child(99) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.3737240068s;
+  animation-delay: 0.1418708462s;
 }
 #fondoPantalla .imgFondo:nth-child(100) {
   animation: 4s zoom-in-zoom-out infinite;
-  animation-delay: 0.3341763782s;
+  animation-delay: 3.0175459555s;
 }
 @keyframes zoom-in-zoom-out {
   0% {
