@@ -1,5 +1,6 @@
 $("document").ready(function () {
   
+  
   if ($('#almacen').get(0)!=undefined && $('#sala').get(0)!=undefined) {
 
     $( "#divNewMesa" ).hide();
@@ -11,13 +12,18 @@ $("document").ready(function () {
     sala2.setDrop();
 
     //incializo el datepicker
+    let date = new Date();
+    let reservas = getReservas({currentYear:date.getFullYear(),currentMonth:date.getMonth(), currentDay:date.getDate()});
     setDatePickerDisposiciones(sala2, almacen2);
+
+    $('#fecha-disposicion').data('reservas', reservas);
 
     //pongo las disposiciones de las mesas
     let currentDate = new Date();
     sala2.actualizaDisposicion({currentYear: currentDate.getFullYear(), currentMonth: currentDate.getMonth()+1, currentDay: currentDate.getDate()});
     almacen2.actualizaDisposicion({currentYear: currentDate.getFullYear(), currentMonth: currentDate.getMonth()+1, currentDay: currentDate.getDate()});
     setDrag();
+
 
     //programo el boton de disposiciones default
     $('#default-dispo').click(function () {
@@ -30,6 +36,32 @@ $("document").ready(function () {
   //programo el boton de crear una mesa
     $( "#btnNewMesa" ).click(function () {
       $( "#divNewMesa" ).show( 'scale', {}, 500, function(){});
-    });
+    })
+  
+    
+    $('.noReservada').dblclick(function () {
+      debugger
+      $("#modalMenu").dialog({
+        autoOpen: true,
+        modal:true,
+        buttons: [
+          {
+            text: "Ok",
+            icon: "ui-icon-heart",
+            click: function() {
+              $( this ).dialog( "close" );
+            }
+       
+            // Uncommenting the following line would hide the text,
+            // resulting in the label being used as a tooltip
+            //showText: false
+          }
+        ],
+        show: { effect: "slideDown", duration: 800 },
+        
+  
+      });
+      
+    })
   }
 });

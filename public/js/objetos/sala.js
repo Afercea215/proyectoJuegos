@@ -13,11 +13,13 @@ Sala.prototype.pinta=function () {
 
 Sala.prototype.actualizaDisposicion=function (fecha) {
     let dispo = getDisposiciones(fecha);
+     $('#fecha-disposicion').data('disposiciones',dispo);
+    let reservas = $('#fecha-disposicion').data('reservas');
     //buco la mesa y actualiza su posi en el array
     let mesas = getMesas();
+    
     if (dispo.length>0) {
         let mesasDispo=[];
-        
         //recorro las mesas y las disposiciones, por si coinciden para cambiar su posicion
         $.each(mesas,function (key,val) {
             let aceptar = false;
@@ -32,8 +34,8 @@ Sala.prototype.actualizaDisposicion=function (fecha) {
                 }
             })
 
+            let mesa = val;
             if (aceptar) {
-                let mesa = val;
                 mesa.x=x;
                 mesa.y=y;
                 mesasDispo.push(mesa);
@@ -60,7 +62,33 @@ Sala.prototype.actualizaDisposicion=function (fecha) {
         $.each(this.mesas, function (key, val) {
             val.pinta();
         })
+
     }
+
+    ////////////
+    $.each($('#sala .mesa'),function (key2, mesa) {
+        let reservada = false;
+        let reservas = $('#fecha-disposicion').data('reservas');
+
+        $.each(reservas,function (key2, reserva) {
+            if ($(mesa).data('obj').id == reserva.mesa.split('/')[3]) {
+                reservada = true;
+            }
+        })
+        //si esta reservada le asigno la clase
+        if (reservada) {
+            $(mesa).removeClass('reservada');
+            $(mesa).removeClass('noReservada');
+            $(mesa).addClass('reservada');
+            $(mesa).draggable({ disabled: true });
+        }else{
+            $(mesa).removeClass('reservada');
+            $(mesa).removeClass('noReservada');
+            $(mesa).addClass('noReservada');
+            $(mesa).draggable({ disabled: false });
+        }
+    })
+
 }
 
 Sala.prototype.setDrop=function (mesas = this.mesas, mesasAlamacen) {
@@ -76,8 +104,39 @@ Sala.prototype.setDrop=function (mesas = this.mesas, mesasAlamacen) {
 
                 mesa.data('obj').actualizarPosicion(left-this.offsetLeft, top-this.offsetTop)
                 
+                let reservada = false;
+                let reservas = $('#fecha-disposicion').data('reservas');
+
+                $.each(reservas,function (key2, reserva) {
+                    if ($(mesa).data('obj').id == reserva.mesa.split('/')[3]) {
+                        reservada = true;
+                    }
+                })
+                //si esta reservada le asigno la clase
+                if (reservada) {
+                    $(mesa).removeClass('reservada');
+                    $(mesa).removeClass('noReservada');
+                    $(mesa).addClass('reservada');
+                    $(mesa).draggable({ disabled: true });
+                }else{
+                    $(mesa).removeClass('reservada');
+                    $(mesa).removeClass('noReservada');
+                    $(mesa).addClass('noReservada');
+                    $(mesa).draggable({ disabled: false });
+                }
+                
                 //mesaObj.actualizarPosicion(left,top);
                 mesa.css({ position: 'absolute', top: top + "px", left: left + "px" });
+            }else{
+                $.notification(
+                    ["No puede colocar una mesa sobre otra!"],
+                    {
+                      messageType: 'success',
+                      timeView: 5000,
+                      position: ['top','left'],
+    
+                    }
+                  )
             }
 
         },

@@ -39,7 +39,7 @@ function setDatePickerDisposiciones(sala, almacen=null){
         onSelect:function (text, obj) {
           //cada vez que se cambia el dia se actualiza la sala y almacen
           showLoad();
-          
+          $(this).data('reservas',getReservas({currentYear:obj.currentYear, currentMonth:obj.currentMonth, currentDay:obj.currentDay}))
           this.sala.actualizaDisposicion(obj);
           this.almacen.actualizaDisposicion(obj);
           setDrag();

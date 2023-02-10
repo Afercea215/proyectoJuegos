@@ -18,18 +18,23 @@ Reserva.prototype.realizar=function () {
             //dataType: 'json',
             data: JSON.stringify(this),
             success: function(a) {  
-                debugger
-                console.log('Success, reserva realizada');
+                $.notification(
+                    ["Reserva realizada"],
+                    {
+                      messageType: 'success',
+                      timeView: 5000,
+                      position: ['top','left'],
+    
+                    }
+                  )
             }
         }).done(function (data) {
-            debugger
-            console.log(data);
+        
         })
     }
 }
 
 Reserva.prototype.valida=function() {
-    debugger
     if (this.tramo != null && this.juego != null && this.mesa != null && this.fecha) {
         return true;
     }

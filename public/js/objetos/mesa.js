@@ -96,6 +96,28 @@ Mesa.prototype.actualizarPosicion=function (x, y) {
             contentType: 'application/json',
             data: data,
             success: function(a) {
+                if (type == 'POST') {
+                    $.notification(
+                        ["Disposicion creada!"],
+                        {
+                          messageType: 'success',
+                          timeView: 5000,
+                          position: ['top','left'],
+        
+                        }
+                      )
+                }
+                if (type == 'PUT') {
+                    $.notification(
+                        ["Disposicion actualizada!"],
+                        {
+                          messageType: 'success',
+                          timeView: 5000,
+                          position: ['top','left'],
+        
+                        }
+                      )
+                }
                 console.log('Success, mesa updated id : '+a.id+" ---- POSICION DISPOSICION > "+data.fecha);
               }
         })
@@ -118,6 +140,15 @@ Mesa.prototype.actualizarPosicion=function (x, y) {
             data: data,
             success: function(a) {
                 console.log('Success, mesa updated id : '+a.id+" ---- POSICION DEFAULT");
+                $.notification(
+                    ["Mesa actualizada!"],
+                    {
+                      messageType: 'success',
+                      timeView: 5000,
+                      position: ['top','left'],
+    
+                    }
+                  )
               }
         })
     }
@@ -131,7 +162,8 @@ Mesa.prototype.creaDiv=function () {
                         width:this.ancho,
                         height:this.longitud,
                     })
-                    .data('obj', this);
+                    .data('obj', this)
+                    ;
 
 };
 
@@ -149,7 +181,7 @@ Mesa.prototype.choca=function (x,y) {
     //comprueba si choca la poasicion con alguna mesa de la sala
     $.each(mesasSala, function (key,val) {
         //si no es ella misma o una mesa sin id se comprar con las demas
-        if (mesasSala.length>0 && val.id!='' && $(val).data('obj')!=this) {
+        if (mesasSala.length>0 && val.id!='' && $(val).data('obj')!=$(this).data('obj')) {
 
             let posX = parseInt(val.offsetLeft);
             let posY = parseInt(val.offsetTop);
