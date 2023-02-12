@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+
+    <div class='juego juego--info'>
+        <h1>{{juego.nombre}}</h1>     
+        <h2>{{juego.editorial}}</h2>     
+
+        <img src='../{{img_juegos_path}}{{juego.img}}' class='imgDescJuego'>
+
+        <div class='juego--info__texto'>
+            <p>Min Jugadores : {{juego.minJuga}}</p>     
+            <p>Max Jugadores : {{juego.maxJuga}}</p>     
+            <p>Ancho : {{juego.ancho}}</p>     
+            <p>Longitd : {{juego.longitud}}</p>     
+            <a class='boton mt-3' href="{{ absolute_url(path('app_reserva',{id: juego.id})) }}">Reservar</a>
+        </div>
+    </div>
+
+{% endblock %}

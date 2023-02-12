@@ -1,8 +1,9 @@
 twig:
     default_path: '%kernel.project_dir%/templates'
     globals:
-        img_path: './images/'
-        img_juegos_path: './images/juegos/'
+        img_path: '/images/'
+        img_juegos_path: '/images/juegos/'
+        img_icons_path: '/images/icons/'
 
 when@test:
     twig:

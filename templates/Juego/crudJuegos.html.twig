@@ -1,0 +1,53 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <h1>Gestion Juegos</h1>
+    <div id='crudJuegos'>
+        <table id='crudJuegos' class='c-tabla mt-3'>
+            <thead>
+                <tr>
+                {% set ordenNew = 'ASC' %}
+                {% if tipo =='ASC' %}
+                    {% set ordenNew = 'DESC' %}
+                {% endif %}
+                
+                    <th><a href="{{ absolute_url(path('app_admin_juegos',{pag: 1, orden:'id', tipo:ordenNew})) }}">Id ▼</a></th>
+                    <th><a href="{{ absolute_url(path('app_admin_juegos',{pag: 1, orden:'nombre', tipo:ordenNew})) }}">Nombre ▼</a></th>
+                    <th><a href="{{ absolute_url(path('app_admin_juegos',{pag: 1, orden:'editorial', tipo:ordenNew})) }}">Editorial ▼</a></th>
+                    <th><a href="{{ absolute_url(path('app_admin_juegos',{pag: 1, orden:'img', tipo:ordenNew})) }}">Img ▼</a></th>
+                    <th><a href="{{ absolute_url(path('app_admin_juegos',{pag: 1, orden:'minJuga', tipo:ordenNew})) }}">Min Juga ▼</a></th>
+                    <th><a href="{{ absolute_url(path('app_admin_juegos',{pag: 1, orden:'maxJuga', tipo:ordenNew})) }}">Max Juga ▼</a></th>
+                    <th><a href="{{ absolute_url(path('app_admin_juegos',{pag: 1, orden:'ancho', tipo:ordenNew})) }}">Ancho ▼</a></th>
+                    <th><a href="{{ absolute_url(path('app_admin_juegos',{pag: 1, orden:'longitud', tipo:ordenNew})) }}">Longitud ▼</a></th>
+                    <th></th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+
+            <tbody>
+            {% for juego in juegos %}
+                <tr>
+                    <td>{{juego.id}}</td>
+                    <td>{{juego.nombre}}</td>
+                    <td>{{juego.editorial}}</td>
+                    <td><img src='{{img_juegos_path}}{{juego.img}}'></td>
+                    <td>{{juego.minJuga}}</td>
+                    <td>{{juego.maxJuga}}</td>
+                    <td>{{juego.ancho}}</td>
+                    <td>{{juego.longitud}}</td>
+                    <td><a href="{{ absolute_url(path('app_juego',{id: juego.id})) }}"><img src='{{img_icons_path}}eye.png'></a></td>
+                    <td><a href="{{ absolute_url(path('app_juego_edit',{id: juego.id})) }}"><img src='{{img_icons_path}}pencil.png'></a></td>
+                    <td><a href="{{ absolute_url(path('app_juego_borrar',{id: juego.id})) }}"><img src='{{img_icons_path}}trash.png'></a></td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <nav aria-label="... mt-3">
+        <ul class="pagination pagination-lg mt-3">
+            <li class='page-item {% if pag == 1 %}active{% endif %}'><a class="page-link" href="{{ absolute_url(path('app_admin_juegos',{pag: 1, orden:orden, tipo:tipo})) }}">1</a></li>
+            <li class='page-item {% if pag == 2 %}active{% endif %}'><a class="page-link" href="{{ absolute_url(path('app_admin_juegos',{pag: 2, orden:orden, tipo:tipo})) }}">2</a></li>
+        </ul>
+    </nav>
+{% endblock %}

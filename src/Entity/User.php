@@ -61,6 +61,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
+    public function getAdmin(){
+        return in_array('ROLE_ADMIN', $this->roles);
+    }
     /**
      * A visual identifier that represents this user.
      *

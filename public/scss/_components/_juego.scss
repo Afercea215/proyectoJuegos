@@ -1,6 +1,105 @@
+#listJuegos{
+    width: 80%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
+    min-width: 700px;
+
+    & .juego{
+        width: 350px;
+        height: 275px;
+
+    }
+}
+
+
 .juego{
-    border: 2px solid $color-princip;
+    margin: 1%;
+    border-radius: getBorder(2);
+    background: $color-gradient;
+    box-shadow: 10px 10px 10px rgba($color: #000000, $alpha: 0.1);
+    padding: 2%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    transition: transform .2s;
+    
+    &:hover{
+        transform: scale(1.1);
+    }
+
+    &--info{
+
+        & .imgDescJuego{
+    
+            width: 250px;
+            height: 250px;
+            border-radius: getBorder(2);
+        }
+        
+        &__texto{
+            width: 50%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            & p{
+                color: white;
+            }
+            & .boton{
+                text-align: center;
+                width: 55%;
+            }
+    
+        }
+    }
+
+    & h1{
+        width: 100%;
+        text-align: center;
+        font-size: 150%;
+        color: $color-terc;
+    }
+    & h2{
+        width: 100%;
+        text-align: center;
+        font-size: 100%;
+        margin-bottom: 3%;
+    }
+
+    &__texto{
+        width: 60%;
+        text-align: center;
+        & p{
+            color: white;
+        }
+
+    }
+
+    & .boton{
+        margin-top: 3%;
+        text-align: center;
+        width: 55%;
+    }
+
     & img{
-        max-width: 100px;
+        margin-top: 1%;
+        width: 120px;
+        height: 120px;
+        border-radius: getBorder(2);
+    }
+}
+
+#crudJuegos{
+    width: 100%;
+    padding: 0 5%;
+}
+
+@media (max-width: 767px) {
+    #crudJuegos{
+        overflow: scroll;
     }
 }

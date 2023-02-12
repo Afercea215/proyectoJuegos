@@ -40,7 +40,6 @@ $("document").ready(function () {
   
     
     $('.noReservada').dblclick(function () {
-      debugger
       $("#modalMenu").dialog({
         autoOpen: true,
         modal:true,
@@ -58,10 +57,22 @@ $("document").ready(function () {
           }
         ],
         show: { effect: "slideDown", duration: 800 },
-        
+        open: function () {
+          $('#editaMesa').click(function () {
+            let mesa = $(this).parent().data('mesa');
+            modalEditaMesa(mesa);
+            
+            //$(this).parent().data('mesa').edita();
+          })  
+          $('#borraMesa').click(function () {
+            let mesa = $(this).parent().data('mesa');
+            mesa.borrar();
+
+            //$(this).parent().data('mesa').edita();
+          })  
+        }
   
-      });
-      
+      }).data('mesa',$(this).data('obj'));
     })
   }
 });

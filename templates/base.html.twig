@@ -9,20 +9,20 @@
         
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
-            <link rel="stylesheet" href="css/main.css" />
+            <link rel="stylesheet" href="/css/main.css" />
             <!-- Bootstrap core CSS -->
-            <link href="bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+            <link href="/bootstrap/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
             <!-- Additional CSS Files -->
-            <link rel="stylesheet" href="bootstrap/assets/css/fontawesome.css">
-            <link rel="stylesheet" href="bootstrap/assets/css/templatemo-tale-seo-agency.css">
-            <link rel="stylesheet" href="bootstrap/assets/css/owl.css">
-            <link rel="stylesheet" href="bootstrap/assets/css/animate.css">
+            <link rel="stylesheet" href="/bootstrap/assets/css/fontawesome.css">
+            <link rel="stylesheet" href="/bootstrap/assets/css/templatemo-tale-seo-agency.css">
+            <link rel="stylesheet" href="/bootstrap/assets/css/owl.css">
+            <link rel="stylesheet" href="/bootstrap/assets/css/animate.css">
             <link rel="stylesheet" href="https://unpkg.com/swiper@7/swiper-bundle.min.css" />
 
             {# jquery #}
-            <link rel="stylesheet" href="js/ui/css/jquery-ui.css">
-            <link rel="stylesheet" href="js/ui/css/jquery-ui.structure.css">
-            <link rel="stylesheet" href="js/ui/css/jquery-ui.theme.css">
+            <link rel="stylesheet" href="/js/ui/css/jquery-ui.css">
+            <link rel="stylesheet" href="/js/ui/css/jquery-ui.structure.css">
+            <link rel="stylesheet" href="/js/ui/css/jquery-ui.theme.css">
             {# jquery pliugins #}
             <link rel="stylesheet" href="/js/jquery-plugins/contextMenu.min.css">
     
@@ -35,63 +35,88 @@
         {% block body %}
             {% block header %}
                 {% set classHeader = '' %}
-                
-                {% if app.user and app.user.roles[0] and app.user.roles[0] == 'ROLE_ADMIN' %}
-                    {% set classHeader = 'header-area--admin' %}
+                {# comprueba que sea admin #}
+                {% set admin = false %}
+                    
+                {% if app.user and app.user.roles %}
+                    
+                    {% for rol in app.user.roles %}
+                        {% if rol == 'ROLE_ADMIN' %}
+                            {% set admin = true %}
+                        {% endif %}
+                    {% endfor %}
+
                 {% endif %}
 
+                <div id="js-preloader" class="js-preloader">
+                    <div class="preloader-inner">
+                        <span class="dot"></span>
+                        <div class="dots">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                </div>
+
+                {% if admin %}
+                    {% set classHeader = 'header-area--admin' %}
+                {% endif %}
                 <header class='header-area background-header {{classHeader}}'>
                     <div class="container ">
-                    <div class="row text-center">
-                        <div class="col-8 col-md-7 ">
                             <nav class="main-nav">
                                 <!-- ***** Logo Start ***** -->
-                                <a href="{{ absolute_url(path('home')) }}" class="logo">
+                                <a href="{{ absolute_url(path('home')) }}" class="logo order-md-0">
                                 <img src={{img_path}}logo.png alt="" style="width: 50px;">
                                 </a>
                                 <!-- ***** Logo End ***** -->
                                 <!-- ***** Menu Start ***** -->
-                                <ul class="nav">
+                                <ul class="nav order-md-1">
                                     <li class="scroll-to-section"><a href='{{ absolute_url(path('app_reserva')) }}' class="">Reservar</a></li>
-                                    <li class="scroll-to-section"><a href='{{ absolute_url(path('app_reserva')) }}' class="">Juegos</a></li>
+                                    <li class="scroll-to-section"><a href='{{ absolute_url(path('app_juegos')) }}' class="">Juegos</a></li>
                                     <li class="scroll-to-section"><a href="#">Eventos</a></li>
+                                    {% if admin %}
+                                        <li class="scroll-to-section"><a href='{{ absolute_url(path('app_mesa')) }}' class="">Mesas</a></li>
+                                        <li class="scroll-to-section"><a href='{{ absolute_url(path('app_admin_juegos')) }}' class="">Gestion Juegos</a></li>
+                                        <li class="scroll-to-section"><a href='{{ absolute_url(path('admin')) }}' class="">Admin</a></li>
+                                    {% endif %}
                                 </ul>
                                 <a class="menu-trigger">
-                                    <span>Menu</span>
+                                    <span></span>
                                 </a>
                                 <!-- ***** Menu End ***** -->
-                            </nav>
-                        </div>
+                                <div class="order-md-2 content-log d-flex">
+                                    {% if app.user %}
+                                        <div class="indentificacion ">
+                                            <div class="indentificacion__logo">
+                                                <div class="menu-desplegable">
+                                                    <img src="/images/users/logo.png" class='imgUser' alt="">
+                                                    <span id="desplegable" class="btnDesplegable">▼</span>
 
-                        <div class="col-4 col-md-5 pt-3">
-                            {% if app.user %}
-                                <div class="indentificacion">
-                                    <div class="indentificacion__logo">
-                                        <div class="menu-desplegable">
-                                            <img src="images/users/logo.png" class='imgUser' alt="">
-                                            <span id="desplegable" class="btnDesplegable">▼</span>
+                                                    <div class="desplegable__contenido esconde" id="contenido-menu">
+                                                        <span>{{app.user.nombre}}</span>
+                                                        <a href='{{ absolute_url(path('profile', { 'id': app.user.id })) }}'>Datos Personales</a>
+                                                        <a href='{{ absolute_url(path('profile', { 'id': app.user.id })) }}'>Mis reservas</a>
+                                                        <a href='{{ absolute_url(path('profile', { 'id': app.user.id })) }}'>Mis Eventos</a>
+                                                        <a href='{{ absolute_url(path('app_logout')) }}'>Cerrar Sesion</a>
 
-                                            <div class="desplegable__contenido" id="contenido-menu">
-                                                <span>{{app.user.nombre}}</span>
-                                                <a href='{{ absolute_url(path('profile', { 'id': app.user.id })) }}'>Datos Personales</a>
-                                                <a href='{{ absolute_url(path('app_logout')) }}'>Cerrar Sesion</a>
-
-                                            </div>
+                                                    </div>
+                                                </div>
+                                            </div>    
                                         </div>
-                                    </div>    
+                                    {% else %}
+                                        <div class="boton boton--secundario d-inline-block align-middle">
+                                            <a href='../login' class=''>Login</a>
+                                        </div>
+                                        <div class="boton scroll-to-section d-inline-block align-middle">
+                                            <a href='../register' class=''>Registrarse</a>
+                                        </div>
+                                    {% endif %}
+                                    
                                 </div>
-                            {% else %}
-                                <div class="boton boton--secundario d-inline-block align-middle">
-                                    <a href='../login' class=''>Login</a>
-                                </div>
-                                <div class="boton scroll-to-section d-inline-block align-middle">
-                                    <a href='../register' class=''>Registrarse</a>
-                                </div>
-                            {% endif %}
-                            
-                        </div>
+                            </nav>
                     </div>
-                    </div>
+                    <div class='nav-responsive'></div>
                 </header>
 
                 {% for flash_message in app.session.flashbag.get('success') %}
@@ -124,8 +149,8 @@
             {% block javascripts %}
                 {{ encore_entry_script_tags('app') }}
                 {# JQUERY #}
-                <script src="js/js/jquery.js"></script>
-                <script src="js/js/jquery-ui.js"></script>
+                <script src="/js/js/jquery.js"></script>
+                <script src="/js/js/jquery-ui.js"></script>
                 {# JQUERY VALIDATION #}
                 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.js"></script>
                 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/additional-methods.js"></script>
@@ -133,33 +158,34 @@
                 
                 <!-- Scripts -->
                 <!-- Bootstrap core JavaScript -->
-                <script src="bootstrap/vendor/jquery/jquery.min.js"></script>
-                <script src="bootstrap/vendor/bootstrap/js/bootstrap.min.js"></script>
+                <script src="/bootstrap/vendor/jquery/jquery.min.js"></script>
+                <script src="/bootstrap/vendor/bootstrap/js/bootstrap.min.js"></script>
 
-                <script src="bootstrap/assets/js/isotope.min.js"></script>
-                <script src="bootstrap/assets/js/owl-carousel.js"></script>
-                <script src="bootstrap/assets/js/tabs.js"></script>
-                <script src="bootstrap/assets/js/popup.js"></script>
-                <script src="bootstrap/assets/js/custom.js"></script>
+                <script src="/bootstrap/assets/js/isotope.min.js"></script>
+                <script src="/bootstrap/assets/js/owl-carousel.js"></script>
+                <script src="/bootstrap/assets/js/tabs.js"></script>
+                <script src="/bootstrap/assets/js/popup.js"></script>
+                <script src="/bootstrap/assets/js/custom.js"></script>
             
                 {# JQUERY PLUGINS #}
                 <script src="/js/jquery-plugins/notifications.js"></script>
                 <script src="/js/jquery-plugins/contextMenu.min.js"></script>
                 
                 {# PERSONAL #}
-                <script src="js/api/reservas.js"></script>   
-                <script src="js/funcionamiento/load.js"></script>   
-                <script src="js/objetos/reserva.js"></script>   
-                <script src="js/objetos/mesa.js"></script>   
-                <script src="js/objetos/juego.js"></script>   
-                <script src="js/objetos/alamacen.js"></script>
-                <script src="js/objetos/sala.js"></script>
-                <script src="js/funcionamiento/gestionMesas.js"></script>
-                <script src="js/funcionamiento/reservar.js"></script>
-                <script src="js/funcionamiento/menu-header.js"></script>
-                <script src="js/objetos/datepickerDisposiciones.js"></script>
-                <script src="js/validacion/validaForm.js"></script>
-                <script src="js/uix/alert.js"></script>
+                <script src="/js/funcionamiento/header.js"></script>   
+                <script src="/js/api/reservas.js"></script>   
+                <script src="/js/funcionamiento/load.js"></script>   
+                <script src="/js/objetos/reserva.js"></script>   
+                <script src="/js/objetos/mesa.js"></script>   
+                <script src="/js/objetos/juego.js"></script>   
+                <script src="/js/objetos/alamacen.js"></script>
+                <script src="/js/objetos/sala.js"></script>
+                <script src="/js/funcionamiento/gestionMesas.js"></script>
+                <script src="/js/funcionamiento/reservar.js"></script>
+                <script src="/js/funcionamiento/menu-header.js"></script>
+                <script src="/js/objetos/datepickerDisposiciones.js"></script>
+                <script src="/js/validacion/validaForm.js"></script>
+                <script src="/js/uix/alert.js"></script>
             {% endblock %}
 
         {% endblock %}

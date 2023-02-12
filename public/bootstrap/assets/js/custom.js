@@ -154,8 +154,17 @@
 	// Menu Dropdown Toggle
 	if($('.menu-trigger').length){
 		$(".menu-trigger").on('click', function() {	
-			$(this).toggleClass('active');
-			$('.header-area .nav').slideToggle(200);
+			if ($(this).hasClass('active')) {
+				$(this).toggleClass('active');
+				$('.nav').appendTo($('.main-nav'));
+			}else{
+
+				$(this).toggleClass('active');
+				$('.nav').appendTo($('.nav-responsive'));
+	
+				$('.nav-responsive')
+				.css({display:'block'});
+			}
 		});
 	}
 

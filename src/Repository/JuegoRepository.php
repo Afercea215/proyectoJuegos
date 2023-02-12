@@ -39,6 +39,17 @@ class JuegoRepository extends ServiceEntityRepository
         }
     }
 
+    public function getPage(int $page, string $orderBy='nombre', string $typeOrder = 'DESC'){
+        $qb = $this->createQueryBuilder('j')
+                ->orderBy('j.'.$orderBy, $typeOrder)
+                ->setFirstResult($page*10-10)
+                ->setMaxResults(($page*10));
+    
+        $query = $qb->getQuery();
+
+        return $query->execute();
+    }
+
 //    /**
 //     * @return Juego[] Returns an array of Juego objects
 //     */

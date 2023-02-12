@@ -62,3 +62,84 @@
 .imgUser{
     width: 50px;
 }
+
+.desplegable__contenido{
+    display: none;
+}
+
+.content-log{
+    align-self: center;
+}
+
+.nav-responsive ul{
+    display: flex;
+    width: 100%;
+    background-color: white;
+    padding: 2%;
+
+    & li{
+        padding: 3%;
+        border-bottom: 1px solid $color-princip;
+    }
+}
+
+#contenido-menu{
+    /* display: flex; */
+    flex-direction: column;
+    text-align: center;
+    position: absolute;
+    right: 15px;
+    background: $color-terc;
+    color: $color-cuart;
+    padding: 2%;
+    border-radius: getBorder(1);
+    box-shadow: 10px 10px 20px rgba($color: #000000, $alpha: 0.4);
+
+    & span{
+        padding-bottom: 5%;
+        border-bottom: 1px solid $color-cuart;
+        width: 100%;
+        margin-bottom: 5%;
+    }
+    & a{
+        width: 100%;
+        padding: 3% 0;
+    }
+}
+
+.muestra{
+    display: flex;
+}
+.esconde{
+    display: none;
+}
+
+@media (max-width: 767px) {
+    .nav{
+        display: none;
+    }    
+    .menu-trigger{
+        display: block;
+    }
+    .content-log{
+        /* flex-direction: column; */
+        font-size: 75%;
+    }
+    .main-nav{
+        display: block;
+    }
+    
+}
+@media (max-width: 555px) {
+    .content-log{
+        //flex-direction: column;
+        font-size: 50%;
+    }
+    .main-nav{
+        display: block;
+    }
+    .header-area .main-nav .menu-trigger{
+        right: 50%;
+    }
+    
+}

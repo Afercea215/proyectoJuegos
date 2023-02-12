@@ -167,6 +167,23 @@ Mesa.prototype.creaDiv=function () {
 
 };
 
+Mesa.prototype.modalEditaMesa = function (){
+    let mesa = this;
+
+    let modal = $('<div>').attr('id','modalEditar');
+    let ancho = $('<div>').attr('id','divAncho').append([
+        $('<label>').text('Ancho'),
+        $('<input>').attr('type','number').attr('id', 'anchoMesa'),]
+    );
+    let longitud = $('<div>').attr('id','divLongitud').append([
+        $('<label>').text('Longitud'),
+        $('<input>').attr('type','number').attr('id', 'longitudMesa'),]
+    );
+    let guardar = $('<input>').attr('type','button').attr('id', 'guardaMesa');
+
+    /////////////////////
+}
+
 //compruebo si una mesa choca con todas las demas de la sala
 //x y son las posiciones donde se dropea la mesa para comprobar
 Mesa.prototype.choca=function (x,y) {

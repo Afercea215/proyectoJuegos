@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+    <h1>Juegos</h1>
+    <a href='{{ absolute_url(path('app_reserva')) }}' class='boton boton--gradient mt-2 mb-2'>Reservar</a>
+    <div id='listJuegos'>
+    {% for juego in juegos %}
+        <div class='juego'>
+            <h1>{{juego.nombre}}</h1>     
+            <img src='{{img_path}}juegos/{{juego.img}}'>
+            <div class='juego__texto'>
+                 <p>Min Jugadores : {{juego.minJuga}}</p>     
+                 <p>Max Jugadores : {{juego.maxJuga}}</p>     
+            </div>
+            <a href="{{ absolute_url(path('app_juego',{id: juego.id})) }}" class='boton boton--secundario '>Ver</a>
+            
+        </div>
+    {% endfor %}
+    </div>
+{% endblock %}

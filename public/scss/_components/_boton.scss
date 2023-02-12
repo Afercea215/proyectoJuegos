@@ -1,7 +1,6 @@
 @mixin btn(){
     border: none;
     background: $color-terc;
-    min-width: 30%;
     border-radius: 23px;
     color: $color-princip;
     transition: all 0.4s;
@@ -11,10 +10,17 @@
     letter-spacing: 0.5px;
     transition: all .3s;
     position: relative;
+    text-align: center;
+    transition: transform .2s;
+    
 }
 
 .boton{
     @include btn();
+    &:hover{
+        transform: scale(1.1);
+    }
+
     &--text-blanco{
         color: $color-terc;
     }
@@ -25,13 +31,26 @@
         background: none;
         border: 3px solid $color-terc;
         color: $color-terc;
+
+        &:hover{
+            background: $color-terc;
+            color: $color-princip;
+        }
+    }
+    &--gradient{
+        background: $color-gradient;
+        color: $color-terc;
+
+        &:hover{
+            color:$color-terc;
+        }
     }
 }
 
 @media (max-width:1000px) and (min-width:700px) {
-    .boton{
+   /*  .boton{
         min-width: 25%;
         padding: 8px 25px;
         font-size: 80%;
-    }
+    } */
 }
