@@ -5,8 +5,12 @@ namespace App\Controller\Admin;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ArrayField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -23,17 +27,20 @@ class UserCrudController extends AbstractCrudController
                 'nombre',
                 'apellidos',
                 ChoiceField::new('roles')->setChoices(['ADMIN' => 'ROLE_ADMIN', 'USER' => 'ROLE_USER'])->allowMultipleChoices()->autocomplete(),
+                ArrayField::new('roles'),
+                
             ];
         }
         
         return [
-            'id',
-            'email',
-            'nombre',
-            'apellidos',
-            'telegramUser',
+            IdField::new('id'),
+            EmailField::new('email'),
+            TextField::new('nombre'),
+            TextField::new('apellidos'),
+            TextField::new('telegramUser'),
+            ArrayField::new('roles'),
             //ArrayField::new('roles'),
-            BooleanField::new('Admin'),
+            BooleanField::new('Admin')->setDisabled(),
         ];
     }
    

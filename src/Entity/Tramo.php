@@ -50,4 +50,9 @@ class Tramo
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->inicio->format('H:i'). ' - '.$this->fin->format('H:i');
+    }
 }

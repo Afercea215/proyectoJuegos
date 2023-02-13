@@ -2,7 +2,15 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Disposicion;
+use App\Entity\Evento;
+use App\Entity\Juego;
+use App\Entity\Reserva;
+use App\Entity\Tramo;
 use App\Entity\User;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\UserMenu;
@@ -11,6 +19,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Http\Attribute\IsGranted;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class DashboardController extends AbstractDashboardController
 {
@@ -43,16 +52,27 @@ class DashboardController extends AbstractDashboardController
             ->setTitle('ProyectoJuegos');
     }
 
+    public function configureActions(): Actions
+    {
+        return parent::configureActions()
+                ->add(Crud::PAGE_INDEX, Action::DETAIL);
+    }
+
     public function configureMenuItems(): iterable
     {
         return [
-            MenuItem::linkToDashboard('Dashboard', 'fa fa-home'),
-            MenuItem::subMenu('Users', 'fa fa-home')->setSubItems([
+            MenuItem::linkToRoute('Home', 'fa fa-home', 'home'),
+            MenuItem::linkToDashboard('Dashboard', 'fa fa-dashboard'),
+            MenuItem::subMenu('Admin', 'fa-solid fa-folder')->setSubItems([
                 //MenuItem::linkToRoute('Home', 'fa ...', 'home'),
-                MenuItem::linkToCrud('Nuevo', 'fa ...', User::class)->setAction('new'),
                 /* MenuItem::linkToCrud('Editar', 'fa ...', User::class)->setAction('edit'),
                 MenuItem::linkToCrud('Borrar', 'fa ...', User::class)->setAction('delete'), */
-                MenuItem::linkToCrud('Listado', 'fa ...', User::class),
+                MenuItem::linkToCrud('User', 'fa fa-user ', User::class),
+                MenuItem::linkToCrud('Evento', 'fa-solid fa-calendar-days', Evento::class),
+                MenuItem::linkToCrud('Disposicion', 'fa-solid fa-map-pin', Disposicion::class),
+                MenuItem::linkToCrud('Juego', 'fa-solid fa-gamepad', Juego::class),
+                MenuItem::linkToCrud('Reserva', 'fa-solid fa-book', Reserva::class),
+                MenuItem::linkToCrud('Tramo', 'fa-solid fa-hourglass-half', Tramo::class),
                 //MenuItem::linkToUrl('Search in Google', 'fab fa-google', 'https://google.com'),
             ]),
 

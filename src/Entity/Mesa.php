@@ -75,8 +75,13 @@ class Mesa
 
     public function __toString()
     {
-        return $this->ancho." - ".$this->longitud;
+        return 'Id : '.$this->id.', anch->'.$this->ancho.' long->'.$this->longitud;
     }
+
+    /* public function __toString()
+    {
+        return $this->ancho." - ".$this->longitud;
+    } */
 
     public function objToArray(): array
     {
@@ -202,4 +207,5 @@ class Mesa
         return $this;
     }
 
+    
 }
