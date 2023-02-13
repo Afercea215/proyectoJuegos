@@ -37,6 +37,22 @@
             color: $color-princip;
         }
     }
+    
+    &--morado{
+        background: $color-princip;
+        color: $color-terc;
+    }
+
+    &--secundario-morado{
+        background: none;
+        border: 3px solid $color-princip;
+        color: $color-princip;
+
+        &:hover{
+            background: $color-princip;
+            color: $color-terc;
+        }
+    }
     &--gradient{
         background: $color-gradient;
         color: $color-terc;

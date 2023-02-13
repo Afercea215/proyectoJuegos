@@ -24,7 +24,10 @@
             <link rel="stylesheet" href="/js/ui/css/jquery-ui.structure.css">
             <link rel="stylesheet" href="/js/ui/css/jquery-ui.theme.css">
             {# jquery pliugins #}
+            <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+            <link rel="stylesheet" href="/js/jquery-plugins/lightslider.css">
             <link rel="stylesheet" href="/js/jquery-plugins/contextMenu.min.css">
+
     
             {# personal #}
         {% endblock %}
@@ -106,10 +109,10 @@
                                         </div>
                                     {% else %}
                                         <div class="boton boton--secundario d-inline-block align-middle">
-                                            <a href='../login' class=''>Login</a>
+                                            <a href='{{ absolute_url(path('app_login')) }}' class=''>Login</a>
                                         </div>
                                         <div class="boton scroll-to-section d-inline-block align-middle">
-                                            <a href='../register' class=''>Registrarse</a>
+                                            <a href='{{ absolute_url(path('app_register')) }}' class=''>Registrarse</a>
                                         </div>
                                     {% endif %}
                                     
@@ -167,9 +170,16 @@
                 <script src="/bootstrap/assets/js/popup.js"></script>
                 <script src="/bootstrap/assets/js/custom.js"></script>
             
+
+                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+                <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
                 {# JQUERY PLUGINS #}
                 <script src="/js/jquery-plugins/notifications.js"></script>
                 <script src="/js/jquery-plugins/contextMenu.min.js"></script>
+                <script src="/js/jquery-plugins/lightslider.js"></script>
+
+
+
                 
                 {# PERSONAL #}
                 <script src="/js/funcionamiento/header.js"></script>   
@@ -183,6 +193,7 @@
                 <script src="/js/funcionamiento/gestionMesas.js"></script>
                 <script src="/js/funcionamiento/reservar.js"></script>
                 <script src="/js/funcionamiento/menu-header.js"></script>
+                <script src="/js/funcionamiento/home.js"></script>
                 <script src="/js/objetos/datepickerDisposiciones.js"></script>
                 <script src="/js/validacion/validaForm.js"></script>
                 <script src="/js/uix/alert.js"></script>

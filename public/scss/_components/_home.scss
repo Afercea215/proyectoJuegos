@@ -1,0 +1,135 @@
+.titleHome{
+
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba($color: #fafafa, $alpha: 1);
+    box-shadow: getShadow(4);
+    border-radius: getBorder(1);
+    padding: 2%;
+
+    & img{
+        width: 75px;
+    }
+}
+
+.contentHome{
+    background: rgba($color: #fafafa, $alpha: 1);
+    box-shadow: getShadow(4);
+    border-radius: getBorder(1);
+    padding: 2%;
+
+    width: 90%;
+    text-align: center;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+
+    & div{
+        width: 40%;
+        text-align: center;
+        display: flex;
+        /* align-self: center; */
+        flex-direction: column;
+        align-items: center;
+
+        & div{
+            display: flex;
+            flex-direction: row;
+            align-content: center;
+            align-items: center;
+            justify-content: space-between;
+            width: 75%;
+            & div{
+                flex: 40%;
+            }
+        }
+    }
+    & img{
+        width: 50%;
+        height: fit-content;
+        border-radius: getBorder(1);
+    }
+}
+
+.reservaHome{
+    text-align: center;
+    background: rgba($color: #fafafa, $alpha: 1);
+    box-shadow: getShadow(4);
+    border-radius: getBorder(1);
+    padding: 2%;
+    width: 50%;
+
+    & div{
+        width: 75%;
+    }
+}
+
+.container {
+    position: relative;
+    width: 800px;
+    margin: auto;
+    .slide-control {
+      position: absolute;
+      top: 0;
+      cursor: pointer;
+      &.slide-left {
+        left: 0;
+      }
+      &.slide-right {
+        right: 0;
+      }
+    }
+    .inner-container {
+      overflow: hidden;
+      width: 600px;
+      margin: auto;
+      .slider-content {
+      }
+    }
+  }
+  
+  .gallery {
+    background: #EEE;
+  }
+  
+  .gallery-cell {
+    width: 66%;
+    height: 200px;
+    margin-right: 10px;
+    background: #8C8;
+    counter-increment: gallery-cell;
+  }
+  
+  /* cell number */
+  .gallery-cell:before {
+    display: block;
+    text-align: center;
+    content: counter(gallery-cell);
+    line-height: 200px;
+    font-size: 80px;
+    color: white;
+  }
+
+@media (max-width:767px) {
+    .contentHome{
+        flex-direction: column;
+
+        & div{
+            width: 90%;
+        }
+        & img{
+            margin-top: 3%;
+            width: 100%;
+        }
+    }
+
+    .reservaHome {
+        width: 75%;
+        
+    }
+ }

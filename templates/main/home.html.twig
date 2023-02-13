@@ -6,4 +6,48 @@
         <img class="imgFondo" src='{{img_juegos_path}}{{img}}'>
     {% endfor %}
 </div>
+
+<section class='titleHome'>
+    <img class="imgFondo" src='{{img_logo}}'>
+    <h1>Xokas y Cía.</h1>
+</section>
+
+<section class='contentHome mt-3'>
+    <div>
+        <h2 class='mt-1 mb-1'>Disfruta de los mejores juegos de mesa con tus amigos!</h2>
+        <p class='mt-1 mb-1'>Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem Lorem </p>
+        <div class='mt-1 mb-1'>
+            <div class="boton boton--secundario-morado d-inline-block align-middle ml-1 mr-1">
+                <a href='{{ absolute_url(path('app_login')) }}' class=''>Login</a>
+            </div>
+            <div class="boton boton--morado scroll-to-section d-inline-block align-middle ml-1 mr-1">
+                <a href='{{ absolute_url(path('app_register')) }}' class=''>Registrarse</a>
+            </div>
+        </div>
+    </div>
+
+    <img src='{{img_path}}brand/juegos-de-mesa-1016059.jpg'>
+</section>
+
+<section class='reservaHome mt-3'>
+    <p class='mt-1 mb-1'>¡Reserva tu juego favorito ya!</p>
+    <div class="boton boton--gradient mt-1 mb-1 scroll-to-section d-inline-block align-middle">
+        <a href='{{ absolute_url(path('app_reserva')) }}' class=''>Reservar</a>
+    </div>
+</section>
+
+{# <section class='' id='lightSlider'>
+    {% for juego in juegos %}
+        <div class='juego'>
+            <h1>{{juego.nombre}}</h1>     
+            <img src='{{img_path}}juegos/{{juego.img}}'>
+            <div class='juego__texto'>
+                 <p>Min Jugadores : {{juego.minJuga}}</p>     
+                 <p>Max Jugadores : {{juego.maxJuga}}</p>     
+            </div>
+            <a href="{{ absolute_url(path('app_juego',{id: juego.id})) }}" class='boton boton--secundario '>Ver</a>
+        </div>
+    {% endfor %}
+</section> #}
+
 {% endblock %}

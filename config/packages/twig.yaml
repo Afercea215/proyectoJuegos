@@ -4,6 +4,7 @@ twig:
         img_path: '/images/'
         img_juegos_path: '/images/juegos/'
         img_icons_path: '/images/icons/'
+        img_logo: '/images/logo.png'
 
 when@test:
     twig:
