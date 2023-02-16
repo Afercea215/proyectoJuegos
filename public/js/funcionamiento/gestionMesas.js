@@ -26,12 +26,19 @@ $("document").ready(function () {
 
 
     //programo el boton de disposiciones default
-    $('#default-dispo').click(function () {
-      if($('#fecha-disposicion').data('disposiciones').length>0){
-        sala2.actualizaDisposicion({currentYear: 1, currentMonth: 1, currentDay: 1});
-        almacen2.actualizaDisposicion({currentYear: 1, currentMonth: 1, currentDay: 1});
-      }
-    });
+
+    $('#default-dispo').attr('selected','')
+      .click(function () {
+        debugger
+        if ($(this).attr('selected') == '') {
+          $(this).attr('selected','selected');
+        }
+
+        if($('#fecha-disposicion').data('disposiciones').length>0){
+          sala2.actualizaDisposicion({currentYear: 1, currentMonth: 1, currentDay: 1});
+          almacen2.actualizaDisposicion({currentYear: 1, currentMonth: 1, currentDay: 1});
+        }
+      });
   
   //programo el boton de crear una mesa
     $( "#btnNewMesa" ).click(function () {

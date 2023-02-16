@@ -73,17 +73,18 @@
     } 
 }
 
-@media (max-width:1000px) {
+@media (max-width:1200px) {
     .c-tabla{
         & thead tr th, & tbody tr td{
-                max-width: 150px;
+                font-size: 0.9em;
         }
     }
 }
-@media (max-width:500px) {
+@media (max-width:765px) {
     .c-tabla{
         & thead tr th, & tbody tr td{
-                max-width: 100px;
+                font-size: 0.7em;
+                padding: 10px 5px;
         }
     }
 }

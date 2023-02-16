@@ -53,14 +53,14 @@ class RegistrationFormType extends AbstractType
             ->add('telegramUser', TextType::class,
                 ['required' => true,
                 'label' => 'Usuario de telegram',])
-            ->add('agreeTerms', CheckboxType::class, [
+            /* ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
                     new IsTrue([
                         'message' => 'Debes de agregar los terminos.',
                     ]),
                 ],
-            ])
+            ]) */
             ;
     }
 

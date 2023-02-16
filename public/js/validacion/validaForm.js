@@ -1,5 +1,0 @@
-/* $(function () {
-    $('#newMesaForm').validate(
-        
-    )
-}) */

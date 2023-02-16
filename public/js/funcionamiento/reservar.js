@@ -1,6 +1,6 @@
 $("document").ready(function () {
   
-  if ($('#fecha-disposicion').get(0)!=undefined && $('#sala').get(0)!=undefined && $('#contenedor-juegos').get(0)!=undefined && $('#btnReservar').get(0)!=undefined) {
+  if ($('#fecha-disposicion').get(0)!=undefined && $('#sala').get(0)!=undefined && $('#contenedor-juegos').get(0)!=undefined && $('#btnReservar').get(0)!=undefined ) {
     $('#btnReservar').data('reserva', new Reserva());
     //creo lo obj para rellenarlos y les asigo propiedades
     let sala2 = new Sala();
@@ -70,8 +70,10 @@ $("document").ready(function () {
     }
   })
 
-  //para que se inicializen
-  cambiaTramo();
+  //para que se inicializen /////////
+  if ($('#tramo')!=undefined) {
+    cambiaTramo();
+  }
 
 
   function setJuegos() {

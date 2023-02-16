@@ -36,6 +36,64 @@
     </div>
 </section>
 
+<div class="container-fluid mt-3">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="owl-features owl-carousel owl-loaded owl-drag">
+            <div class="owl-stage-outer">
+                <div class="owl-stage" style="transition: all 0s ease 0s; width: 3702px; transform: translate3d(-2005px, 0px, 0px);">
+
+                    {% for juego in juegos %}
+                        <div class="owl-item" style="width: 278.5px; margin-right: 30px;">
+                            <div class="item juego">
+                                <h1>{{juego.nombre}}</h1>     
+                                <img src='{{img_path}}juegos/{{juego.img}}'>
+                                <div class='juego__texto'>
+                                    <p>Min Jugadores : {{juego.minJuga}}</p>     
+                                    <p>Max Jugadores : {{juego.maxJuga}}</p>     
+                                </div>
+                                <a href="{{ absolute_url(path('app_juego',{id: juego.id})) }}" class='boton boton--secundario '>Ver</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <div class="owl-nav">
+                <button type="button" role="presentation" class="owl-prev">
+                    <span aria-label="Previous">‹</span>
+                </button>
+                <button type="button" role="presentation" class="owl-next">
+                    <span aria-label="Next">›</span>
+                </button>
+            </div>
+            
+            <div class="owl-dots">
+                <button role="button" class="owl-dot">
+                    <span></span>
+                </button>
+                <button role="button" class="owl-dot">
+                    <span></span>
+                </button>
+                <button role="button" class="owl-dot">
+                    <span></span>
+                </button>
+                <button role="button" class="owl-dot">
+                    <span></span>
+                </button>
+                <button role="button" class="owl-dot active">
+                    <span></span>
+                </button>
+                <button role="button" class="owl-dot">
+                    <span></span>
+                </button>
+            </div>
+            
+        </div>
+      </div>
+    </div>
+</div>
+
 {# <section class='' id='lightSlider'>
     {% for juego in juegos %}
         <div class='juego'>

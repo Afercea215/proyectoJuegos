@@ -3,7 +3,10 @@
  {% block content %}
 
     <span id='fecha-disposicion'></span>
-    <input type="button" id='default-dispo' value='Disposicion por defecto'>
+    <div class="form-check form-switch" id='default-dispo-div'>
+        <input type="checkbox" id='default-dispo' value='Disposicion por defecto' class="form-check-input">
+        <label class="checkbox-switch form-check-label" for="default-dispo">Dispsicion Default</label>
+    </div>
     <input type="button" id='btnNewMesa' value='Nueva mesa'>
 
     <div id="contenedor-mesas" style="width: 100%; min-width: 1200px; overflow: scroll;">

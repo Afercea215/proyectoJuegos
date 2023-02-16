@@ -20,7 +20,6 @@ function setDefaultsDtepicker() {
 }
 
 function setDatePickerDisposiciones(sala, almacen=null){
-    
     setDefaultsDtepicker();
     
     if (almacen!=null) {
