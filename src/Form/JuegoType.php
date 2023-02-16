@@ -28,9 +28,7 @@ class JuegoType extends AbstractType
             ->add('maxJuga', IntegerType::class,
                 ['required' => true
                 ,'label' => 'Maximo Jugadores',])
-            ->add('nombre', StringType::class,
-                ['required' => true
-                ,'label' => 'Nombre',])
+            ->add('nombre')
             ->add('img',FileType::class, [
                 'data_class' => null,
                 'constraints' => [

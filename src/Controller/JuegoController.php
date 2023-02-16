@@ -25,11 +25,71 @@ class JuegoController extends AbstractController
         ]);
     }
     
-    #[Route('/juego/{id}', name: 'app_juego', methods:'GET')]
-    public function juego(Juego $j): Response
+
+    #[IsGranted('ROLE_ADMIN')]
+    #[Route('/juego/nuevo', name: 'app_new_juego')]
+    public function juegoNew(Request $request, ManagerRegistry $doctrine): Response
     {
-        return $this->render('Juego/juego.html.twig',[
-            'juego' => $j,
+        $form = $this->createForm(JuegoType::class);
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            //creo y subo la mesa si no tiene errores
+            $juego = ($form->getData()); 
+            $entityManager = $doctrine->getManager();
+            $img = $form->get('img')->getData();
+
+            // this condition is needed because the 'brochure' field is not required
+            // so the PDF file must be processed only when a file is uploaded
+            if ($img) {
+                $originalFilename = pathinfo($img->getClientOriginalName(), PATHINFO_FILENAME);
+                // this is needed to safely include the file name as part of the URL
+                $newFilename = $originalFilename.'-'.uniqid().'.'.$img->guessExtension();
+
+                // Move the file to the directory where brochures are stored
+                try {
+                    $direct = $this->getParameter('img_juego_directory');
+                    
+                    $img->move(
+                        './images/juegos/',
+                        $newFilename
+                    );
+                } catch (FileException $e) {
+                    dd($e);
+                    // ... handle exception if something happens during file upload
+                }
+
+                // updates the 'brochureFilename' property to store the PDF file name
+                // instead of its contents
+                $juego->setImg($newFilename);
+            }
+
+            // ... persist the $product variable or any other work
+
+            try {
+                $entityManager->persist($juego);
+                $entityManager->flush();
+
+                $this->addFlash(
+                    'success',
+                    '¡Juego Creado!'
+                );
+                return $this->redirectToRoute('app_admin_juegos');
+
+            } catch (\Throwable $th) {
+                dd([$th,$juego]);
+                $this->addFlash(
+                    'error',
+                    '¡No se ha podido crear el juego!'
+                );
+                    //throw $th;
+            }
+                //}else{
+                    //}
+        }
+                
+        return $this->render('Juego/new.html.twig',[
+            'form' => $form,
         ]);
     }
     
@@ -95,73 +155,7 @@ class JuegoController extends AbstractController
             'form' => $form,
         ]);
     }
-
-    #[IsGranted('ROLE_ADMIN')]
-    #[Route('/juego/new', name: 'app_juego_nuevo')]
-    public function juegoNew(Request $request, ManagerRegistry $doctrine): Response
-    {
-        $form = $this->createForm(JuegoType::class);
-        $form->handleRequest($request);
-        
-        if ($form->isSubmitted() && $form->isValid()) {
-            //creo y subo la mesa si no tiene errores
-            $juego = ($form->getData()); 
-            $entityManager = $doctrine->getManager();
-            $img = $form->get('img')->getData();
-
-            // this condition is needed because the 'brochure' field is not required
-            // so the PDF file must be processed only when a file is uploaded
-            if ($img) {
-                $originalFilename = pathinfo($img->getClientOriginalName(), PATHINFO_FILENAME);
-                // this is needed to safely include the file name as part of the URL
-                $newFilename = $originalFilename.'-'.uniqid().'.'.$img->guessExtension();
-
-                // Move the file to the directory where brochures are stored
-                try {
-                    $direct = $this->getParameter('img_juego_directory');
-                    
-                    $img->move(
-                        './images/juegos/',
-                        $newFilename
-                    );
-                } catch (FileException $e) {
-                    dd($e);
-                    // ... handle exception if something happens during file upload
-                }
-
-                // updates the 'brochureFilename' property to store the PDF file name
-                // instead of its contents
-                $juego->setImg($newFilename);
-            }
-
-            // ... persist the $product variable or any other work
-
-            try {
-                $entityManager->persist($juego);
-                $entityManager->flush();
-
-                $this->addFlash(
-                    'success',
-                    '¡Juego Creado!'
-                );
-                return $this->redirectToRoute('app_juegos');
-
-            } catch (\Throwable $th) {
-                $this->addFlash(
-                    'error',
-                    '¡No se ha podido crear el juego!'
-                );
-                    //throw $th;
-            }
-                //}else{
-                    //}
-        }
-                
-        return $this->render('Juego/edit.html.twig',[
-            'juegos' => $j,
-            'form' => $form,
-        ]);
-    }
+    
     
     #[IsGranted('ROLE_ADMIN')]
     #[Route('/borrar/juego/{id}', name: 'app_juego_borrar')]
@@ -192,6 +186,15 @@ class JuegoController extends AbstractController
             'pag' => $pag,
             'orden' => $orden,
             'tipo' => $tipo,
+        ]);
+    }
+
+    
+    #[Route('/juego/{id}', name: 'app_juego', methods:'GET')]
+    public function juego(Juego $j): Response
+    {
+        return $this->render('Juego/juego.html.twig',[
+            'juego' => $j,
         ]);
     }
 }

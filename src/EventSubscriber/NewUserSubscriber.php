@@ -11,12 +11,12 @@ use Doctrine\Persistence\Event\LifecycleEventArgs;
 
 class NewUserSubscriber implements EventSubscriberInterface
 {
-    public function postPersist (LifecycleEventArgs $arg, EmailService $es): void
+    public function postPersist (LifecycleEventArgs $arg/* , EmailService $es */): void
     {
         $user = $arg->getObject();
-        if ($user instanceof User) {
+        /* if ($user instanceof User) {
             $es->sendWelcomeEmail($user);
-        }
+        } */
     }
 
     public function getSubscribedEvents(): array

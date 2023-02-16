@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+
+    <h1>Edición Juego</h1>
+    {{ form_start(form, { 'attr' : { 'class': 'form col-lg-4 col-md-6 col-sm-9 col-xs-12 text-center mt-3' } }) }}
+        {{ form_row(form.nombre) }}
+        {{ form_row(form.minJuga)}}
+        {{ form_row(form.maxJuga)}}
+        {{ form_row(form.ancho) }}
+        {{ form_row(form.longitud) }}
+        {{ form_row(form.editorial) }}
+        {{ form_row(form.img) }}
+        <button type="submit" class="w-50 boton">Guardar</button>
+    {{ form_end(form) }}
+{% endblock %}
