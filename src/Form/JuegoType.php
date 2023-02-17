@@ -51,6 +51,7 @@ class JuegoType extends AbstractType
     {
         $resolver->setDefaults([
             'data_class' => Juego::class,
+            'id' => 'formNewJuego',
         ]);
     }
 }
