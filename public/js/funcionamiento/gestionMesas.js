@@ -46,10 +46,70 @@ $("document").ready(function () {
     })
   
     
-    $('.noReservada').dblclick(function () {
-      $("#modalMenu").dialog({
+    //añado opciones a las mesas
+    ////////////////////////////
+    //let edit = $('<span>').attr('class','imgEdit');
+    let edit = $('<i>').attr('class','fa fa-pencil btnEdit')
+                        ;
+    let borra = $('<i>').attr('class','fa fa-trash btnBorra');
+    let divOpc = $('<div>').attr('class','opcMesa');
+    divOpc.append(edit).append(borra);
+
+    //hago el modal de edit
+    $(divOpc).find('.btnEdit')
+      .click(function () {
+        let obj = $(this).parent().parent().data('obj');
+        let modal = $('<div>').dialog();
+        $(modal).append(
+          $('<labe>').text('Ancho'),
+          $('<input>').attr('value',obj.ancho).attr('type','number').attr('id','anchoInput'),
+          $('<labe>').text('Longitud'),
+          $('<input>').attr('value',obj.longitud).attr('type','number').attr('id','longitudInput'),
+          $('<input>').attr('type','button').attr('value','Guardar').data('obj',obj)
+              .click(function () {
+                let obj = $(this).data('obj');
+                obj.ancho=parseInt($('#anchoInput').val());
+                obj.longitud=parseInt($('#longitudInput').val());
+                
+                (obj.actualizar())
+                $('#mesa_'+obj.id).css({width:obj.ancho+'px',height:obj.longitud+'px'})
+                $(this).parent().parent().fadeOut();
+              }),
+        )
+      });
+
+      //hago el modal de borrar
+      $(divOpc).find('.btnBorra')
+      .click(function () {
+        let obj = $(this).parent().parent().data('obj');
+        let modal = $('<div>').dialog();
+        $(modal).append(
+          $('<input>').attr('type','button').attr('value','Si').data('obj',obj)
+              .click(function () {
+                let obj = $(this).data('obj');
+                
+                let a = obj.eliminar()
+                debugger
+                //if(a){
+                  $('#mesa_'+obj.id).remove()
+                //}
+                $(this).parent().parent().remove();
+
+              }),
+          $('<input>').attr('type','button').attr('value','No').click(function () {
+            $(this).parent().parent().remove();
+          }),
+        )
+      });
+
+    
+    $('.noReservada').append(divOpc);
+    
+    
+    //.dblclick(function () {
+     /*  $("#modalMenu").dialog({
         autoOpen: true,
-        modal:true,
+        modal:true,1
         buttons: [
           {
             text: "Ok",
@@ -79,7 +139,7 @@ $("document").ready(function () {
           })  
         }
   
-      }).data('mesa',$(this).data('obj'));
-    })
+      }).data('mesa',$(this).data('obj')); */
+    
   }
 });

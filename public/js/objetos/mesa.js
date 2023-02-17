@@ -132,26 +132,75 @@ Mesa.prototype.actualizarPosicion=function (x, y) {
             this.y = parseInt(y);
         }
 
-        let data =JSON.stringify(this);
-        $.ajax({
-            url: 'http://127.0.0.1:8000/api/mesas/'+this.id,
-            type: 'PUT',
-            contentType: 'application/json',
-            data: data,
-            success: function(a) {
-                console.log('Success, mesa updated id : '+a.id+" ---- POSICION DEFAULT");
-                $.notification(
-                    ["Mesa actualizada!"],
-                    {
-                      messageType: 'success',
-                      timeView: 5000,
-                      position: ['top','left'],
-    
-                    }
-                  )
-              }
-        })
+       this.actualizar();
     }
+};
+
+Mesa.prototype.actualizar=function () {
+    let data =JSON.stringify(this);
+    $.ajax({
+        url: 'http://127.0.0.1:8000/api/mesas/'+this.id,
+        type: 'PUT',
+        contentType: 'application/json',
+        data: data,
+        success: function(a,exito,xhr) {
+            console.log('Success, mesa updated '+" ---- POSICION DEFAULT");
+            $.notification(
+                ["Mesa actualizada!"],
+                {
+                    messageType: 'success',
+                    timeView: 5000,
+                    position: ['top','left'],
+
+                }
+            )
+        },
+    }).fail(function () {
+        debugger
+        $.notification(
+            ["Esta mesa no se puede!"],
+            {
+              messageType: 'error',
+              timeView: 5000,
+              position: ['top','left'],
+
+            }
+        )
+})
+};
+
+Mesa.prototype.eliminar=function () {
+    exito = false; 
+    $.ajax({
+        url: 'http://127.0.0.1:8000/api/mesas/'+this.id,
+        type: 'DELETE',
+        success: function(a) {
+            console.log('Success, mesa ELIMINADA');
+            $.notification(
+                ["Mesa eliminada!"],
+                {
+                  messageType: 'success',
+                  timeView: 5000,
+                  position: ['top','left'],
+
+                }
+              )
+            exito = true;
+          }
+    }).fail(function () {
+        $.notification(
+            ["Esta mesa no se puede eliminar!"],
+            {
+              messageType: 'error',
+              timeView: 5000,
+              position: ['top','left'],
+
+            }
+        )
+        exito = false;
+    })
+
+    return exito;
 };
 
 //creo el elemento div a partir de un objeto
