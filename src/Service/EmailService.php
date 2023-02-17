@@ -26,7 +26,7 @@ class EmailService
         // ...
     }
 
-    public function sendEmail(User $user,string $subject,string $htmlTemplate,?array $context=null){
+    public function sendEmail(User $user,string $subject,string $htmlTemplate,array $context=null){
         try {
             $email = (new TemplatedEmail())
             ->from($this->correo)
@@ -35,13 +35,14 @@ class EmailService
             ->htmlTemplate($htmlTemplate)
             ->context($context);
             
+            //dd($email);
             $this->mailer->send($email);
     
         } catch (\Throwable $th) {
             //throw $th;
         }
     }
-
+    
     public function sendWelcomeEmail(User $user)
     {
         $this->sendEmail(
