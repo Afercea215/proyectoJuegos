@@ -32,16 +32,6 @@ class Evento
     #[Assert\NotBlank([],'El campo no debe estar vacio')]
     private ?\DateTimeInterface $fecha = null;
 
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
-    #[Assert\NotBlank([],'El campo no debe estar vacio')]
-    private ?Tramo $tramoIni = null;
-
-    #[ORM\ManyToOne]
-    #[ORM\JoinColumn(nullable: false)]
-    #[Assert\NotBlank([],'El campo no debe estar vacio')]
-    private ?tramo $tramoFin = null;
-
     #[ORM\OneToMany(mappedBy: 'evento', targetEntity: Participa::class)]
     private Collection $participas;
 
@@ -103,30 +93,6 @@ class Evento
     public function setFecha(\DateTimeInterface $fecha): self
     {
         $this->fecha = $fecha;
-
-        return $this;
-    }
-
-    public function getTramoIni(): ?Tramo
-    {
-        return $this->tramoIni;
-    }
-
-    public function setTramoIni(?Tramo $tramoIni): self
-    {
-        $this->tramoIni = $tramoIni;
-
-        return $this;
-    }
-
-    public function getTramoFin(): ?tramo
-    {
-        return $this->tramoFin;
-    }
-
-    public function setTramoFin(?tramo $tramoFin): self
-    {
-        $this->tramoFin = $tramoFin;
 
         return $this;
     }

@@ -18,6 +18,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class JuegoController extends AbstractController
 {
+
     #[Route('/juegos', name: 'app_juegos', methods:'GET')]
     public function juegos(JuegoRepository $jr): Response
     {
@@ -93,6 +94,7 @@ class JuegoController extends AbstractController
             'form' => $form,
         ]);
     }
+    
     #[Route('/test', name: 'text')]
     public function test(UserRepository $ur, ManagerRegistry $doctrine): Response
     {

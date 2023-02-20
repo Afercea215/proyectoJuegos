@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+{% block content %}
+{# <pre>
+    {{ dump(form.juegos) }}
+</pre> #}
+
+    <h1>Nuevo Evento</h1>
+    {{ form_start(form, { 'attr' : { 'id':'formNewEvento', 'class': 'form col-lg-4 col-md-6 col-sm-9 col-xs-12 text-center mt-3' } }) }}
+        {{ form_row(form.nombre) }}
+        {{ form_row(form.descrip)}}
+        {{ form_row(form.img)}}
+        {{ form_row(form.juegos) }}
+        {# {% for item in form.juegos.vars.choices %}
+                <img src="./{{img_eventos_path}} {{ item.data.img }}"
+        {% endfor %} #}
+        
+        <button type="submit" class="w-50 boton">Crear</button>
+    {{ form_end(form) }}
+{% endblock %}

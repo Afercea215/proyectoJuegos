@@ -6,6 +6,7 @@
 parameters:
     correo: andrexillofx@gmail.com
     img_juego_directory: ./images/juegos/
+    img_evento_directory: ./images/eventos/
 services:
     # default configuration for services in *this* file
     _defaults:
