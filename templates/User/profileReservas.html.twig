@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Reservas Futuras</h1>
+
+    {% if reservasFuturas|length > 0 %}
+        {% for reserva in reservasFuturas %}
+            <div class="reserva">
+                <img src="{{reserva.juego.img}}">
+                <span>{{ reserva.fecha|date('Y-m-d') }}</span>
+            </div>
+        {% endfor %}
+    {% else %}
+        <h2>No tienes reservas futuras</h2>
+    {% endif %}
+
+    <h1>Reservas Pasadas</h1>
+
+        {% if reservasPasadas|length > 0 %}
+            
+        <table class="c-tabla">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    <th>Tramo</th>
+                    <th>Juego</th>
+                    <th>Anulada</th>
+                    <th>Presentado</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for reserva in reservasPasadas %}
+                    <tr>
+                        <td>{{ reserva.fecha|date('Y-m-d') }}</td>
+                        <td>{{ reserva.tramo }}</td>
+                        <td><img src="{{img_juegos_path}}{{reserva.juego.img}}"></td>
+                        <td>{{reserva.fechaAnul|date('Y-m-d')}}</td>
+                        <td>{{reserva.presentado}}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h2>No tienes reservas antiguas</h2>
+        
+    {% endif %}
+
+{% endblock %}

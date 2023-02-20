@@ -8,8 +8,10 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Login;
 use App\Entity\Mesa;
+use App\Repository\ReservaRepository;
 use App\Service\TestService2;
 use App\Service\UserService;
+use DateTime;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -25,13 +27,35 @@ class UserController extends AbstractController
             'nombres' => $u->getUsersName()
         ]);
     }
-    #[Route('/user/{id}', name: 'profile')]
-    public function profile(?int $id): JsonResponse
+    #[Route('/profile/', name: 'profile')]
+    public function profile(): JsonResponse
     {
         return $this->json([
-            'nombres' => $id
         ]);
     }
+
+    #[Route('/profile/reservas', name: 'app_profile_reserva')]
+    public function profileReservas(ReservaRepository $rp): Response
+    {
+        $reservas = $rp->getReservasUser($this->getUser());
+        $reservasFuturas = [];
+        $reservasPasadas = [];
+        $fecha = new DateTime();
+
+        foreach ($reservas as $key => $value) {
+            if ($value->getFecha()<$fecha) {
+                $reservasPasadas[]=$value;
+            }else{
+                $reservasFuturas[]=$value;
+            }
+        }
+
+        return $this->render('User/profileReservas.html.twig', [
+            'reservasFuturas' => $reservasFuturas,
+            'reservasPasadas' => $reservasPasadas,
+        ]);
+    }
+    
     #[Route('/a', name: 'a')]
     public function login(Request $request):Response
     {

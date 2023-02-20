@@ -58,18 +58,26 @@ Almacen.prototype.actualizaDisposicion=function (fecha) {
 
     }else{
         $('#almacen').empty();
-        let mesasAlma=[];
-        $.each(mesas, function (key, val) {
-            if (val.x == null && val.y == null) {
-                mesasAlma.push(val)
-            }
-        })
+        if ($('#default-dispo').data('default')) {
+            let mesasAlma=[];
+            $.each(mesas, function (key, val) {
+                if (val.x == null && val.y == null) {
+                    mesasAlma.push(val)
+                }
+            })
 
-        this.mesas=mesasAlma;
-        $.each(this.mesas, function (key, val) {
-            val.pinta();
-        })
-
+            this.mesas=mesasAlma;
+            $.each(this.mesas, function (key, val) {
+                val.pinta();
+            })
+        }else{
+            this.mesas=mesas;
+            $.each(this.mesas, function (key, val) {
+                val.x=null;
+                val.y=null;
+                val.pinta();
+            })
+        }
     }
 }
 

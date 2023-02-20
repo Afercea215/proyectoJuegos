@@ -28,6 +28,8 @@ class ReservaController extends AbstractController
         ]);
     }
 
+    
+
     #[Route('api/reserva', name: 'api_newMesa', methods:'POST')]
     public function update(Request $request, UserRepository $ur, TramoRepository $tr, JuegoRepository $jr, MesaRepository $mr, ManagerRegistry $doctrine): JsonResponse
     {

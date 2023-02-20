@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\Reserva;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -37,6 +38,14 @@ class ReservaRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function getReservasUser(User $user = null)
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->where('r.user ='.$user->getId());
+
+        return $qb->getQuery()->execute();
     }
 
 //    /**

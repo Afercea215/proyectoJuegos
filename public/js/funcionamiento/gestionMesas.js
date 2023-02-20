@@ -11,6 +11,8 @@ $("document").ready(function () {
     let sala2 = new Sala();
     sala2.setDrop();
 
+    $('#default-dispo').data('default',true).click();
+
     //incializo el datepicker
     let date = new Date();
     let reservas = getReservas({currentYear:date.getFullYear(),currentMonth:date.getMonth(), currentDay:date.getDate()});
@@ -20,25 +22,29 @@ $("document").ready(function () {
 
     //pongo las disposiciones de las mesas
     let currentDate = new Date();
-    sala2.actualizaDisposicion({currentYear: currentDate.getFullYear(), currentMonth: currentDate.getMonth()+1, currentDay: currentDate.getDate()});
-    almacen2.actualizaDisposicion({currentYear: currentDate.getFullYear(), currentMonth: currentDate.getMonth()+1, currentDay: currentDate.getDate()});
+    sala2.actualizaDisposicion({currentYear: currentDate.getFullYear(), currentMonth: currentDate.getMonth(), currentDay: currentDate.getDate()});
+    almacen2.actualizaDisposicion({currentYear: currentDate.getFullYear(), currentMonth: currentDate.getMonth(), currentDay: currentDate.getDate()});
     setDrag();
 
 
     //programo el boton de disposiciones default
+    if ($('#fecha-disposicion').data('disposiciones').length>0) {
+      $('#default-dispo').data('default') ? $('#default-dispo').data('default',false).click() : ""; 
+    }else{
+      $('#default-dispo').data('default') ? "" : $('#default-dispo').data('default',true).click(); 
+    }
 
-    $('#default-dispo').attr('selected','')
-      .click(function () {
-        debugger
-        if ($(this).attr('selected') == '') {
-          $(this).attr('selected','selected');
-        }
-
-        if($('#fecha-disposicion').data('disposiciones').length>0){
-          sala2.actualizaDisposicion({currentYear: 1, currentMonth: 1, currentDay: 1});
-          almacen2.actualizaDisposicion({currentYear: 1, currentMonth: 1, currentDay: 1});
-        }
-      });
+    $('#default-dispo').click(function () {
+      //LE PONGO LA PROPIEDAD SELECCIONADO
+      if ($(this).data('default')) {
+        $(this).data('default',false);
+      }else{
+        $(this).data('default',true);
+      }
+      //SI HAY DISPOSICIONES LAS COLOCO
+      sala2.actualizaDisposicion({currentYear: 1, currentMonth: 1, currentDay: 1});
+      almacen2.actualizaDisposicion({currentYear: 1, currentMonth: 1, currentDay: 1});
+    });
   
   //programo el boton de crear una mesa
     $( "#btnNewMesa" ).click(function () {
@@ -89,7 +95,6 @@ $("document").ready(function () {
                 let obj = $(this).data('obj');
                 
                 let a = obj.eliminar()
-                debugger
                 //if(a){
                   $('#mesa_'+obj.id).remove()
                 //}

@@ -16,8 +16,9 @@ Sala.prototype.actualizaDisposicion=function (fecha) {
      $('#fecha-disposicion').data('disposiciones',dispo);
     let reservas = $('#fecha-disposicion').data('reservas');
     //buco la mesa y actualiza su posi en el array
+
+    debugger
     let mesas = getMesas();
-    
     if (dispo.length>0) {
         let mesasDispo=[];
         //recorro las mesas y las disposiciones, por si coinciden para cambiar su posicion
@@ -47,21 +48,22 @@ Sala.prototype.actualizaDisposicion=function (fecha) {
         $.each(this.mesas, function (key, val) {
             val.pinta();
         })
-        
     }else{
+        //vacio la sala, y si es dispo default relleno con el default, si no no se rellena nada
         $('#sala').empty();
-
-        let mesasSala=[];
-        $.each(mesas, function (key, val) {
-            if (val.x != null && val.y != null) {
-                mesasSala.push(val)
-            }
-        })
-        
-        this.mesas=mesasSala;
-        $.each(this.mesas, function (key, val) {
-            val.pinta();
-        })
+        if ($('#default-dispo')!=undefined || $('#default-dispo').data('default')) {
+            let mesasSala=[];
+            $.each(mesas, function (key, val) {
+                if (val.x != null && val.y != null) {
+                    mesasSala.push(val)
+                }
+            })
+            
+            this.mesas=mesasSala;
+            $.each(this.mesas, function (key, val) {
+                val.pinta();
+            })
+        }
 
     }
 
@@ -96,8 +98,8 @@ Sala.prototype.setDrop=function (mesas = this.mesas, mesasAlamacen) {
         drop: function (ev, ui) {
             var mesa = ui.draggable;
             //compruebo si choca con las demas mesas
-            let top = mesa.data('ui-draggable').positionAbs.top;
-            let left = mesa.data('ui-draggable').positionAbs.left;
+            let top = ui.offset.top;
+            let left = ui.offset.left;
             
             if (mesa.data('obj').choca(left, top)){
                 $('#sala').append(mesa);
@@ -131,10 +133,9 @@ Sala.prototype.setDrop=function (mesas = this.mesas, mesasAlamacen) {
                 $.notification(
                     ["No puede colocar una mesa sobre otra!"],
                     {
-                      messageType: 'success',
+                      messageType: 'error',
                       timeView: 5000,
                       position: ['top','left'],
-    
                     }
                   )
             }

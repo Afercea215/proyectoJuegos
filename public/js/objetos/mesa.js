@@ -47,7 +47,7 @@ Mesa.prototype.actualizarPosicion=function (x, y) {
     let esDispo = false;
 
     //si hay disposiciones esDispo
-    disposiciones.length>0 ? esDispo=true : esDispo=false;
+    disposiciones.length>0 || !$('#default-dispo').data('default') ? esDispo=true : esDispo=false;
     
     //si es para disposiciones, se haca referencia a api/disposiciones, si no a api/mesa
     if (esDispo) {
@@ -156,7 +156,6 @@ Mesa.prototype.actualizar=function () {
             )
         },
     }).fail(function () {
-        debugger
         $.notification(
             ["Esta mesa no se puede!"],
             {
@@ -299,10 +298,10 @@ function getMesas(){
 //devuelvo las disposiciones de una fecha
 function getDisposiciones(fecha) {
     //consigo el dia anterior y posterior a la fecha para filtrar
-    let f1=new Date(fecha.currentYear,fecha.currentMonth+1, (fecha.currentDay-1));
-    let f2=new Date(fecha.currentYear,fecha.currentMonth+1, (parseInt(fecha.currentDay)+1));
-    let fechaAnt =f1.getFullYear()+'-'+ (f1.getMonth()<10?'0'+f1.getMonth():f1.getMonth()) +'-'+ (f1.getDate()<10?'0'+f1.getDate():f1.getDate()) + ' 00:00:00';
-    let fechaDesp =f2.getFullYear()+'-'+ (f2.getMonth()<10?'0'+f2.getMonth():f2.getMonth()) + '-' + (f2.getDate()<10?'0'+f2.getDate():f2.getDate()) + ' 00:00:00';
+    let f1=new Date(fecha.currentYear,fecha.currentMonth+1, (fecha.currentDay));
+    let f2=new Date(fecha.currentYear,fecha.currentMonth+1, (parseInt(fecha.currentDay)));
+    let fechaAnt =f1.getFullYear()+'-'+ (f1.getMonth()<10?'0'+f1.getMonth():f1.getMonth()) +'-'+ (f1.getDate()<10?'0'+f1.getDate():f1.getDate());
+    let fechaDesp =f2.getFullYear()+'-'+ (f2.getMonth()<10?'0'+f2.getMonth():f2.getMonth()) + '-' + (f2.getDate()<10?'0'+f2.getDate():f2.getDate());
     let dispo=[];
     let url = 'http://localhost:8000/api/disposicions?fecha[before]='+fechaDesp+'&fecha[after]='+fechaAnt;
     //hago la peticion, y lo meto en el array dispo

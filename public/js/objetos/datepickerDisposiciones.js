@@ -37,12 +37,23 @@ function setDatePickerDisposiciones(sala, almacen=null){
         minDate: +0,
         onSelect:function (text, obj) {
           //cada vez que se cambia el dia se actualiza la sala y almacen
-          showLoad();
+          //showLoad();
+          debugger
           $(this).data('reservas',getReservas({currentYear:obj.currentYear, currentMonth:obj.currentMonth, currentDay:obj.currentDay}))
+          getDisposiciones({currentYear:obj.currentYear, currentMonth:obj.currentMonth, currentDay:obj.currentDay});
+
+          if ($('#default-dispo-div')) {
+            if ($(this).data('disposiciones').length>0) {
+              $('#default-dispo').data('default') ? $('#default-dispo').click() : ""
+            }else{
+              !$('#default-dispo').data('default') ? $('#default-dispo').click() : ""
+            }
+          }
+
           this.sala.actualizaDisposicion(obj);
-          this.almacen.actualizaDisposicion(obj);
+          this.almacen!=undefined ? this.almacen.actualizaDisposicion(obj) : '';
           setDrag();
-          hideLoad();
+          //hideLoad();
         }
     });
 

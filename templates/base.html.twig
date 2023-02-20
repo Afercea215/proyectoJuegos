@@ -98,8 +98,8 @@
 
                                                     <div class="desplegable__contenido esconde" id="contenido-menu">
                                                         <span>{{app.user.nombre}}</span>
-                                                        <a href='{{ absolute_url(path('profile', { 'id': app.user.id })) }}'>Datos Personales</a>
-                                                        <a href='{{ absolute_url(path('profile', { 'id': app.user.id })) }}'>Mis reservas</a>
+                                                        <a href='{{ absolute_url(path('profile')) }}'>Datos Personales</a>
+                                                        <a href='{{ absolute_url(path('app_profile_reserva')) }}'>Mis reservas</a>
                                                         <a href='{{ absolute_url(path('profile', { 'id': app.user.id })) }}'>Mis Eventos</a>
                                                         <a href='{{ absolute_url(path('app_logout')) }}'>Cerrar Sesion</a>
 
@@ -191,7 +191,6 @@
                 <script src="/js/api/reservas.js"></script>   
                 
                 <script src="/js/funcionamiento/header.js"></script>   
-                <script src="/js/funcionamiento/load.js"></script>   
                 <script src="/js/funcionamiento/gestionMesas.js"></script>
                 <script src="/js/funcionamiento/reservar.js"></script>
                 <script src="/js/funcionamiento/menu-header.js"></script>

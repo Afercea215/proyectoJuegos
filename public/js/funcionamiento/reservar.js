@@ -18,7 +18,7 @@ $("document").ready(function () {
 
     //pongo las disposiciones de las mesas
     let currentDate = new Date();
-    sala2.actualizaDisposicion({currentYear: currentDate.getFullYear(), currentMonth: currentDate.getMonth()+1, currentDay: currentDate.getDate()});
+    sala2.actualizaDisposicion({currentYear: currentDate.getFullYear(), currentMonth: currentDate.getMonth(), currentDay: currentDate.getDate()});
 
     //pongo los juegos
     setJuegos();
@@ -92,7 +92,6 @@ $("document").ready(function () {
         snap:'.mesa',
   
         start: function (juego,a,b) {
-          //debugger
             $(a.helper[0]).css({width:$(this).data('obj').ancho+'px', height:$(this).data('obj').longitud+'px'});
             //$(this).css({width:$(this).data('obj').ancho+'px', height:$(this).data('obj').longitud+'px'});
         },

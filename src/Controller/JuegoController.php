@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Juego;
 use App\Form\JuegoType;
 use App\Repository\JuegoRepository;
+use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Doctrine\Persistence\ManagerRegistry;
@@ -91,6 +92,13 @@ class JuegoController extends AbstractController
         return $this->render('Juego/new.html.twig',[
             'form' => $form,
         ]);
+    }
+    #[Route('/test', name: 'text')]
+    public function test(UserRepository $ur, ManagerRegistry $doctrine): Response
+    {
+        $em = $doctrine->getManager();
+        $user = $ur->findOneBy(['email' => 'gindres79@gmail.com']);
+        dd($user);
     }
     
     #[IsGranted('ROLE_ADMIN')]
