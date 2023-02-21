@@ -27,7 +27,8 @@
             <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
             <link rel="stylesheet" href="/js/jquery-plugins/lightslider.css">
             <link rel="stylesheet" href="/js/jquery-plugins/contextMenu.min.css">
-
+            <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/jquery.dataTables.css">
+ 
     
             {# personal #}
         {% endblock %}
@@ -146,7 +147,16 @@
             </div>
 
             {% block footer %}
+                <footer>
+                    <div class="container">
+                    <div class="col-lg-12">
+                        <p>Copyright © 2036 <a href="#">Tale SEO Agency</a>. All rights reserved.
 
+                        <br>Design: <a href="https://templatemo.com" target="_blank">TemplateMo</a> Distribution: <a href="https://themewagon.com">ThemeWagon</a>
+                        </p>
+                    </div>
+                    </div>
+                </footer>
             {% endblock %}
 
             {% block javascripts %}
@@ -174,6 +184,8 @@
                 <script src="/js/jquery-plugins/notifications.js"></script>
                 <script src="/js/jquery-plugins/contextMenu.min.js"></script>
                 <script src="/js/jquery-plugins/lightslider.js"></script>
+                <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.js"></script>
+
                 {# JQUERY VALIDATE #}
                 <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
 
@@ -195,6 +207,7 @@
                 <script src="/js/funcionamiento/reservar.js"></script>
                 <script src="/js/funcionamiento/menu-header.js"></script>
                 <script src="/js/funcionamiento/home.js"></script>
+                <script src="/js/funcionamiento/tablaReservas.js"></script>
 
                 <script src="/js/uix/alert.js"></script>
                 
@@ -203,5 +216,7 @@
             {% endblock %}
 
         {% endblock %}
+
+     
     </body>
 </html>

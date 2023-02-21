@@ -14,10 +14,10 @@ class Participa
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 5)]
+    #[ORM\Column(length: 5,nullable: true)]
     private ?string $invitacion = null;
 
-    #[ORM\Column]
+    #[ORM\Column(nullable: true)]
     private ?bool $presentado = null;
 
     #[ORM\ManyToOne(inversedBy: 'participas')]

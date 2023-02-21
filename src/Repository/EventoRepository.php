@@ -3,7 +3,9 @@
 namespace App\Repository;
 
 use App\Entity\Evento;
+use App\Entity\Juego;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -37,6 +39,28 @@ class EventoRepository extends ServiceEntityRepository
         if ($flush) {
             $this->getEntityManager()->flush();
         }
+    }
+
+    public function setJuegos(Array $juegos, int $idEvento)
+    {
+        try {
+            //
+            $sql='insert into juego_evento("juego_id","evento_id") values ';
+            for ($i=0; $i <sizeof($juegos) ; $i++) { 
+                if ($i<sizeof($juegos)) {
+                    $sql.='('.$juegos[$i]->getId().','.$idEvento.'),';
+                } else {
+                    $sql.='('.$juegos[$i]->getId().','.$idEvento.')';
+                }
+                
+            }
+            $stmt = $this->parent()->getConnection()->prepare($sql);
+            $result = $stmt->execute();
+
+        } catch (\Throwable $th) {
+            dd($th);
+        }
+
     }
 
 //    /**

@@ -65,7 +65,7 @@ class Juego
     #[ORM\OneToMany(mappedBy: 'juego', targetEntity: Reserva::class)]
     private ?Collection $reservas;
 
-    #[ORM\zz(targetEntity: Evento::class, inversedBy: 'juegos')]
+    #[ORM\ManyToMany(targetEntity: Evento::class, inversedBy: 'juegos')]
     private ?Collection $eventos;
 
     public function __construct()

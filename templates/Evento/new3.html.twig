@@ -9,32 +9,29 @@
     <div class="container d-flex justify-content-center align-items-center mb-3 mt-3">
         <div class="progresses">
             <div class="steps-done">
-                <span class="font-weight-bold">{# <i class="fa fa-check"></i> #}1</span>
+                <span class="font-weight-bold"><i class="fa fa-check"></i></span>
             </div>
 
-            <span class="line"></span>
+            <span class="line-done"></span>
 
-            <div class="steps">
-                <span class="font-weight-bold">2</span>
+            <div class="steps-done">
+                <span class="font-weight-bold"><i class="fa fa-check"></i></span>
             </div>
 
 
-            <span class="line"></span>
+            <span class="line-done"></span>
 
-            <div class="steps">
+            <div class="steps-done">
                 <span class="font-weight-bold">3</span>
             </div>
                 
         </div>    
     </div>
 
-    <h2>Evento</h2>
+    <h2>Participantes</h2>
 
-    {{ form_start(form, { 'attr' : { 'id':'formNewEvento', 'class': 'form col-lg-4 col-md-6 col-sm-9 col-xs-12 text-center mt-3' } }) }}
-        {{ form_row(form.nombre) }}
-        {{ form_row(form.descrip)}}
-        {{ form_row(form.img)}}
-        {{ form_row(form.fecha) }}
+    {{ form_start(form, { 'attr' : { 'id':'formNewEventoParticipante', 'class': 'form col-lg-4 col-md-6 col-sm-9 col-xs-12 text-center mt-3' } }) }}
+        {{ form_row(form.participantes) }}
         {# {% for item in form.juegos.vars.choices %}
                 <img src="./{{img_eventos_path}} {{ item.data.img }}"
         {% endfor %} #}

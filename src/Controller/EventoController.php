@@ -2,10 +2,17 @@
 
 namespace App\Controller;
 
+use App\Entity\Participa;
 use App\Form\EventoType;
+use App\Repository\EventoRepository;
+use App\Repository\JuegoRepository;
+use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,6 +21,14 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class EventoController extends AbstractController
 {
+    #[IsGranted('ROLE_ADMIN')]
+    #[Route('/admin/evento', name: 'app_admin_evento')]
+    public function listado(): Response
+    {
+        return $this->render('Evento/listadoAdmin.html.twig',[]);
+    }   
+
+
     #[IsGranted('ROLE_ADMIN')]
     #[Route('/evento/nuevo', name: 'app_new_evento')]
     public function eventoNew(Request $request, ManagerRegistry $doctrine): Response
@@ -62,21 +77,125 @@ class EventoController extends AbstractController
                     'success',
                     'Evento Creado!'
                 );
-                return $this->redirectToRoute('app_admin_juegos');
+                $_GET['evento']=$evento;
+                return $this->redirectToRoute('app_new_evento_2',['id' => $evento->getId()]);
 
             } catch (\Throwable $th) {
-                dd([$th,$evento]);
                 $this->addFlash(
                     'error',
                     '¡No se ha podido crear el evento!'
                 );
-                    //throw $th;
             }
-                //}else{
-                    //}
         }
                 
         return $this->render('Evento/new.html.twig',[
+            'form' => $form,
+        ]);
+    }  
+
+    #[Route('/evento/nuevo/2/{id}', name: 'app_new_evento_2')]
+    public function eventoNew2(Request $request,EventoRepository $er, JuegoRepository $jr, int $id, EntityManagerInterface $em): Response
+    {
+        $form = $this->createFormBuilder()
+            ->add('juegos', ChoiceType::class,[
+                //'expanded' => true,
+                'required' => true
+                ,'label' => 'Selecciona el juego',
+                'choices' => $jr->findAll(),
+                'multiple' => true,
+                // 'choice_label' => function (?Evento $evento) {
+                //    return $evento->getImg();
+                //},
+            ])->getForm();
+
+        $form->handleRequest($request);
+        
+        if ($form->isSubmitted() && $form->isValid()) {
+            //creo y subo la mesa si no tiene errores
+            $juegos = $form->getData('juegos')['juegos'];
+            try {
+                //$er->setJuegos($juegos, $id);
+                $sql='insert into juego_evento(juego_id,evento_id) values ';
+                for ($i=0; $i <sizeof($juegos) ; $i++) { 
+                    if ($i<sizeof($juegos)-1) {
+                        $sql.='('.$juegos[$i]->getId().','.$id.'),';
+                    } else {
+                        $sql.='('.$juegos[$i]->getId().','.$id.')';
+                    }
+                }
+                
+                $stmt = $em->getConnection()->prepare($sql);
+                $result = $stmt->execute();
+
+                $this->addFlash(
+                    'success',
+                    'Juegos Añadidos!'
+                );
+                return $this->redirectToRoute('app_new_evento_3',['id'=>$id]);
+
+            } catch (\Throwable $th) {
+                dd($th);
+                $this->addFlash(
+                    'error',
+                    '¡No se han podido añadir los juegos!'
+                );
+            }
+        }
+                
+        return $this->render('Evento/new2.html.twig',[
+            'form' => $form,
+        ]);
+    }   
+
+    #[Route('/evento/nuevo/3/{id}', name: 'app_new_evento_3')]
+    public function eventoNew3(Request $request, UserRepository $ur, EventoRepository $er, int $id, ManagerRegistry $doctrine): Response
+    {
+        $form = $this->createFormBuilder()
+            ->add('participantes', ChoiceType::class,[
+                //'expanded' => true,
+                'required' => true
+                ,'label' => 'Selecciona los participantes',
+                'choices' => $ur->findAll(),
+                'multiple' => true,
+                // 'choice_label' => function (?Evento $evento) {
+                //    return $evento->getImg();
+                //},
+            ])->getForm();
+
+        $form->handleRequest($request);
+        ////////////
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $doctrine->getManager();
+            $evento = $er->findOneById($id);
+            $partipantes = $form->getData('participantes')['participantes'];
+
+            try {
+                //$er->setJuegos($juegos, $id);
+                for ($i=0; $i <sizeof($partipantes) ; $i++) { 
+                    $part = new Participa();
+                    $part->setUser($partipantes[$i])
+                    ->setEvento($evento);
+
+                    $entityManager->persist($part);
+                }
+                $entityManager->flush();
+
+                $this->addFlash(
+                    'success',
+                    'Participantes Añadidos!'
+                );
+                return $this->redirectToRoute('app_admin_evento');
+
+            } catch (\Throwable $th) {
+                dd($th);
+                $this->addFlash(
+                    'error',
+                    '¡No se han podido añadir los juegos!'
+                );
+            }
+        }
+                
+        return $this->render('Evento/new3.html.twig',[
             'form' => $form,
         ]);
     }   

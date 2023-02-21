@@ -18,7 +18,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 
 
-class EventoType extends AbstractType
+class EventoJuegosType extends AbstractType
 {
     private $jr;
 
@@ -30,30 +30,7 @@ class EventoType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('nombre', TextType::class,
-                ['required' => true
-                ,'label' => 'Nombre',])
-            ->add('descrip', TextareaType::class,
-                ['required' => true
-                ,'label' => 'Descripcion',])
-            ->add('img',FileType::class, [
-                'data_class' => null,
-                'constraints' => [
-                    new File([
-                        'maxSize' => '2048k',
-                        'mimeTypes' => [
-                            'image/jpg',
-                            'image/jpeg',
-                            'image/png',
-                        ],
-                        'mimeTypesMessage' => 'Img no valida, debe ser JPG o PNG',
-                    ])
-                ],
-            ])
-            ->add('fecha', DateTimeType::class,
-                ['required' => true
-                ,'label' => 'Fecha',])
-            /* ->add('juegos', ChoiceType::class,[
+            ->add('juegos', ChoiceType::class,[
                 //'expanded' => true,
                 'required' => true
                 ,'label' => 'Selecciona el juego',
@@ -62,14 +39,12 @@ class EventoType extends AbstractType
                 // 'choice_label' => function (?Evento $evento) {
                 //    return $evento->getImg();
                 //},
-            ]) */
+            ])
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([
-            'data_class' => Evento::class,
-        ]);
+    
     }
 }
