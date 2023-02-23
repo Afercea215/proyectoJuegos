@@ -8,9 +8,11 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Login;
 use App\Entity\Mesa;
+use App\Repository\EventoRepository;
 use App\Repository\ReservaRepository;
-use App\Service\TestService2;
-use App\Service\UserService;
+use App\Repository\UserRepository;
+use App\Service\PdfService;
+use App\Service\TelegramService;
 use DateTime;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -21,12 +23,11 @@ use Symfony\Component\HttpFoundation\Request;
 class UserController extends AbstractController
 {
     #[Route('/test', name: 'test')]
-    public function index(UserService $u): JsonResponse
+    public function index(TelegramService $ts, PdfService $ps, UserRepository $ur, EventoRepository $er)
     {
-        return $this->json([
-            'nombres' => $u->getUsersName()
-        ]);
+       
     }
+
     #[Route('/profile/', name: 'profile')]
     public function profile(): JsonResponse
     {

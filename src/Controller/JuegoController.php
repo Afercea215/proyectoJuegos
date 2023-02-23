@@ -95,14 +95,6 @@ class JuegoController extends AbstractController
         ]);
     }
     
-    #[Route('/test', name: 'text')]
-    public function test(UserRepository $ur, ManagerRegistry $doctrine): Response
-    {
-        $em = $doctrine->getManager();
-        $user = $ur->findOneBy(['email' => 'gindres79@gmail.com']);
-        dd($user);
-    }
-    
     #[IsGranted('ROLE_ADMIN')]
     #[Route('/juego/edit/{id}', name: 'app_juego_edit')]
     public function juegoEdit(Request $request, ManagerRegistry $doctrine, Juego $j): Response

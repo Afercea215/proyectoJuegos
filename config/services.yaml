@@ -9,6 +9,8 @@ parameters:
     img_evento_directory: ./images/eventos/
 services:
     # default configuration for services in *this* file
+
+    
     _defaults:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.

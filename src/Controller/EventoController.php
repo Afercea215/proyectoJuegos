@@ -7,11 +7,14 @@ use App\Form\EventoType;
 use App\Repository\EventoRepository;
 use App\Repository\JuegoRepository;
 use App\Repository\UserRepository;
+use App\Service\PdfService;
+use App\Service\TelegramService;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -29,7 +32,7 @@ class EventoController extends AbstractController
     }   
 
 
-    #[IsGranted('ROLE_ADMIN')]
+    //#[Security(['is_granted' => 'ROLE_ADMIN'])]
     #[Route('/evento/nuevo', name: 'app_new_evento')]
     public function eventoNew(Request $request, ManagerRegistry $doctrine): Response
     {
@@ -51,7 +54,7 @@ class EventoController extends AbstractController
 
                 // Move the file to the directory where brochures are stored
                 try {
-                    $direct = $this->getParameter('img_juego_directory');
+                    $direct = $this->getParameter('img_evento_directory');
                     
                     $img->move(
                         $direct,
@@ -148,7 +151,7 @@ class EventoController extends AbstractController
     }   
 
     #[Route('/evento/nuevo/3/{id}', name: 'app_new_evento_3')]
-    public function eventoNew3(Request $request, UserRepository $ur, EventoRepository $er, int $id, ManagerRegistry $doctrine): Response
+    public function eventoNew3(Request $request, UserRepository $ur, EventoRepository $er, int $id, ManagerRegistry $doctrine, PdfService $ps, TelegramService $ts): Response
     {
         $form = $this->createFormBuilder()
             ->add('participantes', ChoiceType::class,[
@@ -179,6 +182,17 @@ class EventoController extends AbstractController
                         ->setEvento($evento);
     
                         $entityManager->persist($part);
+
+                        try {
+                            $html = $this->renderView('/pdf_generator/invitacion.html.twig',['user'=>$partipantes[$i], 'evento'=>$evento]);
+
+                            $pdf = $ps->generateInvitacionPDF($partipantes[$i],$evento,$html);
+                            $ts->sendFile('5301384404',$pdf);
+                            //dd('a');
+                        } catch (\Throwable $th) {
+                            //throw $th;
+                            dd($th);
+                        }
                     }
                     $entityManager->flush();
     

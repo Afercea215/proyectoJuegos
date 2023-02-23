@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello PdfGeneratorController!{% endblock %}
+
+{% block body %}
+    <h1>Invitacion evento {{evento.nombre}}</h1>
+
+    <h2>¡Felicidades {{user.nombre}}! Has sido invitado al evento {{evento.nombre}}</h2>
+
+    <img src="{{img_eventos_path}}{{evento.img}}">
+{% endblock %}

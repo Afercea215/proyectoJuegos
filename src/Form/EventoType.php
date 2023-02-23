@@ -51,7 +51,9 @@ class EventoType extends AbstractType
                 ],
             ])
             ->add('fecha', DateTimeType::class,
-                ['required' => true
+                [
+                'widget'=> 'single_text'
+                ,'required' => true
                 ,'label' => 'Fecha',])
             /* ->add('juegos', ChoiceType::class,[
                 //'expanded' => true,

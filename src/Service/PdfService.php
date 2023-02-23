@@ -3,6 +3,7 @@ namespace App\Service;
 
 use App\Entity\Evento;
 use App\Entity\User;
+use Dompdf\Dompdf;
 use Knp\Bundle\SnappyBundle\Snappy\Response\PdfResponse;
 use Knp\Snappy\Pdf;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -14,46 +15,32 @@ use Symfony\Component\HttpFoundation\Response;
 class PdfService //extends AbstractController
 {
     private $params;
-    private $templating;
     private $pdf;
 
-    function __construct(ParameterBagInterface $params, ContainerInterface $container, Pdf $pdf)
+    function __construct(ParameterBagInterface $params, Pdf $pdf)
     {
         $this->params = $params;
-        $this->templating = $container->get('templating');
         $this->pdf = $pdf;
     }
 
     public function getParam($name)
     {
         return $this->params->get($name);
-        // ...
     }
 
-    public function generatePDF(string $twigPath, string $titulo, ?array $params = [], ?array $css = []) : Response
+    public function generatePDF(string $html, string $nombre, ?array $params = [], ?array $css = [])
     {
-        $pdf = $this->pdf;
-        $params['css']=$css;
-        $html =  $this->templating->renderView($twigPath, $params);
-        
-        return new PdfResponse(
-            $pdf->getOutputFromHtml($html, [
-                'images' => true,
-                'page-size' => 'A4',
-                'viewport-size' => '1280x1024',
-            ]),
-            $titulo
-        );
-
-        /* $dompdf = new Dompdf();
+        $dompdf = new Dompdf();
         $dompdf->loadHtml($html);
         $dompdf->render();
-         
-        return new Response (
-            $dompdf->stream('resume', ["Attachment" => false]),
-            Response::HTTP_OK,
-            ['Content-Type' => 'application/pdf']
-        ); */
+
+        file_put_contents($nombre, $dompdf->output());
+    }
+    public function generateInvitacionPDF(User $user, Evento $evento, $html)
+    {
+        $this->generatePDF($html,'pdf/'.'invitacion-'.$user->getUserIdentifier().'-'.$evento->getNombre().'.pdf');
+
+        return 'pdf/'.'invitacion-'.$user->getUserIdentifier().'-'.$evento->getNombre().'.pdf';
     }
 }
 
