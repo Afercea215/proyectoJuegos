@@ -164,33 +164,41 @@ class EventoController extends AbstractController
 
         $form->handleRequest($request);
         ////////////
-        if ($form->isSubmitted() && $form->isValid()) {
+        //dd($form->getData('participantes')['participantes']);
+        if ($form->isSubmitted()) {
             $entityManager = $doctrine->getManager();
             $evento = $er->findOneById($id);
             $partipantes = $form->getData('participantes')['participantes'];
-
-            try {
-                //$er->setJuegos($juegos, $id);
-                for ($i=0; $i <sizeof($partipantes) ; $i++) { 
-                    $part = new Participa();
-                    $part->setUser($partipantes[$i])
-                    ->setEvento($evento);
-
-                    $entityManager->persist($part);
+            
+            if (sizeof($partipantes)>0) {
+                try {
+                    //$er->setJuegos($juegos, $id);
+                    for ($i=0; $i <sizeof($partipantes) ; $i++) { 
+                        $part = new Participa();
+                        $part->setUser($partipantes[$i])
+                        ->setEvento($evento);
+    
+                        $entityManager->persist($part);
+                    }
+                    $entityManager->flush();
+    
+                    $this->addFlash(
+                        'success',
+                        'Participantes Añadidos!'
+                    );
+                    return $this->redirectToRoute('app_admin_evento');
+                    
+                } catch (\Throwable $th) {
+                    dd($th);
+                    $this->addFlash(
+                        'error',
+                        '¡No se han podido añadir los juegos!'
+                    );
                 }
-                $entityManager->flush();
-
-                $this->addFlash(
-                    'success',
-                    'Participantes Añadidos!'
-                );
-                return $this->redirectToRoute('app_admin_evento');
-
-            } catch (\Throwable $th) {
-                dd($th);
+            }else{
                 $this->addFlash(
                     'error',
-                    '¡No se han podido añadir los juegos!'
+                    'Debe seleccionar al menos 1 participante!'
                 );
             }
         }
