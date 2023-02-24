@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Entity\Login;
 use App\Entity\Mesa;
+use App\Entity\User;
 use App\Repository\EventoRepository;
 use App\Repository\ReservaRepository;
 use App\Repository\UserRepository;
@@ -34,6 +35,43 @@ class UserController extends AbstractController
         return $this->json([
         ]);
     }
+
+
+    function sortByOrder($a, $b) {
+        return $a[1] - $b[1];
+    }
+
+    #[Route('/api/user/points', name: 'user_points')]
+    public function points(UserRepository $ur): JsonResponse
+    {
+        $users = $ur->findAll();
+        $puntos=[];
+
+        foreach ($users as $key => $value) {
+           $puntos[] = [
+            "user" => $value,
+            "points" => $ur->getPoints($value)
+        ];
+        }
+
+        for ($i = 0; $i < sizeOf($puntos); $i++) {
+            for ($j = $i + 1; $j < sizeOf($puntos); $j++) {
+                if ($puntos[$i]['points'] > $puntos[$j]['points']) {
+                    $temp = $puntos[$i];
+                    $puntos[$i] = $puntos[$j];
+                    $puntos[$j] = $temp;
+                }
+            }
+        }
+        
+        return $this->json(
+            $puntos
+        );
+    }
+
+   
+    
+    
 
     #[Route('/profile/reservas', name: 'app_profile_reserva')]
     public function profileReservas(ReservaRepository $rp): Response

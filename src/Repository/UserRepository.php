@@ -56,6 +56,35 @@ class UserRepository extends ServiceEntityRepository implements PasswordUpgrader
         $this->save($user, true);
     }
 
+    public function getPoints(User $user)
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $sql = '
+            select * from xocasycia.user
+            join reserva on reserva.user_id=user.id
+            where fecha < now() and user.id = '.$user->getId();
+
+        $stmt = $conn->prepare($sql);
+        $resultSet = $stmt->executeQuery()->fetchAllAssociative();
+
+        $count = 0;
+        foreach ($resultSet as $key => $value) {
+            if ($value['presentado'] == 0) {
+                $count++;
+                $count++;
+            }else{
+                $count--;
+                $count--;
+            }
+            if ($value['fecha_anul'] != null) {
+                $count--;
+            }
+
+        }
+
+        return $count;
+    }
+
 //    /**
 //     * @return User[] Returns an array of User objects
 //     */

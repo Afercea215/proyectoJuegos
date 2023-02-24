@@ -16,7 +16,9 @@
                 {
                     targets: -1,
                     data: null,
-                    defaultContent: "<button type='button' class='editar btn btn-primary'><i class='fa fa-pencil'></i></button>	<button type='button' class='borrar btn btn-danger' data-toggle='modal' data-target='#modalEliminar' ><i class='fa fa-trash'></i></button>",
+                    defaultContent: "<button type='button' class='editar btn btn-primary'><i class='fa fa-pencil'></i></button>"+
+                                    "<button type='button' class='borrar btn btn-danger' data-toggle='modal' data-target='#modalEliminar' ><i class='fa fa-trash'></i></button>"+
+                                    "<button type='button' class='editUsers btn btn-success' data-toggle='modal' data-target='#modalUser' ><i class='fa-solid fa-user-plus'></i></button>",
                 },
             ],
                   
@@ -30,6 +32,15 @@
         $('#tablaReservas tbody').on('click', '.editar', function () {
             let row = table.row($(this).parents('tr'));
             let data = table.row($(this).parents('tr')).data();
+
+            window.location.href = "http://localhost:8000/evento/editar/1/"+data.id;
+        });
+
+        $('#tablaReservas tbody').on('click', '.editUsers', function () {
+            let row = table.row($(this).parents('tr'));
+            let data = table.row($(this).parents('tr')).data();
+
+            window.location.href = "http://localhost:8000/evento/editar/3/"+data.id;
         });
 
         $('#tablaReservas tbody').on('click', '.borrar', function () {
@@ -61,18 +72,6 @@
         
     }
 
-    function getEventos(){
-        let eventos=[];
-        $.ajax({
-            url: 'http://localhost:8000/api/eventos?order[fecha]=desc',
-            type: 'GET',
-            async: false
-        }).done(function (data) {
-            $.each(data['hydra:member'],function (key,val) {
-                eventos.push(creaEventoObj(val));
-            })
-        })
-        return eventos;
-    }
+   
 
    

@@ -51,7 +51,34 @@ Evento.prototype.borrar = function (fila=undefined) {
 }
 
 function creaEventoObj(obj) {
-    let datfecha = obj.fecha.split('-')
-    let fecha = new Date(datfecha[0],datfecha[1],datfecha[2].split('T')[0]);
-    return new Evento(obj.id,obj.nombre,obj.descrip,fecha,obj.img,obj.juegos,obj.participas);
+  let datfecha = obj.fecha.split('-')
+  let fecha = new Date(datfecha[0],datfecha[1],datfecha[2].split('T')[0]);
+  return new Evento(obj.id,obj.nombre,obj.descrip,fecha,obj.img,obj.juegos,obj.participas);
+}
+
+function getEvento(id){
+  let evento;
+  $.ajax({
+    url: 'http://localhost:8000/api/eventos/'+id,
+    type: 'GET',
+    async: false
+  }).done(function (data) {
+    debugger
+          evento = creaEventoObj(data);
+  })
+  return evento;
+}
+
+function getEventos(){
+  let eventos=[];
+  $.ajax({
+      url: 'http://localhost:8000/api/eventos?order[fecha]=desc',
+      type: 'GET',
+      async: false
+  }).done(function (data) {
+      $.each(data['hydra:member'],function (key,val) {
+          eventos.push(creaEventoObj(val));
+      })
+  })
+  return eventos;
 }

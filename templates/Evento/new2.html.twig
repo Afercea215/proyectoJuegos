@@ -31,6 +31,10 @@
     <h2>Juegos</h2>
 
     {{ form_start(form, { 'attr' : { 'id':'formNewEventoJuego', 'class': 'form col-lg-4 col-md-6 col-sm-9 col-xs-12 text-center mt-3' } }) }}
+        
+        <div id='divJuegosSelect' data-id="{{evento.id}}">
+        </div>
+        
         {{ form_row(form.juegos) }}
         {# {% for item in form.juegos.vars.choices %}
                 <img src="./{{img_eventos_path}} {{ item.data.img }}"
