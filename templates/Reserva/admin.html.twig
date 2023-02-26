@@ -5,7 +5,8 @@
 
     <input class="mb-3" type="date" value="{{ fecha|date('Y-m-d') }}" id="datePickerAdminReserva"></input>
 
-    <table id="tablaAdminReservas" class="c-tabla">
+    {% if reservas|length > 0 %}
+        <table id="tablaAdminReservas" class="c-tabla">
         <thead>
             <tr>
                 <th>Usuario</th>
@@ -20,7 +21,7 @@
             </tr>
         </thead>
         <tbody>
-    
+        
             {% for reserva in reservas %}
                 <tr data-id={{reserva.id}}>
                     <td>{{ reserva.user.email }}</td>
@@ -43,8 +44,12 @@
                         {% endif %}" id="cancelarReserva" data-id={{reserva.id}}>Cancelar</span></td>
                     {% endif %}
 
-                </tr>
-            {% endfor %}
-        </tbody>
-    </table>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h2>No hay reservas para este dia</h2>
+    {% endif %}
+    
 {% endblock %}
