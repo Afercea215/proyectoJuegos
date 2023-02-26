@@ -17,7 +17,6 @@ Sala.prototype.actualizaDisposicion=function (fecha) {
     let reservas = $('#fecha-disposicion').data('reservas');
     //buco la mesa y actualiza su posi en el array
 
-    debugger
     let mesas = getMesas();
     if (dispo.length>0) {
         let mesasDispo=[];

@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1>Eventos Futuros</h1>
+
+    {% if eventosFuturos|length > 0 %}
+        {% for evento in eventosFuturos %}
+            <div class="evento">
+                <h1 {{evento.nombre}}>
+                <p>{{evento.descrip}}</p>
+                <img src="{{evento.img}}">
+                <span>{{ evento.fecha|date('Y-m-d') }}</span>
+            </div>
+        {% endfor %}
+    {% else %}
+        <h2>No tienes eventos futuros</h2>
+    {% endif %}
+
+    <h1>Eventos Pasados</h1>
+
+        {% if eventosPasados|length > 0 %}
+            
+        <table class="c-tabla">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Descripcion</th>
+                    <th>Img</th>
+                    <th>Fecha</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for evento in eventosPasados %}
+                    <tr>
+                        <td>{{ evento.nombre }}</td>
+                        <td>{{ evento.descrip }}</td>
+                        <td><img src="{{img_eventos_path}}{{evento.img}}"></td>
+                        <td>{{ evento.fecha|date('Y-m-d') }}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <h2>No tienes eventos antiguos</h2>
+        
+    {% endif %}
+
+{% endblock %}

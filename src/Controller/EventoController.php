@@ -10,6 +10,7 @@ use App\Repository\JuegoRepository;
 use App\Repository\UserRepository;
 use App\Service\PdfService;
 use App\Service\TelegramService;
+use DateTime;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
@@ -30,9 +31,14 @@ class EventoController extends AbstractController
     public function listado(): Response
     {
         return $this->render('Evento/listadoAdmin.html.twig',[]);
-    }   
-
+    }
     
+    
+    #[Route('/eventos', name: 'app_eventos')]
+    public function eventos(EventoRepository $er): Response
+    {
+        return $this->render('Evento/eventos.html.twig',['eventos' => $er->findBy(array(), array('fecha' => 'DESC')), 'now' => new DateTime()]);
+    }   
 
 
     //#[Security(['is_granted' => 'ROLE_ADMIN'])]
@@ -313,6 +319,10 @@ class EventoController extends AbstractController
             $juegos = $form->getData('juegos')['juegos'];
             try {
                 //$er->setJuegos($juegos, $id);
+                $sql='delete from xocasycia.juego_evento where evento_id='.$evento->getId();
+                $stmt = $em->getConnection()->prepare($sql);
+                $result = $stmt->execute();
+
                 $sql='insert into juego_evento(juego_id,evento_id) values ';
                 for ($i=0; $i <sizeof($juegos) ; $i++) { 
                     if ($i<sizeof($juegos)-1) {
@@ -347,8 +357,9 @@ class EventoController extends AbstractController
     }   
 
     #[Route('/evento/editar/3/{id}', name: 'app_edit_evento_3')]
-    public function eventoEdit3(Request $request, UserRepository $ur, EventoRepository $er, Evento $evento, ManagerRegistry $doctrine, PdfService $ps, TelegramService $ts): Response
+    public function eventoEdit3(Request $request, UserRepository $ur, EntityManagerInterface $em, Evento $evento, ManagerRegistry $doctrine, PdfService $ps, TelegramService $ts): Response
     {
+
         $form = $this->createFormBuilder()
             ->add('participantes', ChoiceType::class,[
                 //'expanded' => true,
@@ -370,6 +381,10 @@ class EventoController extends AbstractController
             
             if (sizeof($partipantes)>0) {
                 try {
+                    $sql='delete from xocasycia.participa where evento_id='.$evento->getId();
+                    $stmt = $em->getConnection()->prepare($sql);
+                    $result = $stmt->execute();
+
                     //$er->setJuegos($juegos, $id);
                     for ($i=0; $i <sizeof($partipantes) ; $i++) { 
                         $part = new Participa();

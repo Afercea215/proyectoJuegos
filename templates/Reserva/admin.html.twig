@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+    <h1 class="mb-3">Reservas {{ fecha|date('Y-m-d') }}</h1>
+
+    <input class="mb-3" type="date" value="{{ fecha|date('Y-m-d') }}" id="datePickerAdminReserva"></input>
+
+    <table id="tablaAdminReservas" class="c-tabla">
+        <thead>
+            <tr>
+                <th>Usuario</th>
+                <th>Fecha</th>
+                <th>Tramo</th>
+                <th>Juego</th>
+                <th>Fecha anul</th>
+                <th>Presentado</th>
+                {% if fecha >= fechaActual %}
+                    <th></th>
+                {% endif %}
+            </tr>
+        </thead>
+        <tbody>
+    
+            {% for reserva in reservas %}
+                <tr data-id={{reserva.id}}>
+                    <td>{{ reserva.user.email }}</td>
+                    <td>{{ reserva.fecha|date('Y-m-d') }}</td>
+                    <td>{{ reserva.tramo }}</td>
+                    <td><img src="{{img_juegos_path}}{{reserva.juego.img}}"></td>
+                    <td>{% if reserva.fechaAnul == null %}
+                        ✔No anulada
+                    {% else %}
+                        ❌{{reserva.fechaAnul|date('Y-m-d')}}
+                    {% endif %}</td>
+                    {% if fecha < fechaActual %}
+                        <td><input type="checkbox" class="inputPresentado" data-id={{reserva.id}} {% if reserva.presentado %}checked{% endif %} disabled="disabled"</td>
+                    {% else %}
+                        <td><input type="checkbox" class="inputPresentado" data-id={{reserva.id}} {% if reserva.presentado %}checked{% endif %}{% if reserva.fechaAnul != null %}disabled="disabled"{% endif %} </td>
+                        <td><span class="btn {% if reserva.fechaAnul == null %}
+                            btn-danger
+                            {% else %}
+                            btn-secondary
+                        {% endif %}" id="cancelarReserva" data-id={{reserva.id}}>Cancelar</span></td>
+                    {% endif %}
+
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}

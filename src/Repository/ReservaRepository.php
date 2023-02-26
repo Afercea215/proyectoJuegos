@@ -48,6 +48,14 @@ class ReservaRepository extends ServiceEntityRepository
         return $qb->getQuery()->execute();
     }
 
+    public function getReservasDia(string $fecha)
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->where('r.fecha like '.$fecha.' 00:00:00');
+        dd($qb->getQuery()->execute());
+        return $qb->getQuery()->execute();
+    }
+
 //    /**
 //     * @return Reserva[] Returns an array of Reserva objects
 //     */

@@ -32,7 +32,6 @@ Evento.prototype.borrar = function (fila=undefined) {
             exito = true;
           }
     })/* .done(function (a,b,c) {
-        debugger
     }) */
       .fail(function (a,b,c) {
         $.notification(
@@ -63,7 +62,6 @@ function getEvento(id){
     type: 'GET',
     async: false
   }).done(function (data) {
-    debugger
           evento = creaEventoObj(data);
   })
   return evento;
@@ -81,4 +79,34 @@ function getEventos(){
       })
   })
   return eventos;
+}
+
+
+function getParticipantes(){
+  let users=[];
+  $.ajax({
+      url: 'http://localhost:8000/api/users',
+      type: 'GET',
+      async: false
+  }).done(function (data) {
+      $.each(data['hydra:member'],function (key,val) {
+        users.push({id:val.id, email:val.email, roles:val.roles, password:val.password, nombre:val.nombre, telegramUser:val.telegramUser, admin:val.admin, userIdentifier:val.userIdentifier});
+      })
+  })
+  return users;
+}
+
+function getPoints(){
+  let users=[];
+  $.ajax({
+      url: 'http://localhost:8000/api/user/points',
+      type: 'GET',
+      async: false
+  }).done(function (data) {
+      $.each(data,function (key,val) {
+        users.push([{id:val.user.id, email:val.user.email, roles:val.user.roles, password:val.user.password, nombre:val.user.nombre, telegramUser:val.user.telegramUser, admin:val.user.admin, userIdentifier:val.user.userIdentifier},val.points]);
+          
+      })
+  })
+  return users;
 }

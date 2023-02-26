@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Evento;
 use App\Entity\Juego;
+use App\Entity\User;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\EntityManager;
 use Doctrine\Persistence\ManagerRegistry;
@@ -45,6 +46,11 @@ class EventoRepository extends ServiceEntityRepository
     {
         try {
             //
+            dd($idEvento);
+            $sql='delete from xocasycia.juego_evento where evento_id='.$idEvento;
+            $stmt = $this->parent()->getConnection()->prepare($sql)->execute();
+
+            
             $sql='insert into juego_evento("juego_id","evento_id") values ';
             for ($i=0; $i <sizeof($juegos) ; $i++) { 
                 if ($i<sizeof($juegos)) {
@@ -61,6 +67,15 @@ class EventoRepository extends ServiceEntityRepository
             dd($th);
         }
 
+    }
+
+    public function getEventosUser(User $user = null)
+    {
+        $qb = $this->createQueryBuilder('r')
+            ->join('r.participas','p')
+            ->where('p.user ='.$user->getId());
+
+        return $qb->getQuery()->execute();
     }
 
 //    /**

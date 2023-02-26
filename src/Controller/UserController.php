@@ -94,6 +94,28 @@ class UserController extends AbstractController
             'reservasPasadas' => $reservasPasadas,
         ]);
     }
+
+    #[Route('/profile/eventos', name: 'app_profile_evento')]
+    public function profileEventos(EventoRepository $rp): Response
+    {
+        $eventos = $rp->getEventosUser($this->getUser());
+        $eventosFuturos = [];
+        $eventosPasados = [];
+        $fecha = new DateTime();
+
+        foreach ($eventos as $key => $value) {
+            if ($value->getFecha()<$fecha) {
+                $eventosPasados[]=$value;
+            }else{
+                $eventosFuturos[]=$value;
+            }
+        }
+
+        return $this->render('User/profileEventos.html.twig', [
+            'eventosFuturos' => $eventosFuturos,
+            'eventosPasados' => $eventosPasados,
+        ]);
+    }
     
     #[Route('/a', name: 'a')]
     public function login(Request $request):Response

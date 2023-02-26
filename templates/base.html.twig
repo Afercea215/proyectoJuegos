@@ -79,7 +79,7 @@
                                 <ul class="nav order-md-1">
                                     <li class="scroll-to-section"><a href='{{ absolute_url(path('app_reserva')) }}' class="">Reservar</a></li>
                                     <li class="scroll-to-section"><a href='{{ absolute_url(path('app_juegos')) }}' class="">Juegos</a></li>
-                                    <li class="scroll-to-section"><a href="#">Eventos</a></li>
+                                    <li class="scroll-to-section"><a href="{{ absolute_url(path('app_eventos')) }}">Eventos</a></li>
                                     {% if admin %}
                                         <li class="scroll-to-section"><a href='{{ absolute_url(path('app_mesa')) }}' class="">Mesas</a></li>
                                         <li class="scroll-to-section"><a href='{{ absolute_url(path('app_admin_juegos')) }}' class="">Gestion Juegos</a></li>
@@ -102,7 +102,7 @@
                                                         <span>{{app.user.nombre}}</span>
                                                         <a href='{{ absolute_url(path('profile')) }}'>Datos Personales</a>
                                                         <a href='{{ absolute_url(path('app_profile_reserva')) }}'>Mis reservas</a>
-                                                        <a href='{{ absolute_url(path('profile', { 'id': app.user.id })) }}'>Mis Eventos</a>
+                                                        <a href='{{ absolute_url(path('app_profile_evento')) }}'>Mis Eventos</a>
                                                         <a href='{{ absolute_url(path('app_logout')) }}'>Cerrar Sesion</a>
 
                                                     </div>
@@ -211,6 +211,7 @@
                 <script src="/js/funcionamiento/home.js"></script>
                 <script src="/js/funcionamiento/tablaReservas.js"></script>
                 <script src="/js/funcionamiento/adminEvento.js"></script>
+                <script src="/js/funcionamiento/adminReserva.js"></script>
 
                 <script src="/js/uix/alert.js"></script>
                 
