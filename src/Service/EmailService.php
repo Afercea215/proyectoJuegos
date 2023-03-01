@@ -53,6 +53,7 @@ class EmailService
         );
     }
 
+
     public function sendInvitacionEvento(User $user,Evento $evento)
     {
         $this->sendEmail(

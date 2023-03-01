@@ -8,6 +8,7 @@ use App\Form\EventoType;
 use App\Repository\EventoRepository;
 use App\Repository\JuegoRepository;
 use App\Repository\UserRepository;
+use App\Service\EmailService;
 use App\Service\PdfService;
 use App\Service\TelegramService;
 use DateTime;
@@ -163,7 +164,7 @@ class EventoController extends AbstractController
 
     #[IsGranted("ROLE_ADMIN")]
     #[Route('/evento/nuevo/3/{id}', name: 'app_new_evento_3')]
-    public function eventoNew3(Request $request, UserRepository $ur, EventoRepository $er, int $id, ManagerRegistry $doctrine, PdfService $ps, TelegramService $ts): Response
+    public function eventoNew3(Request $request, UserRepository $ur, EventoRepository $er, int $id, ManagerRegistry $doctrine, PdfService $ps, TelegramService $ts, EmailService $es): Response
     {
         $form = $this->createFormBuilder()
             ->add('participantes', ChoiceType::class,[
@@ -203,6 +204,12 @@ class EventoController extends AbstractController
                             //dd('a');
                         } catch (\Throwable $th) {
                             //throw $th;
+                            dd($th);
+                        }
+
+                        try {
+                            $es->sendInvitacionEvento($evento, $partipantes[$i]);
+                        } catch (\Throwable $th) {
                             dd($th);
                         }
                     }
