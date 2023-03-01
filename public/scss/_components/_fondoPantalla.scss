@@ -4,33 +4,11 @@
     overflow: hidden;
     position: fixed;
     opacity: 0.5;
+
     & .imgFondo{
         opacity: 1;
         width: 125px;
-        animation: zoom-in-zoom-out 3s ease infinite;
     
     }
 
-    $percent: 1%;
-    @for $i from 1 through 100 {
-        & .imgFondo:nth-child(#{$i}) {
-            animation: 4s zoom-in-zoom-out infinite;
-            animation-delay: random()/random() + s;
-        }
-    }
-
-    @keyframes zoom-in-zoom-out {
-        0% {
-            opacity: 0.5;
-            transform: scale(0.9, 0.9);
-        }
-        50% {
-            opacity: 1;
-            transform: scale(1, 1);
-        }
-        100% {
-            opacity: 0.5;
-            transform: scale(0.9, 0.9);
-        }
-    }
 }

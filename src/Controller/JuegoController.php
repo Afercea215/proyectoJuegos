@@ -153,7 +153,7 @@ class JuegoController extends AbstractController
         }
                 
         return $this->render('Juego/edit.html.twig',[
-            'juegos' => $j,
+            'juego' => $j,
             'form' => $form,
         ]);
     }

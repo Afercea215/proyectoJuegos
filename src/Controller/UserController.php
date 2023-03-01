@@ -30,9 +30,11 @@ class UserController extends AbstractController
     }
 
     #[Route('/profile/', name: 'profile')]
-    public function profile(): JsonResponse
+    public function profile(UserRepository $rp): Response
     {
-        return $this->json([
+        return $this->render('User/profile.html.twig', [
+            'user' => $this->getUser(),
+            'points' => $rp->getPoints($this->getUser()),
         ]);
     }
 
@@ -69,8 +71,6 @@ class UserController extends AbstractController
         );
     }
 
-   
-    
     
 
     #[Route('/profile/reservas', name: 'app_profile_reserva')]

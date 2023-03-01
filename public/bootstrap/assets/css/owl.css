@@ -28,7 +28,8 @@
     height: 0; }
   .owl-carousel .owl-stage-outer {
     position: relative;
-    overflow: hidden;
+   
+  
     /* fix for flashing background */
     -webkit-transform: translate3d(0px, 0px, 0px); }
   .owl-carousel .owl-wrapper,
@@ -48,7 +49,7 @@
     -webkit-touch-callout: none; }
   .owl-carousel .owl-item img {
     display: block;
-    width: 100%; }
+    }
   .owl-carousel .owl-nav.disabled,
   .owl-carousel .owl-dots.disabled {
     display: none; }
@@ -64,11 +65,34 @@
   .owl-carousel .owl-nav button.owl-prev,
   .owl-carousel .owl-nav button.owl-next,
   .owl-carousel button.owl-dot {
-    background: none;
-    color: inherit;
+    
+    color: white;
     border: none;
+    font-weight: bolder;
     padding: 0 !important;
     font: inherit; }
+  .owl-next{
+    background: none;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    background-color: #5b03e4;
+    padding: 0 !important;
+    width: 70px;
+    height: 70px;
+    font: 300%;
+  }
+  .owl-prev{
+    background: none;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    background-color: #5b03e4;
+    padding: 0 !important;
+    width: 70px;
+    height: 70px;
+    font: 300%;
+  }
   .owl-carousel.owl-loaded {
     display: block; }
   .owl-carousel.owl-loading {

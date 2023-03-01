@@ -2,19 +2,24 @@
  
  {% block content %}
 
-    <span id='fecha-disposicion'></span>
-    <div class="form-check form-switch" id='default-dispo-div'>
-        <input type="checkbox" id='default-dispo' value='Disposicion por defecto' class="form-check-input">
-        <label class="checkbox-switch form-check-label" for="default-dispo">Dispsicion Default</label>
-    </div>
-    <input type="button" id='btnNewMesa' value='Nueva mesa'>
+    <h1 class="mb-3">Gestion Mesas</h1>
 
-    <div id="contenedor-mesas" style="width: 100%; min-width: 1200px; overflow: scroll;">
+    <div class="contentMesasAdmin">
+        <label>Selecciona la fecha ⏩</label>
+        <input type="text" id='fecha-disposicion'>
+
+        <div class="form-check form-switch" id='default-dispo-div'>
+            <input type="checkbox" id='default-dispo' value='Disposicion por defecto' class="form-check-input">
+            <label class="checkbox-switch form-check-label" for="default-dispo">Dispsicion Default</label>
+        </div>
+        <input type="button" id='btnNewMesa' class="boton boton--morado" value='Nueva mesa'>
+    </div>
+    <div id="contenedor-mesas" style="">
         <div id="sala" style=""></div>
         <div id="almacen" style=""></div>
     </div>
 
-    <div id='divNewMesa' class='' style='width:100%'>
+    <div id='divNewMesa' class='' style=''>
         {{ form_start(form,{'attr': {'id': 'newMesaForm', 'class': 'form col-lg-4 col-md-6 col-sm-9 col-xs-12 text-center mt-3 '}}) }}
             {{ form_errors(form) }}
             {{ form_row(form.ancho) }}
@@ -31,10 +36,6 @@
         </div>
     {% endif %}
 
-    <div id="modalMenu" role="dialog">
-        <!-- Contenido del modal -->
-        <input id='editaMesa' type='button' value='Editar'>
-        <input id='borraMesa' type='button' value='Eliminar'>
-    </div>
+ 
 
  {% endblock %}

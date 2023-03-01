@@ -8,21 +8,6 @@
     align-items: center;
     justify-content: space-evenly;
     padding: 1% 0;
-    background-color: $color-princip;
-
-    &__redesSociales{
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        width: 6%;
-
-        & img{
-            max-width: 30px;
-        }
-    }
-
-    &--admin{
-        background: $color-terc;
-    }
+    background-color: $color-terc;
+    
 }

@@ -1,19 +1,28 @@
  {% extends "base.html.twig" %}
  
  {% block content %}
+   <h1 class="mb-3">Reserva tu juego Favorito!</h1>
 
-    <span id='fecha-disposicion'></span>
-    <select id='tramo'>
-      {% for tramo in tramos %}
-         <option value={{tramo.id}}>{{tramo.inicio|date('H:i')}} - {{tramo.fin|date('H:i')}} </option>
-      {% endfor %}
-    </select>
+    <div class="contentMesasAdmin">
+      <label>Selecciona la fecha ⏩</label>
+      <input type="text" id='fecha-disposicion'>
+      
+      <div style="text-align:center;">
+         <p>Selecciona un tramo</p>
+         <select id='tramo'>
+            {% for tramo in tramos %}
+               <option value={{tramo.id}}>{{tramo.inicio|date('H:i')}} - {{tramo.fin|date('H:i')}} </option>
+            {% endfor %}
+         </select>
+      </div>
+
+      <button id='btnReservar' class="boton boton--morado">Reservar</button>
+   </div>
     {# <input type="button" id='default-dispo' value='Disposicion por defecto'>
     <input type="button" id='btnNewMesa' value='Nueva mesa'> #}
+   <div id="contenedor-mesas" style="">
+      <div id="sala" style=""></div>
+      <div id='contenedor-juegos'></div>
 
-    <div id="sala" style=""></div>
-    <div id='contenedor-juegos'></div>
-
-    <button id='btnReservar'>Reservar</button>
 
  {% endblock %}

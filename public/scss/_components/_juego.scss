@@ -8,7 +8,6 @@
 
     & .juego{
         width: 350px;
-        height: 275px;
 
     }
 }
@@ -19,7 +18,7 @@
     border-radius: getBorder(2);
     background: $color-gradient;
     box-shadow: 10px 10px 10px rgba($color: #000000, $alpha: 0.1);
-    padding: 2%;
+    padding: 4%;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -102,6 +101,10 @@
     #crudJuegos{
         overflow: scroll;
     }
+}
+
+.imgFormEdit{
+    width: 100px;
 }
 
 #divJuegosSelect{

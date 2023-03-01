@@ -8,7 +8,10 @@
         <div class='evento {% if now > evento.fecha %}evento--antiguo{% endif %}'>
             <h1>{{evento.nombre}}</h1>     
             <img src='{{img_eventos_path}}{{evento.img}}'>
-                <span>{{ evento.fecha|date('Y-m-d') }}</span>
+            <div>
+                <span>📅{{ evento.fecha|date('Y-m-d') }}</span>
+                <p>{{evento.descrip}}</p>
+            </div>
             {# <a href="{{ absolute_url(path('app_juego',{id: juego.id})) }}" class='boton boton--secundario '>Ver</a> #}
             
         </div>

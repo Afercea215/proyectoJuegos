@@ -115,6 +115,25 @@
     color: white;
   }
 
+.owl-nav{
+  display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    align-content: center;
+
+   
+}
+
+.owl-prev, .owl-next{
+  font-size: 300%;
+  padding: 3%;
+  border-radius: 50%;
+  background: $color-princip;
+  margin: 0 2%;
+  color: white;
+}
+  
 @media (max-width:767px) {
     .contentHome{
         flex-direction: column;
@@ -133,3 +152,5 @@
         
     }
  }
+
+small{color: white;}

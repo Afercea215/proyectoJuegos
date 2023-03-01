@@ -1,8 +1,8 @@
 {% extends "base.html.twig" %}
 
 {% block content %}
-    <h1>Gestion Juegos</h1>
-    <a class="boton" href="{{ absolute_url(path('app_new_juego')) }}">Nuevo</a>
+    <h1 class="mb-3">Gestion Juegos</h1>
+    <a class="boton boton--morado mb-3" href="{{ absolute_url(path('app_new_juego')) }}">Nuevo</a>
     <div id='crudJuegos'>
         <table id='crudJuegos' class='c-tabla mt-3'>
             <thead>

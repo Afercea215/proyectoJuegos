@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    <h1>Eventos Futuros</h1>
+    <h1 >Eventos Futuros</h1>
 
     {% if eventosFuturos|length > 0 %}
         {% for evento in eventosFuturos %}
@@ -16,7 +16,7 @@
         <h2>No tienes eventos futuros</h2>
     {% endif %}
 
-    <h1>Eventos Pasados</h1>
+    <h1 class="mt-3">Eventos Pasados</h1>
 
         {% if eventosPasados|length > 0 %}
             

@@ -73,18 +73,24 @@
                                 <!-- ***** Logo Start ***** -->
                                 <a href="{{ absolute_url(path('home')) }}" class="logo order-md-0">
                                 <img src={{img_path}}logo.png alt="" style="width: 50px;">
+                                <h1>Xokas y Cía.</h1>
                                 </a>
                                 <!-- ***** Logo End ***** -->
                                 <!-- ***** Menu Start ***** -->
                                 <ul class="nav order-md-1">
-                                    <li class="scroll-to-section"><a href='{{ absolute_url(path('app_reserva')) }}' class="">Reservar</a></li>
-                                    <li class="scroll-to-section"><a href='{{ absolute_url(path('app_juegos')) }}' class="">Juegos</a></li>
-                                    <li class="scroll-to-section"><a href="{{ absolute_url(path('app_eventos')) }}">Eventos</a></li>
+                                    <li class="scroll-to-section"><a href='{{ absolute_url(path('app_reserva')) }}' class="">📅Reservar</a></li>
+                                    <li class="scroll-to-section"><a href='{{ absolute_url(path('app_juegos')) }}' class="">🎮Juegos</a></li>
+                                    <li class="scroll-to-section"><a href="{{ absolute_url(path('app_eventos')) }}">🎉Eventos</a></li>
                                     {% if admin %}
-                                        <li class="scroll-to-section"><a href='{{ absolute_url(path('app_mesa')) }}' class="">Mesas</a></li>
-                                        <li class="scroll-to-section"><a href='{{ absolute_url(path('app_admin_juegos')) }}' class="">Gestion Juegos</a></li>
-                                        <li class="scroll-to-section"><a href='{{ absolute_url(path('app_admin_reserva')) }}' class="">Reservas</a></li>
-                                        <li class="scroll-to-section"><a href='{{ absolute_url(path('admin')) }}' class="">Admin</a></li>
+                                        <li class="has-sub">
+                                            <a>Admin</a>
+                                            <ul class="sub-menu">
+                                                <li><a href='{{ absolute_url(path('app_mesa')) }}' class="">Mesas</a></li>
+                                                <li><a href='{{ absolute_url(path('app_admin_juegos')) }}' class="">Gestion Juegos</a></li>
+                                                <li><a href='{{ absolute_url(path('app_admin_reserva')) }}' class="">Reservas</a></li>
+                                                <li><a href='{{ absolute_url(path('admin')) }}' class="">EasyAdmin</a></li>
+                                            </ul>
+                                        </li>
                                     {% endif %}
                                 </ul>
                                 <a class="menu-trigger">
@@ -149,12 +155,11 @@
             </div>
 
             {% block footer %}
-                <footer>
+                <footer class="c-footer">
                     <div class="container">
                     <div class="col-lg-12">
-                        <p>Copyright © 2036 <a href="#">Tale SEO Agency</a>. All rights reserved.
-
-                        <br>Design: <a href="https://templatemo.com" target="_blank">TemplateMo</a> Distribution: <a href="https://themewagon.com">ThemeWagon</a>
+                        <p>2023-02-28 <a href="#">Andrés Fernandez Ceacero</a>. All rights reserved.
+                        <br><a href="https://templatemo.com" target="_blank" style="text-decoration: underline;">Politicas y privacidad</a>
                         </p>
                     </div>
                     </div>

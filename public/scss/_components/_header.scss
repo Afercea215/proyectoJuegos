@@ -22,6 +22,7 @@
     &__logo{
         max-width: 95px;
         margin-left: 2%;
+
     }
 
     &__indentificacion{
@@ -51,6 +52,18 @@
     &--admin{
         background: $color-terc;
         
+    }
+}
+.logo{
+    display: flex;
+    flex-direction: row;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+
+    & h1{
+        font-size: 75%;
+        color: white;
     }
 }
 
@@ -142,4 +155,8 @@
         right: 50%;
     }
     
+}
+
+li.has-sub::after{
+    margin-left: 50px;
 }
