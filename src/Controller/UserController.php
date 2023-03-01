@@ -15,6 +15,7 @@ use App\Repository\UserRepository;
 use App\Service\PdfService;
 use App\Service\TelegramService;
 use DateTime;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
@@ -29,6 +30,7 @@ class UserController extends AbstractController
        
     }
 
+    #[IsGranted("ROLE_USER")]
     #[Route('/profile/', name: 'profile')]
     public function profile(UserRepository $rp): Response
     {
@@ -72,7 +74,7 @@ class UserController extends AbstractController
     }
 
     
-
+    #[IsGranted("ROLE_USER")]
     #[Route('/profile/reservas', name: 'app_profile_reserva')]
     public function profileReservas(ReservaRepository $rp): Response
     {
@@ -95,6 +97,7 @@ class UserController extends AbstractController
         ]);
     }
 
+    #[IsGranted("ROLE_USER")]
     #[Route('/profile/eventos', name: 'app_profile_evento')]
     public function profileEventos(EventoRepository $rp): Response
     {

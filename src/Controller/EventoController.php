@@ -42,6 +42,7 @@ class EventoController extends AbstractController
 
 
     //#[Security(['is_granted' => 'ROLE_ADMIN'])]
+    #[IsGranted("ROLE_ADMIN")]
     #[Route('/evento/nuevo', name: 'app_new_evento')]
     public function eventoNew(Request $request, ManagerRegistry $doctrine): Response
     {
@@ -105,6 +106,7 @@ class EventoController extends AbstractController
         ]);
     }  
 
+    #[IsGranted("ROLE_ADMIN")]
     #[Route('/evento/nuevo/2/{id}', name: 'app_new_evento_2')]
     public function eventoNew2(Request $request,EventoRepository $er, JuegoRepository $jr, int $id, EntityManagerInterface $em): Response
     {
@@ -159,6 +161,7 @@ class EventoController extends AbstractController
         ]);
     }   
 
+    #[IsGranted("ROLE_ADMIN")]
     #[Route('/evento/nuevo/3/{id}', name: 'app_new_evento_3')]
     public function eventoNew3(Request $request, UserRepository $ur, EventoRepository $er, int $id, ManagerRegistry $doctrine, PdfService $ps, TelegramService $ts): Response
     {
@@ -233,7 +236,7 @@ class EventoController extends AbstractController
 
 
 
-
+    #[IsGranted("ROLE_ADMIN")]
     #[Route('/evento/editar/1/{id}', name: 'app_edit_evento_1')]
     public function eventoEdit1(Request $request, ManagerRegistry $doctrine, Evento $evento): Response
     {
@@ -297,6 +300,7 @@ class EventoController extends AbstractController
         ]);
     }  
 
+    #[IsGranted("ROLE_ADMIN")]
     #[Route('/evento/editar/2/{id}', name: 'app_edit_evento_2')]
     public function eventoEdit2(Request $request, JuegoRepository $jr, Evento $evento, EntityManagerInterface $em): Response
     {
@@ -356,6 +360,7 @@ class EventoController extends AbstractController
         ]);
     }   
 
+    #[IsGranted("ROLE_ADMIN")]
     #[Route('/evento/editar/3/{id}', name: 'app_edit_evento_3')]
     public function eventoEdit3(Request $request, UserRepository $ur, EntityManagerInterface $em, Evento $evento, ManagerRegistry $doctrine, PdfService $ps, TelegramService $ts): Response
     {

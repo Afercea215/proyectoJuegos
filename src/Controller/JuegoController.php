@@ -169,6 +169,7 @@ class JuegoController extends AbstractController
                 $entityManager->remove($j);
                 $entityManager->flush();
             } catch (\Throwable $th) {
+                dd($th);
                 //throw $th;
             }
         }

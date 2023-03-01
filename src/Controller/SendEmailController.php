@@ -11,6 +11,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SendEmailController extends AbstractController
 {
+    
     #[Route('/send/email', name: 'app_send_email')]
     public function sendEmail(MailerInterface $mailer): Response
     {

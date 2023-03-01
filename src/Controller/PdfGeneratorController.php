@@ -9,6 +9,7 @@ use Dompdf\Dompdf;
 
 class PdfGeneratorController extends AbstractController
 {
+    
     #[Route('/pdf/generator', name: 'app_pdf_generator')]
     public function index(): Response
     {

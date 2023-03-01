@@ -39,7 +39,7 @@
                     <td>{{juego.longitud}}</td>
                     <td><a href="{{ absolute_url(path('app_juego',{id: juego.id})) }}"><img src='{{img_icons_path}}eye.png'></a></td>
                     <td><a href="{{ absolute_url(path('app_juego_edit',{id: juego.id})) }}"><img src='{{img_icons_path}}pencil.png'></a></td>
-                    <td><a href="{{ absolute_url(path('app_juego_borrar',{id: juego.id})) }}"><img src='{{img_icons_path}}trash.png'></a></td>
+                    <td><a class="borraJuego" href="{{ absolute_url(path('app_juego_borrar',{id: juego.id})) }}" data-id={{juego.id}}><img src='{{img_icons_path}}trash.png'></a></td>
                 </tr>
             {% endfor %}
             </tbody>

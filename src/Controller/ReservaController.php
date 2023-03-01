@@ -11,6 +11,7 @@ use App\Repository\TramoRepository;
 use App\Repository\UserRepository;
 use DateTime;
 use Doctrine\Persistence\ManagerRegistry;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,6 +21,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class ReservaController extends AbstractController
 {
+    #[IsGranted("ROLE_USER")]
     #[Route('/reservar', name: 'app_reserva')]
     public function reserva(TramoRepository $tr): Response
     {
@@ -28,6 +30,7 @@ class ReservaController extends AbstractController
         ]);
     }
 
+    #[IsGranted("ROLE_ADMIN")]
     #[Route('/admin/reservas/{fecha}', name: 'app_admin_reserva')]
     public function adminReserva(ReservaRepository $rp, string $fecha=null): Response
     {
@@ -46,8 +49,7 @@ class ReservaController extends AbstractController
 
     
 
-    
-
+    #[IsGranted("ROLE_USER")]
     #[Route('api/reserva/cancelar/{id}', name: 'api_cancela_reserva', methods:'PUT')]
     public function cancelar(Reserva $reserva=null, ManagerRegistry $doctrine): JsonResponse
     {
@@ -66,6 +68,7 @@ class ReservaController extends AbstractController
         ],200);
     }
 
+    #[IsGranted("ROLE_ADMIN")]
     #[Route('api/reservas/{id}/{presentado}', name: 'api_presentado_reserva', methods:'PUT')]
     public function presentado(ManagerRegistry $doctrine, Reserva $reserva, string $presentado): JsonResponse
     {
@@ -85,7 +88,7 @@ class ReservaController extends AbstractController
         ],200);
     }
 
-
+    #[IsGranted("ROLE_ADMIN")]
     #[Route('api/reserva', name: 'api_newMesa', methods:'POST')]
     public function update(Request $request, UserRepository $ur, TramoRepository $tr, JuegoRepository $jr, MesaRepository $mr, ManagerRegistry $doctrine): JsonResponse
     {
