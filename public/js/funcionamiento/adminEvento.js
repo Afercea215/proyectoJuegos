@@ -64,10 +64,10 @@ if ($('#divParticipantesSelect').length>0) {
     $.each(points, function (key, participante) {
         
         //CREO EL LABEL CON TODOS LOS participanteS CON FUNCIONALIDAD
-        $('<label>').attr('class','participanteOption').attr('for',key).append(
+        $('<label>').attr('class','participanteOption').data('obj',participante[0]).attr('for',key).append(
             $('<input>').attr('type','checkbox').val(key),
             //$('<img>').attr('src','/images/participantes/'+participante[key].img),
-            $('<p>').text(participante[0].nombre + ' - ' + participante[0].userIdentifier)
+            $('<p>').text('Puntos : '+participante[1]+' - '+participante[0].nombre + ' - ' + participante[0].userIdentifier)
         )
         .click(function () {
             //CAMBIO LA CLASE EN FUNCION DE SI QUIERE SELEC O NO
@@ -112,4 +112,45 @@ if ($('#divParticipantesSelect').length>0) {
 
         }
     })
+
+
+    //boton selecciona todos
+    $('#selecTodosParticip').click(function () {
+        $.each($('#divParticipantesSelect').children(), function (key,val) {
+            $(val).click();
+        })
+    })
+    //boton selecciona 10
+    $('#selec5Particip').click(function () {
+        let cont = 0;
+        $.each($('#divParticipantesSelect').children(), function (key,val) {
+            if (cont<5) {
+                $(val).click();
+                cont++;
+            }
+        })
+    })
+
+    //input de buscar por nombre
+    $('#buscaNombreParticip').on('input', function(a) {
+        
+        let input = $(this);
+        //recorro todos los option del select que haya
+        $.each($('#divParticipantesSelect').children(), function (key,val){
+            //si la longitud del texto de busqueda es mayor a 0 filtro
+            if (input.val().length>0) {
+                let obj = $(val).data('obj');
+                //si coincide display flex si no lo escondo
+                if (obj.nombre.includes(input.val())) {
+                    $(val).css({'display':'flex'})    
+                }else{
+                    $(val).css({'display':'none'})    
+                }
+            }else{
+                //si no pongo todos
+                $(val).css({'display':'flex'})    
+            }
+        })
+        
+    });
 }

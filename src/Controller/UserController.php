@@ -60,7 +60,7 @@ class UserController extends AbstractController
 
         for ($i = 0; $i < sizeOf($puntos); $i++) {
             for ($j = $i + 1; $j < sizeOf($puntos); $j++) {
-                if ($puntos[$i]['points'] > $puntos[$j]['points']) {
+                if ($puntos[$i]['points'] < $puntos[$j]['points']) {
                     $temp = $puntos[$i];
                     $puntos[$i] = $puntos[$j];
                     $puntos[$j] = $temp;
