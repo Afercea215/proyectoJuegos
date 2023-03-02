@@ -52,6 +52,12 @@ class Juego
     private ?int $maxJuga = null;
 
     #[ORM\Column(length: 100)]
+    #[Assert\Length([
+        'min'=>4,
+        'max'=>100,
+        'minMessage' => 'Debe de tener minimo {{ limit }} caracteres',
+        'maxMessage' => 'Debe de tener maximo {{ limit }} caracteres',
+    ])]
     #[Assert\NotBlank([],'El campo no debe estar vacio')]
     private ?string $nombre = null;
 

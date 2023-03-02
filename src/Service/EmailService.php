@@ -58,7 +58,7 @@ class EmailService
     {
         $this->sendEmail(
             $user,
-            'Invitacion evento '+$evento->getNombre()+'!',
+            'Invitacion evento '.$evento->getNombre().'!',
             'send_email/invitacionEvento.html.twig',
             ['usuario'=>$user, 'evento'=>$evento]
         );

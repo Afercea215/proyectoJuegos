@@ -2,7 +2,7 @@
 
 {% block content %}
     <h1 class="mb-3">Reservas {{ fecha|date('Y-m-d') }}</h1>
-
+    <p>Seleccione un dia para ver sus reservas</p>
     <input class="mb-3" type="date" value="{{ fecha|date('Y-m-d') }}" id="datePickerAdminReserva"></input>
 
     {% if reservas|length > 0 %}

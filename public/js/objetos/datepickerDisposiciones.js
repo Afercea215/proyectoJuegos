@@ -1,3 +1,4 @@
+//config default datepicker
 function setDefaultsDtepicker() {
     $.datepicker.regional['es'] = {
         closeText: 'Cerrar',
@@ -19,9 +20,11 @@ function setDefaultsDtepicker() {
       $.datepicker.setDefaults($.datepicker.regional['es']);
 }
 
+//añado las dispo segun el datepicker
 function setDatePickerDisposiciones(sala, almacen=null){
     setDefaultsDtepicker();
     
+    //añado a data la sala y almacen
     if (almacen!=null) {
       $('#fecha-disposicion').get(0).almacen=almacen;
     }
@@ -30,6 +33,7 @@ function setDatePickerDisposiciones(sala, almacen=null){
 
     $('#fecha-disposicion').data('festivos',getFestivos());
 
+    //inicializo el datepicker
     $('#fecha-disposicion').datepicker({
         firstDay: 1,
         beforeShowDay: funDisable,
@@ -42,6 +46,7 @@ function setDatePickerDisposiciones(sala, almacen=null){
           getDisposiciones({currentYear:obj.currentYear, currentMonth:obj.currentMonth, currentDay:obj.currentDay});
 
           if ($('#default-dispo-div')) {
+            //si hay disposiciones configuro el boton dispo default
             if ($(this).data('disposiciones').length>0) {
               $('#default-dispo').data('default') ? $('#default-dispo').click() : ""
             }else{
@@ -49,6 +54,7 @@ function setDatePickerDisposiciones(sala, almacen=null){
             }
           }
 
+          //actualizo las dispo
           this.sala.actualizaDisposicion(obj);
           this.almacen!=undefined ? this.almacen.actualizaDisposicion(obj) : '';
           setDrag();
@@ -58,6 +64,7 @@ function setDatePickerDisposiciones(sala, almacen=null){
 
 }
 
+//consigo los dias festivos de una api
 function getFestivos() {
     let days=[];
     
@@ -67,6 +74,7 @@ function getFestivos() {
       type: 'GET',
       async: false
     }).done(function (data) {
+      //lo recorro y lo convierto en un array, que me sirve para cparlo
       $.each(data.holidays,function (key,val) {
         let dia = parseInt(val.date.split('-')[2]);
         let mes = parseInt(val.date.split('-')[1]);
@@ -81,19 +89,23 @@ function getFestivos() {
     return days;
 }
   
-
+//comprueba si es festivo
 function esFestivo(date) {
     let days = $('#fecha-disposicion').data('festivos');
+    //recorre los dias y si es el mismo return false
     for (i = 0; i < days.length; i++) {
       if (date.getMonth() == days[i][1] - 1 && date.getDate() == days[i][0] && date.getFullYear() == days[i][2]+1) {
         return [false, 'diaFestivo',days[i][3]];
       }
     }
+    //si no true
     return [true, '',''];
 }
 
+//desactivo los dias que quiero en el datepciker
 function funDisable(date) {
     var noWeekend = $.datepicker.noWeekends(date);
+    //si no es finde, se comprueba si es festivo
     if (noWeekend[0]) {
         return esFestivo(date);
     } else {

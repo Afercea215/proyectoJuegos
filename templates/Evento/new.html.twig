@@ -34,6 +34,9 @@
         {{ form_row(form.nombre) }}
         {{ form_row(form.descrip)}}
         {{ form_row(form.img)}}
+        {% if evento is defined %}
+            <img src="{{img_eventos_path}}{{evento.img}}">
+        {% endif %}
         {{ form_row(form.fecha) }}
         {# {% for item in form.juegos.vars.choices %}
                 <img src="./{{img_eventos_path}} {{ item.data.img }}"

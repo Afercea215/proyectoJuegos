@@ -6,6 +6,7 @@ use App\Entity\Reserva;
 
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Query\AST\WhereClause;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Context\AdminContext;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
@@ -33,6 +34,22 @@ class ReservaCrudController extends AbstractCrudController
     {
         //dd($this->get(AdminContextProvider::class)->getContext()->getEntity()->getInstance());
         //dd($this->ac);
+        if(Crud::PAGE_EDIT == $pageName || Crud::PAGE_NEW == $pageName){
+            return [
+                DateField::new('fecha'),
+                DateField::new('fechaAnul'),
+                BooleanField::new('presentado'),
+                AssociationField::new('tramo'),
+                AssociationField::new('user')
+                    ->setTextAlign('right'),
+                AssociationField::new('juego'),
+                AssociationField::new('mesa')
+                //->setQueryBuilder(function (QueryBuilder $qb, Reserva $r=new Reserva()){
+                    //$qb->andWhere('entity.id = '.$this->);
+               // })
+               ,
+            ];
+        }
         return [
             IdField::new('id'),
             DateField::new('fecha'),

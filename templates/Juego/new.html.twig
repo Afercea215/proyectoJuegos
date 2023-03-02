@@ -5,11 +5,29 @@
     <h1>Nuevo Juego</h1>
     {{ form_start(form, { 'attr' : { 'id':'formNewJuego', 'class': 'form col-lg-4 col-md-6 col-sm-9 col-xs-12 text-center mt-3' } }) }}
         {{ form_row(form.nombre) }}
+        <div class="error mb-2">
+        {{ form_errors(form.nombre) }}
+        </div>
         {{ form_row(form.minJuga)}}
+        <div class="error mb-2">
+        {{ form_errors(form.minJuga) }}
+        </div>
         {{ form_row(form.maxJuga)}}
+        <div class="error mb-2">
+        {{ form_errors(form.maxJuga) }}
+        </div>
         {{ form_row(form.ancho) }}
+        <div class="error mb-2">
+        {{ form_errors(form.ancho) }}
+        </div>
         {{ form_row(form.longitud) }}
+        <div class="error mb-2">
+        {{ form_errors(form.longitud) }}
+        </div>
         {{ form_row(form.editorial) }}
+        <div class="error mb-2">
+        {{ form_errors(form.editorial) }}
+        </div>
         {{ form_row(form.img) }}
         <button type="submit" class="w-50 boton">Guardar</button>
     {{ form_end(form) }}

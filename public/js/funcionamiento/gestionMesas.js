@@ -65,8 +65,13 @@ $("document").ready(function () {
     $(divOpc).find('.btnEdit')
       .click(function () {
         let obj = $(this).parent().parent().data('obj');
-        let modal = $('<div>').dialog();
+        let modal = $('<div>').dialog({
+          classes: {
+            "ui-dialog": "form"
+          }
+        });
         $(modal).append(
+          $('<div>').attr('class','form').append(
           $('<labe>').text('Ancho'),
           $('<input>').attr('value',obj.ancho).attr('type','number').attr('id','anchoInput'),
           $('<labe>').text('Longitud'),
@@ -81,7 +86,7 @@ $("document").ready(function () {
                 $('#mesa_'+obj.id).css({width:obj.ancho+'px',height:obj.longitud+'px'})
                 $(this).parent().parent().fadeOut();
               }),
-        )
+        ))
       });
 
       //hago el modal de borrar
@@ -90,6 +95,7 @@ $("document").ready(function () {
         let obj = $(this).parent().parent().data('obj');
         let modal = $('<div>').dialog();
         $(modal).append(
+          $('<div>').attr('class','form').append($('<p>').text('¿Deseas borrar esta mesa?'),
           $('<input>').attr('type','button').attr('value','Si').data('obj',obj)
               .click(function () {
                 let obj = $(this).data('obj');
@@ -103,7 +109,7 @@ $("document").ready(function () {
               }),
           $('<input>').attr('type','button').attr('value','No').click(function () {
             $(this).parent().parent().remove();
-          }),
+          }),)
         )
       });
 

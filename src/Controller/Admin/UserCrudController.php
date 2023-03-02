@@ -23,12 +23,10 @@ class UserCrudController extends AbstractCrudController
     {
         if(Crud::PAGE_EDIT == $pageName || Crud::PAGE_NEW == $pageName){
             return [
-                'email',
-                'nombre',
-                'apellidos',
+                EmailField::new('email'),
+                TextField::new('nombre'),
+                TextField::new('apellidos'),
                 ChoiceField::new('roles')->setChoices(['ADMIN' => 'ROLE_ADMIN', 'USER' => 'ROLE_USER'])->allowMultipleChoices()->autocomplete(),
-                ArrayField::new('roles'),
-                
             ];
         }
         

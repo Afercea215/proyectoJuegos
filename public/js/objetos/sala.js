@@ -5,19 +5,29 @@ function Sala(fecha=null){
     this.imagen='fondoSala.jpg';
 }
 
+/**
+ * Pinto todas las mesas de la sala
+ */
 Sala.prototype.pinta=function () {
+    //lo recorro y lo pinto
     $.each(this.mesas,function (key,mesa) {
         mesa.pinta();
     })
 }
 
+/**
+ * actualizo la disposicion segun la fecha
+ * @param {*} fecha 
+ */
 Sala.prototype.actualizaDisposicion=function (fecha) {
+    //cojo las disposiciones de una fecha
     let dispo = getDisposiciones(fecha);
      $('#fecha-disposicion').data('disposiciones',dispo);
     let reservas = $('#fecha-disposicion').data('reservas');
     //buco la mesa y actualiza su posi en el array
 
     let mesas = getMesas();
+    //consigo las mesas y compruebo si hay disposiciones
     if (dispo.length>0) {
         let mesasDispo=[];
         //recorro las mesas y las disposiciones, por si coinciden para cambiar su posicion
@@ -27,6 +37,7 @@ Sala.prototype.actualizaDisposicion=function (fecha) {
             let x=null;
             let y=null;
             $.each(dispo,function (key,val2) {
+                //si es la misma id significa que esta en la sala y le pongo x y y null
                 if (val.id==val2.mesa.split('/')[3]) {
                     aceptar=true;
                     x=val2.x;
@@ -42,6 +53,7 @@ Sala.prototype.actualizaDisposicion=function (fecha) {
             }
         })
     
+        //vacio la sala (html) y pinto las mesas segun posi
         this.mesas=mesasDispo;
         $('#sala').empty();
         $.each(this.mesas, function (key, val) {
@@ -52,12 +64,14 @@ Sala.prototype.actualizaDisposicion=function (fecha) {
         $('#sala').empty();
         if ($('#default-dispo')!=undefined || $('#default-dispo').data('default')) {
             let mesasSala=[];
+            //si no tiene posi la añado a la asal
             $.each(mesas, function (key, val) {
                 if (val.x != null && val.y != null) {
                     mesasSala.push(val)
                 }
             })
             
+            //pinto tofas las mesas
             this.mesas=mesasSala;
             $.each(this.mesas, function (key, val) {
                 val.pinta();
@@ -66,7 +80,7 @@ Sala.prototype.actualizaDisposicion=function (fecha) {
 
     }
 
-    ////////////
+
     $.each($('#sala .mesa'),function (key2, mesa) {
         let reservada = false;
         let reservas = $('#fecha-disposicion').data('reservas');
@@ -99,7 +113,8 @@ Sala.prototype.setDrop=function (mesas = this.mesas, mesasAlamacen) {
             //compruebo si choca con las demas mesas
             let top = ui.offset.top;
             let left = ui.offset.left;
-            
+
+            //cuando lo suelto compruebo veo i la mesa
             if (mesa.data('obj').choca(left, top)){
                 $('#sala').append(mesa);
 
@@ -108,6 +123,7 @@ Sala.prototype.setDrop=function (mesas = this.mesas, mesasAlamacen) {
                 let reservada = false;
                 let reservas = $('#fecha-disposicion').data('reservas');
 
+                //miro si es la reserva
                 $.each(reservas,function (key2, reserva) {
                     if ($(mesa).data('obj').id == reserva.mesa.split('/')[3]) {
                         reservada = true;
@@ -120,6 +136,7 @@ Sala.prototype.setDrop=function (mesas = this.mesas, mesasAlamacen) {
                     $(mesa).addClass('reservada');
                     $(mesa).draggable({ disabled: true });
                 }else{
+                    //si no esta asifnada la pongo no erserv
                     $(mesa).removeClass('reservada');
                     $(mesa).removeClass('noReservada');
                     $(mesa).addClass('noReservada');
@@ -143,12 +160,20 @@ Sala.prototype.setDrop=function (mesas = this.mesas, mesasAlamacen) {
     });
 }
 
+/**
+ * Pinto sd de la sala
+ */
 Sala.prototype.colocaMesas=function () {
     $.each(this.mesas,function (key,mesa) {
         mesa.pinta();
     })
 }
 
+/**
+ * Consigo las mesas de la 
+ * @param {*} fecha 
+ * @param {*} obj 
+ */
 function getMesasSala(fecha,obj) {
     let fechaActu = new Date();
     obj.actualizaDisposicion({currentYear: fechaActu.getFullYear() ,currentMonth: fechaActu.getMonth(), currentDay: fechaActu.getDate()});

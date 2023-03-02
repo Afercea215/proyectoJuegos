@@ -1,15 +1,31 @@
 {% extends 'base.html.twig' %}
 
 {% block content %}
-    <h1>Reservas Futuras</h1>
+    <h1 class="mb-3">Reservas Futuras</h1>
 
     {% if reservasFuturas|length > 0 %}
+        <div id="listReserv">
         {% for reserva in reservasFuturas %}
-            <div class="reserva">
-                <img src="{{reserva.juego.img}}">
-                <span>{{ reserva.fecha|date('Y-m-d') }}</span>
-            </div>
+            {% if reserva.fechaAnul != null %}
+                <div class="reserva reserva--cancelada">
+                    <img src="{{img_juegos_path}}{{reserva.juego.img}}">
+                    <span><strong>{{ reserva.juego.nombre }}</strong></span>
+                    <span><strong>{{ reserva.fecha|date('Y-m-d') }}</strong></span>
+                    <small><i>{{reserva.tramo}}</i></small>
+                </div>
+            {% else %}
+                <div class="reserva">
+                    <img src="{{img_juegos_path}}{{reserva.juego.img}}">
+                    <span><strong>{{ reserva.juego.nombre }}</strong></span>
+                    <span><strong>{{ reserva.fecha|date('Y-m-d') }}</strong></span>
+                    <small><i>{{reserva.tramo}}</i></small>
+                    <span class="btn btn-danger cancelaReserva mt-2 " data-id={{reserva.id}}>Cancelar</span>
+                </div>
+            {% endif %}
+
+            
         {% endfor %}
+        </div>
     {% else %}
         <h2>No tienes reservas futuras</h2>
     {% endif %}
@@ -34,8 +50,16 @@
                         <td>{{ reserva.fecha|date('Y-m-d') }}</td>
                         <td>{{ reserva.tramo }}</td>
                         <td><img src="{{img_juegos_path}}{{reserva.juego.img}}"></td>
-                        <td>{{reserva.fechaAnul|date('Y-m-d')}}</td>
-                        <td>{{reserva.presentado}}</td>
+                        <td>{% if reserva.fechaAnul == null %}
+                                ✔No anulada
+                            {% else %}
+                                ❌{{reserva.fechaAnul|date('Y-m-d')}}
+                            {% endif %}</td>
+                        <td>{% if reserva.presentado %}
+                            ✔
+                        {% else %}
+                            ❌
+                        {% endif %}</td>
                     </tr>
                 {% endfor %}
             </tbody>

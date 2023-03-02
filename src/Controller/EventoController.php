@@ -109,7 +109,7 @@ class EventoController extends AbstractController
 
     #[IsGranted("ROLE_ADMIN")]
     #[Route('/evento/nuevo/2/{id}', name: 'app_new_evento_2')]
-    public function eventoNew2(Request $request,EventoRepository $er, JuegoRepository $jr, int $id, EntityManagerInterface $em): Response
+    public function eventoNew2(Request $request,Evento $evento, JuegoRepository $jr, int $id, EntityManagerInterface $em): Response
     {
         $form = $this->createFormBuilder()
             ->add('juegos', ChoiceType::class,[
@@ -159,12 +159,13 @@ class EventoController extends AbstractController
                 
         return $this->render('Evento/new2.html.twig',[
             'form' => $form,
+            'evento' => $evento,
         ]);
     }   
 
     #[IsGranted("ROLE_ADMIN")]
     #[Route('/evento/nuevo/3/{id}', name: 'app_new_evento_3')]
-    public function eventoNew3(Request $request, UserRepository $ur, EventoRepository $er, int $id, ManagerRegistry $doctrine, PdfService $ps, TelegramService $ts, EmailService $es): Response
+    public function eventoNew3(Request $request, UserRepository $ur, Evento $evento, EventoRepository $er, int $id, ManagerRegistry $doctrine, PdfService $ps, TelegramService $ts, EmailService $es): Response
     {
         $form = $this->createFormBuilder()
             ->add('participantes', ChoiceType::class,[
@@ -208,7 +209,7 @@ class EventoController extends AbstractController
                         }
 
                         try {
-                            $es->sendInvitacionEvento($evento, $partipantes[$i]);
+                            $es->sendInvitacionEvento($partipantes[$i], $evento);
                         } catch (\Throwable $th) {
                             dd($th);
                         }
@@ -238,6 +239,7 @@ class EventoController extends AbstractController
                 
         return $this->render('Evento/new3.html.twig',[
             'form' => $form,
+            'evento' => $evento,
         ]);
     }   
 
@@ -304,6 +306,7 @@ class EventoController extends AbstractController
                 
         return $this->render('Evento/new.html.twig',[
             'form' => $form,
+            'evento' => $evento,
         ]);
     }  
 

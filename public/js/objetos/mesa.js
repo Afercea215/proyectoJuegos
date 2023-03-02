@@ -1,11 +1,11 @@
 function Mesa(id, ancho, longitud, x, y, reservas, disposiciones) {
     this.id=id;
-    this.ancho=ancho;
-    this.longitud=longitud;
-    this.x=x;
-    this.y=y;
-    this.reservas=reservas;
-    this.disposiciones=disposiciones;
+    this.ancho=ancho; //ancho en px
+    this.longitud=longitud; //alto en px
+    this.x=x; //posi left
+    this.y=y; //posi top
+    this.reservas=reservas; //reservas de esa mesa
+    this.disposiciones=disposiciones; //dispo de esa mesa
 }
 
 Mesa.prototype.imagen="./mesa.png";
@@ -13,6 +13,7 @@ Mesa.prototype.imagen="./mesa.png";
 //pinta la mesa en funcion de su posicion
 Mesa.prototype.pinta=function () {
     let mesaDiv = this.creaDiv().eq(0);
+    //en funcion de si su posicion es null o no la pinto en la sala o el alamcen
     if (this.x == null && this.y == null) {
         $(mesaDiv).appendTo('#almacen');
         $(mesaDiv).css({position:'relative'});
@@ -20,7 +21,7 @@ Mesa.prototype.pinta=function () {
     }else{
         let margX = $('#sala').offset().left;
         let margY = $('#sala').offset().top;
-
+        //calculo el matgen y le asigno las prop css
         $(mesaDiv).appendTo('#sala')
         .css({
             position:'absolute',
@@ -31,15 +32,29 @@ Mesa.prototype.pinta=function () {
 
 };
 
+/**
+ * pongo el eleetno html en reservada
+ * @param {*} elemento 
+ */
 function setReservada (elemento) {
     $(elemento).addClass('reservada');
     $(elemento).droppable({ disabled: true });
 }
+
+/**
+ * Prongo el elemetn en no reservada
+ * @param {*} elemento 
+ */
 function setNoReservada (elemento) {
     $(elemento).addClass('noReservada');
     $(elemento).droppable({ disabled: false });
 }
 
+/**
+ * Actualzo la posi de la mesa, con la posi que le he dado
+ * @param {*} x 
+ * @param {*} y 
+ */
 Mesa.prototype.actualizarPosicion=function (x, y) {
     
     //comprobar si el dia seleccionado tiene distribuciones para updatear la mesa o la disposicion
@@ -66,7 +81,7 @@ Mesa.prototype.actualizarPosicion=function (x, y) {
         let idDispo;
         if (contDispo>0) {
             idDispo = disposiciones[contDispo].id;
-
+            //compruebbo las posis si es null y la pongo en la dispo
             if (x==null && y==null) {
                 disposiciones[contDispo].x = null;
                 disposiciones[contDispo].y = null;
@@ -74,7 +89,7 @@ Mesa.prototype.actualizarPosicion=function (x, y) {
                 disposiciones[contDispo].x = parseInt(x);
                 disposiciones[contDispo].y = parseInt(y);
             }
-            
+            //lo preparo para evniarlo en json
             data =JSON.stringify(disposiciones[contDispo]);
             type='PUT';
 
@@ -123,7 +138,7 @@ Mesa.prototype.actualizarPosicion=function (x, y) {
         })
 
     }else{
-
+        //si no hay disposiciones le pongo la posi null
         if (x==null && y==null) {
             this.x = null;
             this.y = null;
@@ -136,7 +151,11 @@ Mesa.prototype.actualizarPosicion=function (x, y) {
     }
 };
 
+/**
+ * Actualizo la posicion de la mesa
+ */
 Mesa.prototype.actualizar=function () {
+    //convierto el obj en json
     let data =JSON.stringify(this);
     $.ajax({
         url: 'http://127.0.0.1:8000/api/mesas/'+this.id,
@@ -168,6 +187,10 @@ Mesa.prototype.actualizar=function () {
 })
 };
 
+/**
+ * Elimino la mesa de la bd
+ * @returns bool de exito
+ */
 Mesa.prototype.eliminar=function () {
     exito = false; 
     $.ajax({
@@ -215,9 +238,11 @@ Mesa.prototype.creaDiv=function () {
 
 };
 
+/**
+ * Creo el modal de edicion de la mesa
+ */
 Mesa.prototype.modalEditaMesa = function (){
     let mesa = this;
-
     let modal = $('<div>').attr('id','modalEditar');
     let ancho = $('<div>').attr('id','divAncho').append([
         $('<label>').text('Ancho'),
@@ -229,7 +254,7 @@ Mesa.prototype.modalEditaMesa = function (){
     );
     let guardar = $('<input>').attr('type','button').attr('id', 'guardaMesa');
 
-    /////////////////////
+    //creo el modal y lo pinto
 }
 
 //compruebo si una mesa choca con todas las demas de la sala

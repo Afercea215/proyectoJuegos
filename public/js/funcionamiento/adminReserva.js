@@ -4,9 +4,11 @@ if ($('#datePickerAdminReserva').length>0) {
     })
 
     $('#cancelarReserva').click(function () {
+        //si tiene la clase ejecuto todo
         if ($(this).hasClass('btn-danger')){
             let id = $(this).data('id');
             btn = $(this);
+            //modal confirmacion
             $.confirm({
                 title: 'Atención!',
                 content: '¿Quieres cancelar esta reserva?',
@@ -33,6 +35,7 @@ if ($('#datePickerAdminReserva').length>0) {
     })
 
     $('.inputPresentado').change(function (val) {
+        //cuando cambio el valor de el input hago la llamada ayax
         let id = $(this).data('id');  
         if (val.target.checked) {
             updatePresentadoReserva(id,true);
@@ -42,6 +45,9 @@ if ($('#datePickerAdminReserva').length>0) {
     })
 }
 
+/*
+set presentado en una reserva, ajax
+ */
 function updatePresentadoReserva(id, presentado){
     $.ajax({
         url: 'http://127.0.0.1:8000/api/reservas/'+id+'/'+presentado,
@@ -69,6 +75,10 @@ function updatePresentadoReserva(id, presentado){
         )
     })
 }
+
+/*
+    cancelo una reserva por su id
+*/
 function cancelarReserva(id){
     $.ajax({
         url: 'http://127.0.0.1:8000/api/reserva/cancelar/'+id,
