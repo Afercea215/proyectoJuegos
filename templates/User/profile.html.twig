@@ -2,5 +2,17 @@
 
 {% block content %}
     <h1>Perfil {{user.nombre}}</h1>
+    <a class="boton boton--morado mt-2 mb-2" href="{{ absolute_url(path('app-update_profile')) }}">Editar perfil</a>
+    <p>Puntos actuales : {{points}}</p>
+
+    <div class="perfil mt-2">
+        <img src="/images/users/logo.png">
+        <div class="perfil__otros">
+            <p>Nombre : <strong>{{user.nombre}}</strong></p>
+            <p>Correo Electronico : <strong>{{user.email}}</strong></p>
+            <p>Apellidos : <strong>{{user.apellidos}}</strong></p>
+            <p>Telegram : <strong>{{user.telegramUser}}</strong></p>
+        </div>
+    </div>
 
 {% endblock %}

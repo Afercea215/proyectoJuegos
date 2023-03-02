@@ -30,7 +30,6 @@ class ReservaController extends AbstractController
         ]);
     }
 
-    #[IsGranted("ROLE_ADMIN")]
     #[Route('/admin/reservas/{fecha}', name: 'app_admin_reserva')]
     public function adminReserva(ReservaRepository $rp, string $fecha=null): Response
     {
@@ -88,7 +87,7 @@ class ReservaController extends AbstractController
         ],200);
     }
 
-    #[IsGranted("ROLE_ADMIN")]
+    #[IsGranted("ROLE_USER")]
     #[Route('api/reserva', name: 'api_newMesa', methods:'POST')]
     public function update(Request $request, UserRepository $ur, TramoRepository $tr, JuegoRepository $jr, MesaRepository $mr, ManagerRegistry $doctrine): JsonResponse
     {

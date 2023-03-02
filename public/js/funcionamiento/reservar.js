@@ -74,45 +74,7 @@ $("document").ready(function () {
   //para que se inicializen /////////
   if ($('#tramo')!=undefined) {
     cambiaTramo();
-    (".mesa").droppable({
-      drop: function (ev, ui) {
-        debugger
-          var juego = $(ui.draggable).clone();
-          juego.data('obj',$(ui.draggable).data('obj'));
-          //let top = mesa.data('ui-draggable').positionAbs.top;
-          //let left = mesa.data('ui-draggable').positionAbs.left;
-          
-          //compruebo si cabe el juego en la mesa
-          if ($(juego).data('obj').cabe(this.offsetWidth, this.offsetHeight)){
-            $(juego).css({width:$(juego).data('obj').ancho, height:$(juego).data('obj').longitud})
-            $(this).append(juego).css({'text-align':'center', 'vertical-align':'center'});
-            
-            $('#btnReservar').data('reserva').mesa=$(this).data('obj').id;
-            $('#btnReservar').data('reserva').juego=$(juego).data('obj').id;
-          }
-
-      },
-    });
   }
-
-  (".mesa").droppable({
-    drop: function (ev, ui) {
-        juego.data('obj',$(ui.draggable).data('obj'));
-        //let top = mesa.data('ui-draggable').positionAbs.top;
-        //let left = mesa.data('ui-draggable').positionAbs.left;
-        
-        //compruebo si cabe el juego en la mesa
-        if ($(juego).data('obj').cabe(this.offsetWidth, this.offsetHeight)){
-          $(juego).css({width:$(juego).data('obj').ancho, height:$(juego).data('obj').longitud})
-          $(this).append(juego).css({'text-align':'center', 'vertical-align':'center'});
-          
-          $('#btnReservar').data('reserva').mesa=$(this).data('obj').id;
-          $('#btnReservar').data('reserva').juego=$(juego).data('obj').id;
-        }
-
-    },
-  });
-
 
   function setJuegos() {
     let juegos = getJuegos();

@@ -1,52 +1,29 @@
-.c-perfil{
+.perfil{
     display: grid;
     grid-template-areas: "foto datos";
-    margin-top: 10%;
+    margin-top: 20%;
     align-items: center;
 
-    &__logo{
+    & img{
         grid-area: foto;
         text-align: center;
-        width: 175px;
-        & img{
-            max-width: 150px;
-            border-radius: 50%;
-        }
-        & h2{
-            margin-top: 4%;
-            color: $color-sec;
-        }
-        background: $color-princip;
-        padding: 4%;
-        border-radius: getBorder(2);
+        width: 125px;
+        background-color: $color-princip;
+        padding: 6%;
+        border-top-left-radius: getBorder(2);
+        border-bottom-left-radius: getBorder(2);
     }
     &__otros{
-        width: 200px;
+        width: 275px;
         grid-area: datos;
-        background: $color-princip;
+        background: $color-gradient;
         padding: 20% 8%;
         border-radius: getBorder(2);
         box-shadow: getShadow(10);
-        color: $color-sec;
         text-align: center;
-
-        & hr{
-            border: 1px solid $color-sec;
-            border-radius: 10px;
-            height: 0px;
-            background-color: $color-sec;
-        }
-
-        & label{
-            font-size: 125%;
-            font-weight: bold;
+        color: white;
+        & p{
+            color: white;
         }
     }
-}
-
-#opciones{
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    width: 125%;
 }

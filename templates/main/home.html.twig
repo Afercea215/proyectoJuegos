@@ -59,6 +59,29 @@
     </div>
 </div>
 
+<video id="medio" width="720" height="400">
+    <source src="/vid/vidExplica.mp4">
+</video>
+
+<nav id="navVideo" class="mt-2">
+    <span type="button" id="reiniciar" class="boton boton--morado">
+        <i class="fa-solid fa-rotate-right"></i>
+    </span>
+    <input type="button" id="retrasar" class="boton boton--morado" value="&laquo;">
+    <input type="button" id="play" class="boton boton--morado" value="&#9658;">
+    <input type="button" id="adelantar" class="boton boton--morado" value="&raquo;">
+    <span type="button" id="silenciar" class="boton ">
+        <i class="fa-solid fa-volume-xmark"></i>
+    </span>
+    {# <label>Volumen</label> #}
+    <span type="button" id="menosVolumen" class="boton ">
+        <i class="fa-solid fa-volume-low"></i>
+    </span>
+    <span type="button" id="masVolumen" class="boton " value="+">
+        <i class="fa-solid fa-volume-high"></i>
+    </span>
+</nav>
+
 {# <section class='' id='lightSlider'>
     {% for juego in juegos %}
         <div class='juego'>

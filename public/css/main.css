@@ -1255,54 +1255,33 @@ li.has-sub::after {
   border: solid 2px #c03afe;
 }
 
-.c-perfil {
+.perfil {
   display: grid;
   grid-template-areas: "foto datos";
-  margin-top: 10%;
+  margin-top: 20%;
   align-items: center;
 }
-.c-perfil__logo {
+.perfil img {
   grid-area: foto;
   text-align: center;
-  width: 175px;
-  background: #5b03e4;
-  padding: 4%;
-  border-radius: 14px;
+  width: 125px;
+  background-color: #5b03e4;
+  padding: 6%;
+  border-top-left-radius: 14px;
+  border-bottom-left-radius: 14px;
 }
-.c-perfil__logo img {
-  max-width: 150px;
-  border-radius: 50%;
-}
-.c-perfil__logo h2 {
-  margin-top: 4%;
-  color: #c03afe;
-}
-.c-perfil__otros {
-  width: 200px;
+.perfil__otros {
+  width: 275px;
   grid-area: datos;
-  background: #5b03e4;
+  background: linear-gradient(90deg, rgb(85, 0, 227) 0%, rgb(198, 61, 255) 100%);
   padding: 20% 8%;
   border-radius: 14px;
   box-shadow: 0 30px 60px hsla(0, 0%, 0%, 0.13);
-  color: #c03afe;
   text-align: center;
+  color: white;
 }
-.c-perfil__otros hr {
-  border: 1px solid #c03afe;
-  border-radius: 10px;
-  height: 0px;
-  background-color: #c03afe;
-}
-.c-perfil__otros label {
-  font-size: 125%;
-  font-weight: bold;
-}
-
-#opciones {
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  width: 125%;
+.perfil__otros p {
+  color: white;
 }
 
 .form {
@@ -1986,4 +1965,10 @@ small {
   justify-content: center;
   flex-wrap: wrap;
   align-items: center;
+}
+
+#medio {
+  box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.35);
+  border-radius: 14px;
+  border: 2px solid #5b03e4;
 }/*# sourceMappingURL=main.css.map */

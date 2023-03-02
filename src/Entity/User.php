@@ -26,7 +26,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    private ?int $id = null;
+    public ?int $id = null;
 
     #[ORM\Column(length: 180, unique: true)]
     #[Assert\Email([],'Debe ser un email')]
@@ -54,10 +54,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 50)]
     private ?string $telegramUser = null;
     
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
 
     public function getEmail(): ?string
     {
@@ -110,10 +106,20 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->password;
     }
+    public function getId(): int
+    {
+        return $this->id;
+    }
 
     public function setPassword(string $password): self
     {
         $this->password = $password;
+
+        return $this;
+    }
+    public function setId(int $id): self
+    {
+        $this->id = $id;
 
         return $this;
     }
