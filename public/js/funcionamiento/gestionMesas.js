@@ -1,5 +1,9 @@
 $("document").ready(function () {
   
+  let plantilla = '<form name="mesa" method="post" id="newMesaForm" class="form col-lg-4 col-md-6 col-sm-9 col-xs-12 text-center mt-3 " style="width:100%;">'+
+                  '<div><label for="mesa_ancho" class="required">Ancho mesa</label><input type="number" id="mesa_ancho" name="mesa[ancho]" required="required"></div>'+
+                  '<div><label for="mesa_longitud" class="required">Longitud mesa</label><input type="number" id="mesa_longitud" name="mesa[longitud]" required="required"></div>'+
+                  '<button type="submit" class="w-50 boton">Crear</button></form>';
   
   if ($('#almacen').get(0)!=undefined && $('#sala').get(0)!=undefined) {
 
@@ -48,7 +52,42 @@ $("document").ready(function () {
   
   //programo el boton de crear una mesa
     $( "#btnNewMesa" ).click(function () {
-      $( "#divNewMesa" ).show( 'scale', {}, 500, function(){});
+      $( "#divNewMesa" ).append( $(plantilla) ).dialog();
+      $('#newMesaForm').find('button').click(function (ev) {
+        ev.preventDefault();
+        let alto = $('#mesa_ancho').val();
+        let longitud = $('#mesa_longitud').val();
+        mesaNueva = new Mesa(null, parseInt(alto), parseInt(longitud), null, null, [], []);
+        let data =JSON.stringify(mesaNueva);
+        $.ajax({
+            url: 'http://127.0.0.1:8000/api/mesas',
+            type: 'POST',
+            contentType: 'application/json',
+            data: data,
+            success: function(a,exito,xhr) {
+                $.notification(
+                    ["Mesa creada!"],
+                    {
+                        messageType: 'success',
+                        timeView: 5000,
+                        position: ['top','left'],
+
+                    }
+                )
+                $('#almacen').append($(mesaNueva.creaDiv()));
+            },
+        }).fail(function () {
+            $.notification(
+                ["Esta mesa no se puede crear!"],
+                {
+                  messageType: 'error',
+                  timeView: 5000,
+                  position: ['top','left'],
+
+                }
+            )
+        })
+      })
     })
   
     

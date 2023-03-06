@@ -53,12 +53,12 @@ function setDatePickerDisposiciones(sala, almacen=null){
               !$('#default-dispo').data('default') ? $('#default-dispo').click() : ""
             }
           }
-
           //actualizo las dispo
           this.sala.actualizaDisposicion(obj);
           this.almacen!=undefined ? this.almacen.actualizaDisposicion(obj) : '';
           setDrag();
           //hideLoad();
+          cambiaTramo();
         }
     });
 

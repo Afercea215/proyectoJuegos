@@ -8,14 +8,23 @@
     & .evento{
         flex: 45%;
         display: flex;
-        justify-content: space-evenly;
+        justify-content: center;
         align-items: center;
         align-content: center;
+
+        & img{
+            margin-right: 3%;
+        }
 
         & h1{
             flex: 100%;
         }
+        & span{
+            color: white;
+            font-weight: bolder;
+        }
         & p{
+          
             max-width: 100%;
         }
     }

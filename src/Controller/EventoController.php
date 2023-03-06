@@ -38,7 +38,14 @@ class EventoController extends AbstractController
     #[Route('/eventos', name: 'app_eventos')]
     public function eventos(EventoRepository $er): Response
     {
-        return $this->render('Evento/eventos.html.twig',['eventos' => $er->findBy(array(), array('fecha' => 'DESC')), 'now' => new DateTime()]);
+        $eventos = $er->findBy(array(), array('fecha' => 'DESC'));
+        $juegos = [];
+        
+        return $this->render('Evento/eventos.html.twig',[
+            'eventos' => $eventos,
+            'now' => new DateTime(),
+            //'juegos' => $er->getJuegosEvento()
+        ]);
     }   
 
 

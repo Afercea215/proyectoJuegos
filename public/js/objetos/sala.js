@@ -63,19 +63,38 @@ Sala.prototype.actualizaDisposicion=function (fecha) {
         //vacio la sala, y si es dispo default relleno con el default, si no no se rellena nada
         $('#sala').empty();
         if ($('#default-dispo')!=undefined || $('#default-dispo').data('default')) {
-            let mesasSala=[];
-            //si no tiene posi la añado a la asal
-            $.each(mesas, function (key, val) {
-                if (val.x != null && val.y != null) {
-                    mesasSala.push(val)
-                }
-            })
-            
-            //pinto tofas las mesas
-            this.mesas=mesasSala;
-            $.each(this.mesas, function (key, val) {
-                val.pinta();
-            })
+            debugger
+            if ($('#default-dispo').data('default')) {
+                let mesasSala=[];
+                //si no tiene posi la añado a la asal
+                $.each(mesas, function (key, val) {
+                    if (val.x != null && val.y != null) {
+                        mesasSala.push(val)
+                    }
+                })
+                
+                //pinto tofas las mesas
+                this.mesas=mesasSala;
+                $.each(this.mesas, function (key, val) {
+                    val.pinta();
+                })
+            }else{
+                let mesasSala=[];
+                //si no tiene posi la añado a la asal
+                $.each(mesas, function (key, val) {
+                    if (val.x != null && val.y != null) {
+                        val.x=null;
+                        val.y=null;
+                        mesasSala.push(val)
+                    }
+                })
+                
+                //pinto tofas las mesas
+                this.mesas=mesasSala;
+                $.each(this.mesas, function (key, val) {
+                    val.pinta();
+                })
+            }
         }
 
     }
@@ -115,6 +134,7 @@ Sala.prototype.setDrop=function (mesas = this.mesas, mesasAlamacen) {
             let left = ui.offset.left;
 
             //cuando lo suelto compruebo veo i la mesa
+            debugger
             if (mesa.data('obj').choca(left, top)){
                 $('#sala').append(mesa);
 

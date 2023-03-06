@@ -13,6 +13,7 @@ function Reserva(id = null, tramo = null, user = null, juego = null, mesa = null
  * Creo una reserva en la bd
  */
 Reserva.prototype.realizar=function () {
+    debugger
     //si es reserva hago la peticion
     if (this instanceof Reserva) {
         $.ajax({

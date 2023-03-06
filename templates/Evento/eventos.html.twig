@@ -12,6 +12,18 @@
                 <span>📅{{ evento.fecha|date('Y-m-d') }}</span>
                 <p>{{evento.descrip}}</p>
             </div>
+            <hr class="row col-12 mt-3">
+            <div>
+                <h1>Juegos</h1>
+                <div class="juegosEvento">
+                    {% for juego in evento.juegos %}
+                        <div class="juegoEvento">
+                            <img src="{{img_juegos_path}}{{juego.img}}">
+                            <p>{{juego.nombre}}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
             {# <a href="{{ absolute_url(path('app_juego',{id: juego.id})) }}" class='boton boton--secundario '>Ver</a> #}
             
         </div>

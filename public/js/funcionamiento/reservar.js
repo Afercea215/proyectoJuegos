@@ -42,10 +42,14 @@ $("document").ready(function () {
 
       },
     });
+
+    cambiaTramo();
   }
 
   $('#btnReservar').click(function () {
     let reserva = $(this).data('reserva');
+    reserva.fecha=$('#fecha-disposicion').val().split('/')[2] + '-' + $('#fecha-disposicion').val().split('/')[1] + '-' + $('#fecha-disposicion').val().split('/')[0];
+    debugger
     //si la reservae es valida se realiza
     if ($(this).data('reserva').valida()) {
       reserva.realizar(reserva);
